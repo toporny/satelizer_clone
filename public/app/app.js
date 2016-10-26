@@ -65,7 +65,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       
     $urlRouterProvider.otherwise('/');
 
-// $authProvider.baseUrl = 'https://just-words.setupmyproduct.com/';
+    $authProvider.baseUrl = 'http://localhost:3000/';
 // $authProvider.tokenPrefix = 'satellizer';
     /**
      *  Satellizer config
