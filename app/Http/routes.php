@@ -21,7 +21,8 @@ Route::post('auth/google', 'AuthController@google');
 Route::post('auth/linkedin', 'AuthController@linkedin');
 Route::post('auth/login', 'AuthController@login');
 Route::post('auth/signup', 'AuthController@signup');
-Route::get('auth/unlink/{provider}', ['middleware' => 'auth', 'uses' => 'AuthController@unlink']);
+//Route::get('auth/unlink/{provider}', ['middleware' => 'auth', 'uses' => 'AuthController@unlink']);
+Route::post('auth/unlink/', ['middleware' => 'auth', 'uses' => 'AuthController@unlink']);
 
 // API Routes.
 Route::get('api/me', ['middleware' => 'auth', 'uses' => 'UserController@getUser']);

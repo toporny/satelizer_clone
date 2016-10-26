@@ -29,6 +29,7 @@ angular.module('MyApp')
         });
     };
     $scope.unlink = function(provider) {
+      alert(provider);
       $auth.unlink(provider)
         .then(function() {
           toastr.info('You have unlinked a ' + provider + ' account');

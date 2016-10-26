@@ -10,33 +10,62 @@
   <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="//cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
-  <link href="/stylesheets/angular-toastr.css" rel="stylesheet">
-  <link href="/stylesheets/styles.css" rel="stylesheet">
+  <link href="stylesheets/angular-toastr.css" rel="stylesheet">
+  <link href="stylesheets/styles.css" rel="stylesheet">
+
+
+<!-- TODO: remove jquery and bootstrap -->
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.js"></script>
+
+
+<!-- Third-party Libraries -->
+<script src="vendor/angular.js"></script>
+<script src="vendor/angular-animate.js"></script>
+<script src="vendor/angular-messages.js"></script>
+<script src="vendor/angular-resource.js"></script>
+<script src="vendor/angular-sanitize.js"></script>
+<script src="vendor/angular-ui-router.js"></script>
+<script src="vendor/angular-toastr.tpls.js"></script>
+<script src="vendor/satellizer.js"></script>
+
+<!-- Application Code -->
+<script src="app/app.js"></script>
+<script src="app/directives/passwordStrength.js"></script>
+<script src="app/directives/passwordMatch.js"></script>
+<script src="app/common/logout.js"></script>
+<script src="app/common/navbar.js"></script>
+<script src="app/services/account.js"></script>
+<script src="app/home/home.js"></script>
+<script src="app/login/login.controller.js"></script>
+<script src="app/signup/signup.controller.js"></script>
+<script src="app/profile/profile.controller.js"></script>
+  
+
 </head>
 <body>
-<!-- <div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
-  <div class="navbar-header">
+<div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
+<!--   <div class="navbar-header">
     <a class="navbar-brand" href="/"><i class="ion-ios7-pulse-strong"></i> Just words</a>
-  </div>
+  </div> -->
   <ul class="nav navbar-nav">
     <li><a href="/#/">Home</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/">Select Words</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/">Learn Yourself</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/">Test Yourself</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/">Challenge Somebody</a></li>    
-  </ul>
+    <li ng-if="isAuthenticated()"><a href="/#/learn">Learn</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/tests">Tests</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/results">Results</a></li>
+<!--     <li ng-if="isAuthenticated()"><a href="/#/">Challenge Somebody</a></li>
+ -->  </ul>
   <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
     <li><a href="/#/login">Login</a></li>
     <li><a href="/#/signup">Sign up</a></li>
   </ul>
   <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
+    <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
     <li><a href="/#/logout">Logout</a></li>
   </ul>
-</div> -->
-<nav class="navbar navbar-default">
+</div>
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -47,7 +76,6 @@
       <a class="navbar-brand" href="#">Brand</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
@@ -78,36 +106,11 @@
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
-
+ -->
 <div ui-view></div>
 
-
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.js"></script>
-
-
-<!-- Third-party Libraries -->
-<script src="/vendor/angular.js"></script>
-<script src="/vendor/angular-animate.js"></script>
-<script src="/vendor/angular-messages.js"></script>
-<script src="/vendor/angular-resource.js"></script>
-<script src="/vendor/angular-sanitize.js"></script>
-<script src="/vendor/angular-ui-router.js"></script>
-<script src="/vendor/angular-toastr.tpls.js"></script>
-<script src="/vendor/satellizer.js"></script>
-
-<!-- Application Code -->
-<script src="/app.js"></script>
-<script src="/directives/passwordStrength.js"></script>
-<script src="/directives/passwordMatch.js"></script>
-<script src="/controllers/home.js"></script>
-<script src="/controllers/login.js"></script>
-<script src="/controllers/signup.js"></script>
-<script src="/controllers/logout.js"></script>
-<script src="/controllers/profile.js"></script>
-<script src="/controllers/navbar.js"></script>
-<script src="/services/account.js"></script>
 </body>
 </html>

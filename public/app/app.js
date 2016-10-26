@@ -31,11 +31,11 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       .state('home', {
         url: '/',
         controller: 'HomeCtrl',
-        templateUrl: 'partials/home.html'
+        templateUrl: 'app/home/home.html'
       })
       .state('login', {
         url: '/login',
-        templateUrl: 'partials/login.html',
+        templateUrl: 'app/login/login.html',
         controller: 'LoginCtrl',
         resolve: {
           skipIfLoggedIn: skipIfLoggedIn
@@ -43,7 +43,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       })
       .state('signup', {
         url: '/signup',
-        templateUrl: 'partials/signup.html',
+        templateUrl: 'app/signup/signup.html',
         controller: 'SignupCtrl',
         resolve: {
           skipIfLoggedIn: skipIfLoggedIn
@@ -56,12 +56,13 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       })
       .state('profile', {
         url: '/profile',
-        templateUrl: 'partials/profile.html',
+        templateUrl: 'app/profile/profile.html',
         controller: 'ProfileCtrl',
         resolve: {
           loginRequired: loginRequired
         }
       });
+      
     $urlRouterProvider.otherwise('/');
 
     /**
@@ -75,47 +76,47 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       clientId: '908156294400-qdqgta0rukfi3el2rl8qgsjtcel3ka87.apps.googleusercontent.com'
     });
 
-    $authProvider.github({
-      clientId: 'YOUR_GITHUB_CLIENT_ID'
-    });
+    // $authProvider.github({
+    //   clientId: 'YOUR_GITHUB_CLIENT_ID'
+    // });
 
-    $authProvider.linkedin({
-      clientId: 'YOUR_LINKEDIN_CLIENT_ID'
-    });
+    // $authProvider.linkedin({
+    //   clientId: 'YOUR_LINKEDIN_CLIENT_ID'
+    // });
 
-    $authProvider.instagram({
-      clientId: 'YOUR_INSTAGRAM_CLIENT_ID'
-    });
+    // $authProvider.instagram({
+    //   clientId: 'YOUR_INSTAGRAM_CLIENT_ID'
+    // });
 
-    $authProvider.yahoo({
-      clientId: 'YOUR_YAHOO_CLIENT_ID'
-    });
+    // $authProvider.yahoo({
+    //   clientId: 'YOUR_YAHOO_CLIENT_ID'
+    // });
 
-    $authProvider.live({
-      clientId: 'YOUR_MICROSOFT_CLIENT_ID'
-    });
+    // $authProvider.live({
+    //   clientId: 'YOUR_MICROSOFT_CLIENT_ID'
+    // });
 
-    $authProvider.twitch({
-      clientId: 'YOUR_TWITCH_CLIENT_ID'
-    });
+    // $authProvider.twitch({
+    //   clientId: 'YOUR_TWITCH_CLIENT_ID'
+    // });
 
-    $authProvider.bitbucket({
-      clientId: 'YOUR_BITBUCKET_CLIENT_ID'
-    });
+    // $authProvider.bitbucket({
+    //   clientId: 'YOUR_BITBUCKET_CLIENT_ID'
+    // });
 
-    $authProvider.spotify({
-      clientId: 'YOUR_SPOTIFY_CLIENT_ID'
-    });
+    // $authProvider.spotify({
+    //   clientId: 'YOUR_SPOTIFY_CLIENT_ID'
+    // });
 
-    $authProvider.twitter({
-      url: '/auth/twitter'
-    });
+    // $authProvider.twitter({
+    //   url: '/auth/twitter'
+    // });
 
-    $authProvider.oauth2({
-      name: 'foursquare',
-      url: '/auth/foursquare',
-      clientId: 'MTCEJ3NGW2PNNB31WOSBFDSAD4MTHYVAZ1UKIULXZ2CVFC2K',
-      redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
-      authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
-    });
+    // $authProvider.oauth2({
+    //   name: 'foursquare',
+    //   url: '/auth/foursquare',
+    //   clientId: 'MTCEJ3NGW2PNNB31WOSBFDSAD4MTHYVAZ1UKIULXZ2CVFC2K',
+    //   redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
+    //   authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
+    // });
   });
