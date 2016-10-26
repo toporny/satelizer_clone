@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just words</title>
+  <link href="favicon.png" rel="shortcut icon">
+  <link href="//fonts.googleapis.com/css?family=Roboto|Montserrat:400,700|Open+Sans:400,300,600" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
+  <link href="/stylesheets/angular-toastr.css" rel="stylesheet">
+  <link href="/stylesheets/styles.css" rel="stylesheet">
+</head>
+<body>
+<!-- <div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/"><i class="ion-ios7-pulse-strong"></i> Just words</a>
+  </div>
+  <ul class="nav navbar-nav">
+    <li><a href="/#/">Home</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/">Select Words</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/">Learn Yourself</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/">Test Yourself</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/">Challenge Somebody</a></li>    
+  </ul>
+  <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
+    <li><a href="/#/login">Login</a></li>
+    <li><a href="/#/signup">Sign up</a></li>
+  </ul>
+  <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
+    <li><a href="/#/logout">Logout</a></li>
+  </ul>
+</div> -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div ui-view></div>
+
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.js"></script>
+
+
+<!-- Third-party Libraries -->
+<script src="/vendor/angular.js"></script>
+<script src="/vendor/angular-animate.js"></script>
+<script src="/vendor/angular-messages.js"></script>
+<script src="/vendor/angular-resource.js"></script>
+<script src="/vendor/angular-sanitize.js"></script>
+<script src="/vendor/angular-ui-router.js"></script>
+<script src="/vendor/angular-toastr.tpls.js"></script>
+<script src="/vendor/satellizer.js"></script>
+
+<!-- Application Code -->
+<script src="/app.js"></script>
+<script src="/directives/passwordStrength.js"></script>
+<script src="/directives/passwordMatch.js"></script>
+<script src="/controllers/home.js"></script>
+<script src="/controllers/login.js"></script>
+<script src="/controllers/signup.js"></script>
+<script src="/controllers/logout.js"></script>
+<script src="/controllers/profile.js"></script>
+<script src="/controllers/navbar.js"></script>
+<script src="/services/account.js"></script>
+</body>
+</html>
