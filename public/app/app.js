@@ -49,6 +49,30 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
           skipIfLoggedIn: skipIfLoggedIn
         }
       })
+      .state('learn', {
+        url: '/learn',
+        templateUrl: 'app/learn/learn.html',
+        controller: 'LearnCtrl',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('tests', {
+        url: '/tests',
+        templateUrl: 'app/tests/tests.html',
+        controller: 'TestsCtrl',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
+      .state('results', {
+        url: '/results',
+        templateUrl: 'app/results/results.html',
+        controller: 'ResultsCtrl',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
       .state('logout', {
         url: '/logout',
         template: null,

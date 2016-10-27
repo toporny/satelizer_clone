@@ -1,0 +1,3 @@
+[2016-10-27 09:21:52] development.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Barryvdh\Cors\ServiceProvider' not found' in C:\Users\przemyslaw.rzeznik\development\www\satelizer_clone\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:146
+Stack trace:
+#0 {main}  
