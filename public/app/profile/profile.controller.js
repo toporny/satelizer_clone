@@ -1,5 +1,12 @@
-angular.module('MyApp')
-  .controller('ProfileCtrl', function($scope, $auth, toastr, Account) {
+(function () {
+
+angular
+  .module('MyApp')
+  .controller('ProfileCtrl', ProfileCtrl);
+
+  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account'];
+
+  function ProfileCtrl($scope, $auth, toastr, Account) {
     $scope.getProfile = function() {
       Account.getProfile()
         .then(function(response) {
@@ -41,4 +48,6 @@ angular.module('MyApp')
     };
 
     $scope.getProfile();
-  });
+  };
+
+})();

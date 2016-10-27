@@ -1,7 +1,25 @@
-angular.module('MyApp')
-  .controller('SignupCtrl', function($scope, $location, $auth, toastr) {
-    $scope.signup = function() {
-      $auth.signup($scope.user)
+(function () {
+angular
+  .module('MyApp')
+  .controller('SignupCtrl', SignupCtrl);
+
+  SignupCtrl.$inject = [ '$location', '$auth', 'toastr'];
+
+  function SignupCtrl ( $location, $auth, toastr) {
+    
+    vm = this;
+    vm.signup = signup;
+
+    vm.data = {
+      displayName: '',
+      email: '',
+      password: ''
+    }
+
+ 
+    function signup() {
+      console.log('vm.data.user',vm.data);
+      $auth.signup(vm.data)
         .then(function(response) {
           $auth.setToken(response);
           $location.path('/');
@@ -11,4 +29,6 @@ angular.module('MyApp')
           toastr.error(response.data.message);
         });
     };
-  });
+  };
+
+})();

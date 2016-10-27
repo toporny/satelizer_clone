@@ -1,7 +1,19 @@
+(function () {
 angular.module('MyApp')
-  .controller('LoginCtrl', function($scope, $location, $auth, toastr) {
-    $scope.login = function() {
-      $auth.login($scope.user)
+  .controller('LoginCtrl', LoginCtrl);
+
+  LoginCtrl.$inject = ['$scope', '$location', '$auth', 'toastr'];
+
+  function LoginCtrl ($scope, $location, $auth, toastr ) {
+
+    var vm = this;
+
+    vm.login = login;
+    vm.authenticate = authenticate;
+    vm.data = {user: { login: '', password: ''} };
+
+    function login() {
+      $auth.login(vm.data.user)
         .then(function() {
           toastr.success('You have successfully signed in!');
           $location.path('/');
@@ -10,7 +22,8 @@ angular.module('MyApp')
           toastr.error(error.data.message, error.status);
         });
     };
-    $scope.authenticate = function(provider) {
+
+    function authenticate(provider) {
       $auth.authenticate(provider)
         .then(function() {
           toastr.success('You have successfully signed in with ' + provider + '!');
@@ -28,4 +41,7 @@ angular.module('MyApp')
           }
         });
     };
-  });
+  };
+
+})();
+

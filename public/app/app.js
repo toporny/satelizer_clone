@@ -1,5 +1,13 @@
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.router', 'satellizer'])
-  .config(function($stateProvider, $urlRouterProvider, $authProvider) {
+angular
+.module('MyApp', [
+  'ngResource',
+  'ngMessages',
+  'ngAnimate',
+  'toastr',
+  'ui.router',
+  'satellizer'])
+
+.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
     /**
      * Helper auth functions
@@ -30,13 +38,13 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
     $stateProvider
       .state('home', {
         url: '/',
-        controller: 'HomeCtrl',
+        controller: 'HomeCtrl as home',
         templateUrl: 'app/home/home.html'
       })
       .state('login', {
         url: '/login',
         templateUrl: 'app/login/login.html',
-        controller: 'LoginCtrl',
+        controller: 'LoginCtrl as login',
         resolve: {
           skipIfLoggedIn: skipIfLoggedIn
         }
@@ -44,7 +52,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/signup/signup.html',
-        controller: 'SignupCtrl',
+        controller: 'SignupCtrl as signup',
         resolve: {
           skipIfLoggedIn: skipIfLoggedIn
         }
@@ -52,7 +60,7 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ngAnimate', 'toastr', 'ui.
       .state('learn', {
         url: '/learn',
         templateUrl: 'app/learn/learn.html',
-        controller: 'LearnCtrl',
+        controller: 'LearnCtrl as learn',
         resolve: {
           loginRequired: loginRequired
         }
