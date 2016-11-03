@@ -14,6 +14,7 @@
   <link href="//cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
   <link href="stylesheets/angular-toastr.css" rel="stylesheet">
   <link href="stylesheets/styles.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
 
 
 <!-- TODO: remove jquery and bootstrap -->
@@ -50,6 +51,7 @@
 <script src="app/tests/tests.controller.js"></script>
 <script src="app/results/results.controller.js"></script>
 <script src="app/profile/profile.controller.js"></script>
+<script src="app/pick-words/pick-words.controller.js"></script>
 
 
 
@@ -61,7 +63,8 @@
   </div> -->
   <ul class="nav navbar-nav">
     <li><a href="/#/">Home</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/learn">Learn</a></li>
+    <li ng-if="isAuthenticated()"><a href="/#/pick">Pick Words</a></li>
+    <li ng-if="isAuthenticated()"><a class="font-weight-bold" href="/#/learn">Learn</a></li>
     <li ng-if="isAuthenticated()"><a href="/#/tests">Tests</a></li>
     <li ng-if="isAuthenticated()"><a href="/#/results">Results</a></li>
 <!--     <li ng-if="isAuthenticated()"><a href="/#/">Challenge Somebody</a></li>

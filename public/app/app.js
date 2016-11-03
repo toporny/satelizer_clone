@@ -65,10 +65,18 @@ angular
           loginRequired: loginRequired
         }
       })
+      .state('pick', {
+        url: '/pick',
+        templateUrl: 'app/pick-words/pick-words.html',
+        controller: 'PickCtrl as pick',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })      
       .state('tests', {
         url: '/tests',
         templateUrl: 'app/tests/tests.html',
-        controller: 'TestsCtrl',
+        controller: 'TestsCtrl as test',
         resolve: {
           loginRequired: loginRequired
         }
@@ -76,7 +84,7 @@ angular
       .state('results', {
         url: '/results',
         templateUrl: 'app/results/results.html',
-        controller: 'ResultsCtrl',
+        controller: 'ResultsCtrl as results',
         resolve: {
           loginRequired: loginRequired
         }
