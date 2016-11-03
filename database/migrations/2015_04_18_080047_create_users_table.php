@@ -17,12 +17,13 @@ class CreateUsersTable extends Migration {
 			$table->increments('id');
 			$table->string('email')->nullable();
 			$table->string('password')->nullable();
+			$table->string('locale')->nullable();
 			$table->string('displayName')->nullable();
 			$table->string('facebook')->nullable();
+			$table->string('google')->nullable();
 			$table->string('foursquare')->nullable();
 			$table->string('instagram')->nullable();
 			$table->string('github')->nullable();
-			$table->string('google')->nullable();
 			$table->string('linkedin')->nullable();
 			$table->string('twitter')->nullable();
 			$table->string('picture')->nullable();

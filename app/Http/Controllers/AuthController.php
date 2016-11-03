@@ -9,6 +9,9 @@ use GuzzleHttp;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
 use App\User;
 
+// IMPORTANT: locale are set only for GOOGLE and FACEBOOK
+// TODO: make locale also for rest of providers
+
 class AuthController extends Controller {
 
     /**
@@ -121,7 +124,7 @@ class AuthController extends Controller {
         $accessToken = json_decode($accessTokenResponse->getBody(), true);
 
         // Step 2. Retrieve profile information about the current user.
-        $fields = 'id,email,first_name,last_name,link,name';
+        $fields = 'id,email,first_name,last_name,link,name,locale';
         $profileResponse = $client->request('GET', 'https://graph.facebook.com/v2.5/me', [
             'query' => [
                 'access_token' => $accessToken['access_token'],
@@ -163,6 +166,7 @@ class AuthController extends Controller {
 
             $user = new User;
             $user->facebook = $profile['id'];
+            $user->locale = $profile['locale'];
             $user->email = $profile['email'];
             $user->displayName = $profile['name'];
             $user->save();
@@ -232,6 +236,7 @@ class AuthController extends Controller {
             $user->google = $profile['sub'];
             $user->displayName = $profile['name'];
             $user->picture = $profile['picture'];
+            $user->locale = $profile['locale'];
             $user->email = $profile['email'];
             $user->save();
 
