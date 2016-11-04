@@ -1,6 +1,9 @@
 .margin-top10 {
   margin-top: 10px;
 }
+.width50 {
+  width: 50%;
+}
 .font-weight-bold {
   font-weight: bold;
   color: black !important;

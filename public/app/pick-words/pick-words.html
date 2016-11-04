@@ -9,19 +9,14 @@
             tellus ac cursus commodo, tortor mauris condimentum nibh, ut
             fermentum massa justo sit amet risus. Etiam porta sem malesuada
             magna mollis euismod. Donec sed odio dui.</p>
-            <div class="row">
-              <div class="col-xs-6 col-sm-4 col-md-3">
-                <select class="form-control ">
-                  <option>French</option>
-                  <option>German</option>
-                  <option>Spain</option>
-                  <option>Russian</option>
-                  <option>Polish</option>
-                </select>
-              </div>
-            </div>
-
-          <p class="text-right margin-top10"><a class="btn btn-primary" href="#">Next »</a></p>
+            
+            <select name="language" class="form-control width50"
+              ng-model="pick.data.languageSelected"
+              ng-options="opt as opt.label for opt in pick.data.languages">
+            </select>
+            <p class="text-right margin-top10">
+              <a class="btn btn-primary" ng-click="pick.choose(pick.data.languageSelected)" href="#">Next »</a>
+            </p>
         </div>
       </div>
     </div>
