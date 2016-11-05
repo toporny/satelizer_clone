@@ -7,11 +7,11 @@
 
     function routes($stateProvider) {
         $stateProvider
-            .state('login', {
-                url: '/login',
-                templateUrl: 'app/login/login.html',
-                controller: 'LoginCtrl as login',
+            .state('signup', {
+                url: '/signup',
+                templateUrl: 'app/signup/signup.html',
+                controller: 'SignupCtrl as signup',
                 authenticate: false,
             })
-    }
+        }
 })();

@@ -1,3 +1,5 @@
+(function() {
+
 angular.module('MyApp')
   .controller('HomeCtrl', function($scope, $http) {
     $http.jsonp('https://api.github.com/repos/sahat/satellizer?callback=JSON_CALLBACK')
@@ -15,3 +17,5 @@ angular.module('MyApp')
         }
       });
   });
+
+})();

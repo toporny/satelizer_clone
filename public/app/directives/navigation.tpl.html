@@ -1,0 +1,25 @@
+<div class="navbar navbar-default navbar-static-top">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 ">
+      <ul class="nav navbar-nav top-menu">
+        <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/')}" href="/#/">Home</a></li>
+        <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/pick')}"  href="/#/pick">Pick Words</a></li>
+        <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/learn')}" href="/#/learn">Learn</a></li>
+        <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/tests')}" href="/#/tests">Tests</a></li>
+        <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/results')}" href="/#/results">Results</a></li>
+      </ul>
+      <ul ng-if="!$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+        <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/login')}" href="/#/login">Login</a></li>
+        <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/signup')}" href="/#/signup">Sign up</a></li>
+      </ul>
+      <ul ng-if="$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+        <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/profile')}" href="/#/profile">Profile</a></li>
+        <li><a href="/#/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+ 
+<!-- 
+<i class="fa fa-refresh fa-spin fa-3x fa-fw" id="loading-indicator" style="display:none"></i>
+ -->

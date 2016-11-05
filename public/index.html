@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MyApp">
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +12,9 @@
   <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="//cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
   <link href="stylesheets/angular-toastr.css" rel="stylesheet">
   <link href="stylesheets/styles.css" rel="stylesheet">
-  <link href="css/app.css" rel="stylesheet">
 
 
 <!-- TODO: remove jquery and bootstrap -->
@@ -36,56 +36,38 @@
 <script src="app/app.js"></script>
 <script src="app/directives/passwordStrength.js"></script>
 <script src="app/directives/passwordMatch.js"></script>
+<script src="app/directives/navigation.js"></script>
+
 <script src="app/common/logout.js"></script>
-<script src="app/common/navbar.js"></script>
-<script src="app/common/localauth.service.js"></script>
 
 
 <script src="app/services/account.js"></script>
 
 <script src="app/home/home.js"></script>
+<script src="app/home/home.routes.js"></script>
+
 <script src="app/login/login.controller.js"></script>
 <script src="app/login/login.routes.js"></script>
 <script src="app/signup/signup.controller.js"></script>
+<script src="app/signup/signup.routes.js"></script>
 <script src="app/learn/learn.controller.js"></script>
+<script src="app/learn/learn.routes.js"></script>
 <script src="app/tests/tests.controller.js"></script>
+<script src="app/tests/tests.routes.js"></script>
 <script src="app/results/results.controller.js"></script>
+<script src="app/results/results.routes.js"></script>
 <script src="app/profile/profile.controller.js"></script>
+<script src="app/profile/profile.routes.js"></script>
 <script src="app/pick-words/pick-words.controller.js"></script>
+<script src="app/pick-words/pick-words.routes.js"></script>
 
 
 
 </head>
-<body>
-<div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
+<body  ng-app="MyApp">
 
-<div class="row">
-<div class="col-lg-8 col-lg-offset-2 ">
-
-  <ul class="nav navbar-nav">
-    <li><a href="/#/">Home</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/pick">Pick Words</a></li>
-    <li ng-if="isAuthenticated()"><a class="font-weight-bold" href="/#/learn">Learn</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/tests">Tests</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/results">Results</a></li>
-  </ul>
-  <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a href="/#/login">Login</a></li>
-    <li><a href="/#/signup">Sign up</a></li>
-  </ul>
-  <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-    <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
-    <li><a href="/#/logout">Logout</a></li>
-  </ul>
-
-</div>
-</div>
-
-
-
-</div>
-
-<div ui-view></div>
+  <nav></nav>
+  <div ui-view></div>
 
 </body>
 </html>

@@ -14,6 +14,14 @@
               ng-model="pick.data.languageSelected"
               ng-options="opt as opt.label for opt in pick.data.languages">
             </select>
+
+
+<br>
+<button type="button" class="btn btn-success" style="margin:4px"><i class="ion-play"></i>Level 1</button>(1-1000 most used words)<br>
+<button type="button" class="btn btn-success" style="margin:4px"><i class="ion-play"></i>Level 2</button>(1001-2000 most used words)<br>
+<button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 4</button>(2001-3000 most used words)<br>
+<button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 5</button>(3001-4000 most used words)<br>
+<button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 6</button>(4001-5000 most used words)<br>
             <p class="text-right margin-top10">
               <a class="btn btn-primary" ng-click="pick.choose(pick.data.languageSelected)" href="#">Next »</a>
             </p>

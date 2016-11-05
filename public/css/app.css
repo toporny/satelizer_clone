@@ -6,7 +6,10 @@
 }
 .font-weight-bold {
   font-weight: bold;
-  color: black !important;
+  color: red !important;
+}
+.navbar-nav li a:hover {
+  background-color: green !important ;
 }
 
 /*# sourceMappingURL=app.css.map */
