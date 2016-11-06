@@ -16,8 +16,26 @@
             </select>
 
 
+{{ pick.data.config[pick.data.languageSelected.value].levels }}
+<!-- <div ng-repeat="n in [].constructor(pick.data.config[pick.data.languageSelected.value].levels) track by $index">
+    {{ $index }}
+</div>
+ -->
+{{pick.data.languageSelected}}
+
+<show-level-buttons 
+  selcd="{{pick.data.config[pick.data.languageSelected.value].levels}}" 
+  free="{{pick.data.config[pick.data.languageSelected.value].free_levels}}">
+    
+  </show-level-buttons>
+<!-- <div ng-repeat="(key, value) in pick.data.config">
+  <button type="button" class="btn btn-success" style="margin:4px">
+    <i class="ion-play"></i>Level 1</button>
+    (1-1000 most used words)<br>
+  {{ value.words }}<br>
+</div>
+ -->
 <br>
-<button type="button" class="btn btn-success" style="margin:4px"><i class="ion-play"></i>Level 1</button>(1-1000 most used words)<br>
 <button type="button" class="btn btn-success" style="margin:4px"><i class="ion-play"></i>Level 2</button>(1001-2000 most used words)<br>
 <button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 4</button>(2001-3000 most used words)<br>
 <button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 5</button>(3001-4000 most used words)<br>
