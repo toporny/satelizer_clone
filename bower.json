@@ -1,0 +1,22 @@
+{
+  "name": "satelize",
+  "version": "0.1.1",
+  "private": "true",
+  "dependencies": {
+    "angularjs" : "1.4.*",
+    "ngBootbox": "0.1.*",
+    "angular-animate": "1.5.*",
+    "angular-messages": "1.5.*",
+    "angular-resource": "1.5.*",
+    "angular-sanitize": "1.5.*",
+    "angular-ui-router": "0.3.*",
+    "angular-ui-router": "0.3.*",
+    "angular-toastr": "*",
+    "satellizer": "*",
+    "bootstrap": "3.3.*",
+    "ionicons": "2.*"
+
+
+
+  }
+}

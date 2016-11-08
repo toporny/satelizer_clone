@@ -5,38 +5,39 @@
       <div class="row">
         <div class="col-sm-12 col-md-12">
           <h2>Pick</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-            tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-            fermentum massa justo sit amet risus. Etiam porta sem malesuada
-            magna mollis euismod. Donec sed odio dui.</p>
+          <p>Please select language that you want to learn and difficulty level. </p>
             
             <select name="language" class="form-control width50 margin-bottom10"
               ng-model="pick.data.languageSelected"
               ng-options="opt as opt.label for opt in pick.data.languages">
             </select>
 
+             <div show-level-buttons
+                next = "pick.next(selectedLanguage)"
+                show-modal = "pick.showModal()"
+                language-sele = "pick.data.languageSelected">
+              </div>
 
             <!-- <b>{{ pick.data.config[pick.data.languageSelected.value].levels }}</b> -->
             <!-- pick.data.config[pick.data.languageSelected.value].levels -->
-            <div 
+<!--             <div 
               ng-if="pick.data.config[pick.data.languageSelected.value].levels" 
-              ng-repeat="n in [].constructor(1000) track by $index">
+              ng-repeat="n in [].constructor(pick.data.config[pick.data.languageSelected.value].levels) track by $index">
               <div ng-if="$index+1 <= pick.data.config[pick.data.languageSelected.value].free_levels">
                 <button type="button" class="btn btn-success" style="margin:4px">
                 <i class="ion-play"></i>
-                Level {{ $index+1 }}</button>({{ 1000*$index+1 }}-{{ 1000*$index+1000 }} most used words)
+                Level {{ $index+1 }}</button>({{ 500*$index+1 }}-{{ 500*$index+500 }} most used words)
               </div>
 
               <div ng-if="$index+1 > pick.data.config[pick.data.languageSelected.value].free_levels">
               <button type="button" class="btn btn-danger" style="margin:4px">
                 <i class="ion-locked"></i>
-                Level {{ $index+1 }}</button>({{ 1000*$index+1 }}-{{ 1000*$index+1000 }} most used words)
+                Level {{ $index+1 }}</button>({{ 500*$index+1 }}-{{ 500*$index+500 }} most used words)
               </div>
-            </div>
-
-
-            <!-- <div show-level-buttons="{{pick.data.config[pick.data.languageSelected.value]}}"
             </div> -->
+
+
+
             <!-- <div ng-repeat="(key, value) in pick.data.config">
               <button type="button" class="btn btn-success" style="margin:4px">
                 <i class="ion-play"></i>Level 1</button>
@@ -49,8 +50,8 @@
             <button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 4</button>(2001-3000 most used words)<br>
             <button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 5</button>(3001-4000 most used words)<br>
             <button type="button" class="btn btn-danger" style="margin:4px"><i class="ion-locked"></i>Level 6</button>(4001-5000 most used words)<br> -->
-                        <p class="text-right margin-top10">
-              <a class="btn btn-primary" ng-click="pick.choose(pick.data.languageSelected)" href="#">Next »</a>
+              <p class="text-right margin-top10">
+              <a class="btn btn-primary" ng-click="pick.next(pick.data.languageSelected)" href="#">Next »</a>
             </p>
         </div>
       </div>
