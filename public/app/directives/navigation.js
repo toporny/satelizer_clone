@@ -33,7 +33,13 @@
         $ctrl.isActive = isActive;
 
         function isActive (viewLocation) {
-            var active = (viewLocation === $location.path());
+            var a = $location.path().indexOf('/', 1);
+            if (a>-1) {
+                var changedLocationPath = $location.path().substr(0,a);
+            }
+            else changedLocationPath = $location.path();
+
+            var active = (viewLocation === changedLocationPath);
             return active;
         };
 

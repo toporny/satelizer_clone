@@ -3,9 +3,9 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = [];
+    PickCtrl.$inject = ['$ngBootbox', '$state'];
 
-    function PickCtrl ($scope, $http) {
+    function PickCtrl ($ngBootbox, $state) {
 		vm = this;
 		vm.next = next;
 		vm.showModal = showModal;
@@ -30,14 +30,34 @@
 		vm.data.selected = vm.data.languages[0];
 
 		function next() {
-			console.log('startLevel!, languageSelected = ',vm.data.languageSelected);
-			alert('next = ');
-
+			$state.go('words-list');
 		}
 
 		function showModal() {
-			console.log('showModal');
-			alert('showModal ');
+
+			var options = {
+			    message: 'This feature is available only for premium users.',
+			    title: 'Premium required',
+			    className: 'test-class',
+			    buttons: {
+					success: {
+						label: "Buy premium",
+						className: "btn-success",
+						callback: function() {
+							$state.go('premium');
+						}
+					},			    	
+					warning: {
+						label: "Cancel",
+						className: "btn-warning",
+						callback: function() { }
+					}
+
+			    }
+			};
+
+			$ngBootbox.customDialog(options);
+
 		}		
 
 

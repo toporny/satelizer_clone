@@ -5,6 +5,7 @@ angular
   'ngAnimate',
   'toastr',
   'ui.router',
+  'ngBootbox',
   'satellizer'])
 
 .config(function($stateProvider, $urlRouterProvider, $authProvider) {

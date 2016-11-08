@@ -13,6 +13,7 @@
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/signup')}" href="/#/signup">Sign up</a></li>
       </ul>
       <ul ng-if="$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+        <li><a class="premium" ng-class="{'font-weight-bold': $ctrl.isActive('/premium')}" href="/#/premium">Premium</a></li>      
         <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/profile')}" href="/#/profile">Profile</a></li>
         <li><a href="/#/logout">Logout</a></li>
       </ul>
