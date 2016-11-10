@@ -23,10 +23,10 @@
 
 
     // ---------------------------------------------
-    navCtrl.$inject = ['$scope', '$auth', '$state', '$location', '$ngBootbox', '$translate'];
+    navCtrl.$inject = ['$scope', '$auth', '$state', '$location', '$ngBootbox', '$translate', 'toastr'];
 
 
-    function navCtrl($scope, $auth, $state, $location, $ngBootbox, $translate) {
+    function navCtrl($scope, $auth, $state, $location, $ngBootbox, $translate, toastr) {
 
         var $ctrl = this;
         $ctrl.init = init;
@@ -58,7 +58,7 @@
                 message: 'Select Language',
                 className: 'test-class',
                 buttons: {
-                    warning: {
+                    Polish: {
                         label: '<span class="lang-sm" lang="pl"></span> Polski',
                         className: "btn-change-language btn-info",
                         callback: function() {
@@ -66,12 +66,33 @@
                             $translate.use('pl');
                         }
                     },
-                    success: {
+                    English: {
                         label: '<span class="lang-sm" lang="en"></span> English',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
                             $ctrl.currentLanguage = 'en';
                             $translate.use('en');
+                        }
+                    },
+                    Spain: {
+                        label: '<span class="lang-sm" lang="sp"></span> Spain',
+                        className: "btn-change-language btn-info",
+                        callback: function(e) {
+                          toastr.warning('Not yet ready','Warning');
+                        }
+                    },
+                    German: {
+                        label: '<span class="lang-sm" lang="de"></span> German',
+                        className: "btn-change-language btn-info",
+                        callback: function(e) {
+                          toastr.warning('Not yet ready','Warning');
+                        }
+                    },
+                    French: {
+                        label: '<span class="lang-sm" lang="fr"></span> French',
+                        className: "btn-change-language btn-info",
+                        callback: function(e) {
+                          toastr.warning('Not yet ready','Warning');
                         }
                     },
                     cancel: {
