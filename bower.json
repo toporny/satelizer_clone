@@ -7,16 +7,17 @@
     "ngBootbox": "0.1.*",
     "angular-animate": "1.5.*",
     "angular-messages": "1.5.*",
+    "angular-translate": "@",
     "angular-resource": "1.5.*",
     "angular-sanitize": "1.5.*",
     "angular-ui-router": "0.3.*",
-    "angular-ui-router": "0.3.*",
-    "angular-toastr": "*",
-    "satellizer": "*",
+    "angular-translate": "~2.11.1",
+    "angular-toastr": "2.1.*",
+    "satellizer": "0.15.*",
     "bootstrap": "3.3.*",
-    "ionicons": "2.*"
-
-
+    "ionicons": "2.*",
+    "bootstrap-language" : "*",
+    "font-awesome" : "4.7.*"
 
   }
 }

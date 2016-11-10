@@ -11,7 +11,6 @@
         'PL_pl': { label: 'Polish',  words:5000,  free_words: 2000 },
         'EN_en': { label: 'English', words:4000,  free_words: 2000 }
     });
-    
 
 
 })();

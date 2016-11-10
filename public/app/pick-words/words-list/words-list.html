@@ -7,11 +7,10 @@
           <h2>WORDS LIST </h2>
           <p>Select Words tha you know </p>
 
-<div class="thumbnail"></div>
- 
+<div words="{{wordsList.data.words}}" class="thumbnail"></div>
 
               <p class="text-right margin-top10">
-              <a class="btn btn-primary" ng-click="pick.next(pick.data.languageSelected)" href="#">Next »</a>
+              <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#">Next »</a>
             </p>
         </div>
       </div>

@@ -2,9 +2,9 @@
 angular.module('MyApp')
   .controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope', '$location', '$auth', 'toastr'];
+  LoginCtrl.$inject = ['$scope', '$location', '$auth', '$translate', 'toastr'];
 
-  function LoginCtrl ($scope, $location, $auth, toastr ) {
+  function LoginCtrl ($scope, $location, $auth, $translate, toastr ) {
 
     var vm = this;
 

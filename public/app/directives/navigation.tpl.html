@@ -9,10 +9,12 @@
         <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/results')}" href="/#/results">Results</a></li>
       </ul>
       <ul ng-if="!$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+        <li><a ng-click="$ctrl.changeLanguage()" ng-class="{'font-weight-bold': $ctrl.isActive('/language')}"><span style="border:1px solid gray; margin-top:1px" class="lang-sm" lang="pl"></span></a></li>
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/login')}" href="/#/login">Login</a></li>
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/signup')}" href="/#/signup">Sign up</a></li>
       </ul>
       <ul ng-if="$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
+        <li><a ng-click="$ctrl.changeLanguage()" ng-class="{'font-weight-bold': $ctrl.isActive('/language')}"><span style="border:1px solid gray; margin-top:1px" class="lang-sm" lang="pl"></span></a></li>
         <li><a class="premium" ng-class="{'font-weight-bold': $ctrl.isActive('/premium')}" href="/#/premium">Premium</a></li>      
         <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/profile')}" href="/#/profile">Profile</a></li>
         <li><a href="/#/logout">Logout</a></li>
@@ -20,7 +22,3 @@
     </div>
   </div>
 </div>
- 
-<!-- 
-<i class="fa fa-refresh fa-spin fa-3x fa-fw" id="loading-indicator" style="display:none"></i>
- -->

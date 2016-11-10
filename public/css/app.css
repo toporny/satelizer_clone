@@ -25,5 +25,18 @@ h6 {
 .navbar-nav li a:hover {
   background-color: red !important;
 }
+.btn-change-language {
+  display: block;
+  margin: 5px;
+  width: 128px;
+  text-align: left;
+}
+.btn-change-language-cancel {
+  display: block;
+  margin: 5px;
+  width: 128px;
+  text-align: center;
+  float: right;
+}
 
 /*# sourceMappingURL=app.css.map */

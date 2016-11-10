@@ -2,13 +2,14 @@ angular
 .module('MyApp', [
   'ngResource',
   'ngMessages',
+  'pascalprecht.translate',
   'ngAnimate',
   'toastr',
   'ui.router',
   'ngBootbox',
   'satellizer'])
 
-.config(function($stateProvider, $urlRouterProvider, $authProvider) {
+.config(function($translateProvider, $stateProvider, $urlRouterProvider, $authProvider, $ngBootboxConfigProvider) {
     /**
      * App routes
      */
@@ -34,6 +35,13 @@ angular
     $authProvider.google({
       clientId: '908156294400-qdqgta0rukfi3el2rl8qgsjtcel3ka87.apps.googleusercontent.com'
     });
+
+    // default language
+    $translateProvider.preferredLanguage('en');
+    // Enable escaping of HTML
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
+
+    $ngBootboxConfigProvider.setDefaultLocale('en');
 
   });
 
