@@ -38,5 +38,9 @@ h6 {
   text-align: center;
   float: right;
 }
+.border-gray {
+  border: 1px solid gray;
+  margin-top: 1px;
+}
 
 /*# sourceMappingURL=app.css.map */

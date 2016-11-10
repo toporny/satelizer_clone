@@ -16,23 +16,27 @@
             scope: { },
             controller: navCtrl,
             controllerAs: '$ctrl',
-            //bindToController: true,
+            bindToController: false,
             templateUrl: templateUrl
         };
     }
 
 
     // ---------------------------------------------
-    navCtrl.$inject = ['$auth', '$state', '$location', '$ngBootbox'];
+    navCtrl.$inject = ['$scope', '$auth', '$state', '$location', '$ngBootbox', '$translate'];
 
-    function navCtrl($auth, $state, $location, $ngBootbox) {
+
+    function navCtrl($scope, $auth, $state, $location, $ngBootbox, $translate) {
 
         var $ctrl = this;
         $ctrl.init = init;
         $ctrl.isAuthenticated = null;
         $ctrl.isActive = isActive;
+        $ctrl.flag = 'en';
+        $ctrl.currentLanguage = $translate.use();
+
         $ctrl.changeLanguage = changeLanguage;
-        $ctrl.delideli = delideli;
+        //$ctrl.delideli = delideli;
 
 
         function isActive (viewLocation) {
@@ -47,104 +51,42 @@
         };
 
 
-
-function delideli(){
-    console.log('deli');
-}
-
         function changeLanguage(){
-var options = {
-    message: 'Select Language',
-    //title: 'Select Language',
-    className: 'test-class',
-    buttons: {
-        warning: {
-            label: '<span class="lang-sm" lang="pl"></span> Polski',
-            className: "btn-change-language btn-info",
-            callback: function() {
-                $translateProvider.preferredLanguage('en');
-                $ngBootboxConfigProvider.setDefaultLocale('en');
-            }
-        },
-        success: {
-            label: '<span class="lang-sm" lang="en"></span> English',
-            className: "btn-change-language btn-info",
-            callback: function(e) {
-                // default language
-                $translateProvider.preferredLanguage('en');
-                $ngBootboxConfigProvider.setDefaultLocale('en');
-                console.log(e);
-            }
-        },
-        cancel: {
-            label: 'Cancel',
-            className: "btn-change-language btn-change-language-cancel btn-warning",
-            callback: function(e) {
-                //console.log(e);
-            }
+
+            var currentLanguage  = $translate.use();
+            var options = {
+                message: 'Select Language',
+                className: 'test-class',
+                buttons: {
+                    warning: {
+                        label: '<span class="lang-sm" lang="pl"></span> Polski',
+                        className: "btn-change-language btn-info",
+                        callback: function() {
+                            $ctrl.currentLanguage = 'pl';
+                            $translate.use('pl');
+                        }
+                    },
+                    success: {
+                        label: '<span class="lang-sm" lang="en"></span> English',
+                        className: "btn-change-language btn-info",
+                        callback: function(e) {
+                            $ctrl.currentLanguage = 'en';
+                            $translate.use('en');
+                        }
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: "btn-change-language btn-change-language-cancel btn-warning",
+                        callback: function(e) {
+
+                        }
+                    }
+                }
+            };
+
+            $ngBootbox.customDialog(options);
         }
-    }
-};
 
-$ngBootbox.customDialog(options);
-
-//    .prompt('Enter something')
-//     .then(function(result) {
-//         console.log('Prompt returned: ' + result);
-//     }, function() {
-//         console.log('Prompt dismissed!');
-//     });
-
-//            $ngBootbox.prompt({
-//             title: "This is a prompt with select!",
-//             inputType: 'select',
-//             inputOptions: [
-//                 {
-//                     text: 'English',
-//                     value: 'en',
-//                 },
-//                 {
-//                     text: 'Polish / Polski',
-//                     value: 'pl',
-//                 }
-//             ],
-//             callback: function (result) {
-//                 console.log(result);
-//             }
-//         });
-
-
-//,
-//bootbox.dialog({ message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>' })
-//$ngBootbox.dialog({ message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>' })
-// $ngBootbox.confirm('A question?')
-// .then(function() {
-//     console.log('Confirmed!');
-// }, function() {
-//     console.log('Confirm dismissed!');
-// });
-
-            // var options = {
-            //         title: 'The title!',
-            //         message: 'This <b>is a</b> message!',
-            //         className: 'test-class',
-            //         buttons: {
-            //             continue: {
-            //                 label: "Ok",
-            //                 className: "btn-success",
-            //                 callback: function() { alert('ok');  }
-            //             },
-            //             cancel: {
-            //                 label: "Cancel",
-            //                 className: "btn-warning",
-            //                 callback: function() {   }
-            //             },
-
-            //         }
-            //     };
-
-            // $ngBootbox.customDialog(options);
-        }
 
         function init(){
           $ctrl.isAuthenticated = function() {
@@ -162,7 +104,6 @@ $ngBootbox.customDialog(options);
         }
     }
 
-    
     // ---------------------------------------------
 // http://msurguy.github.io/ladda-bootstrap/
 
