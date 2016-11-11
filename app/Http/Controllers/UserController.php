@@ -26,7 +26,6 @@ class UserController extends Controller {
     public function getUser(Request $request)
     {
         $user = User::find($request['user']['sub']);
-
         return $user;
     }
 
@@ -36,9 +35,11 @@ class UserController extends Controller {
     public function updateUser(Request $request)
     {
         $user = User::find($request['user']['sub']);
-
-        $user->displayName = $request->input('displayName');
+        $user->locale = json_encode ( $request->input('locale') );
+        $user->languageToLearn = json_encode ( $request->input('languageToLearn') );
+        $user->displayName =  $request->input('displayName');
         $user->email = $request->input('email');
+
         $user->save();
 
         $token = $this->createToken($user);

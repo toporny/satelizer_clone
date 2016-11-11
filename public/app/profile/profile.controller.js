@@ -4,19 +4,42 @@ angular
   .module('MyApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account'];
+  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account', 'languagesDefinitions'];
 
-  function ProfileCtrl($scope, $auth, toastr, Account) {
-    $scope.getProfile = function() {
+  function ProfileCtrl($scope, $auth, toastr, Account, languagesDefinitions) {
+
+    vm = this;
+    vm.getProfile = getProfile;
+    vm.updateProfile = updateProfile;
+    vm.link = link;
+    vm.unlink = unlink;
+
+    vm.data = { 
+      interfaceLanguage: languagesDefinitions,
+      locale : languagesDefinitions[0],
+
+      whatToLearnLanguage: languagesDefinitions,
+      languageToLearn : languagesDefinitions[1]     
+    };
+
+
+    function getProfile() {
       Account.getProfile()
         .then(function(response) {
           $scope.user = response.data;
+          vm.data.languageToLearn = angular.fromJson(response.data.languageToLearn);
+          vm.data.locale = angular.fromJson(response.data.locale);
         })
         .catch(function(response) {
           toastr.error(response.data.message, response.status);
         });
     };
-    $scope.updateProfile = function() {
+
+    function updateProfile() {
+      console.log('$scope.user', $scope.user);
+      $scope.user.locale = vm.data.locale;
+      $scope.user.languageToLearn = vm.data.languageToLearn;
+
       Account.updateProfile($scope.user)
         .then(function() {
           toastr.success('Profile has been updated');
@@ -25,7 +48,7 @@ angular
           toastr.error(response.data.message, response.status);
         });
     };
-    $scope.link = function(provider) {
+    function link(provider) {
       $auth.link(provider)
         .then(function() {
           toastr.success('You have successfully linked a ' + provider + ' account');
@@ -35,7 +58,7 @@ angular
           toastr.error(response.data.message, response.status);
         });
     };
-    $scope.unlink = function(provider) {
+    function unlink(provider) {
       alert(provider);
       $auth.unlink(provider)
         .then(function() {
@@ -47,7 +70,7 @@ angular
         });
     };
 
-    $scope.getProfile();
+    getProfile();
   };
 
 })();

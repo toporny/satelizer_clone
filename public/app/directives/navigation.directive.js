@@ -76,7 +76,7 @@
                         }
                     },
                     Spain: {
-                        label: '<span class="lang-sm" lang="sp"></span> Spain',
+                        label: '<span class="lang-sm" lang="es"></span> Spain',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
                           toastr.warning('Not yet ready','Warning');

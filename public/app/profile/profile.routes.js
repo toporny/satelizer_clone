@@ -10,7 +10,7 @@
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'app/profile/profile.html',
-                controller: 'ProfileCtrl',
+                controller: 'ProfileCtrl as profile',
                 authenticate: true
             });
         }

@@ -157,6 +157,9 @@ class AuthController extends Controller {
         // Step 3b. Create a new user account or return an existing one.
         else
         {
+            // $b =$profile;
+            // file_put_contents('filename.txt', print_r($b, true));
+            // exit;
             $user = User::where('facebook', '=', $profile['id']);
 
             if ($user->first())

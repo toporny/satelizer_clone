@@ -1,22 +1,34 @@
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-heading">Profile</div>
+    <div class="panel-heading" translate="PROFILE.HEADER"></div>
     <div class="panel-body">
-      <legend><i class="ion-clipboard"></i> Edit My Profile</legend>
-      <form method="post" ng-submit="updateProfile()">
+      <legend translate="PROFILE.EDIT_MY_PROFILE"></legend>
+      <form method="post" ng-submit="profile.updateProfile()">
         <div class="form-group">
-          <label class="control-label">Profile Picture</label>
+          <label class="control-label" translate='PROFILE.PROFILE_PICTURE'></label>
           <img class="profile-picture" ng-src="{{user.picture || 'https://placehold.it/100x100'}}">
         </div>
         <div class="form-group">
-          <label class="control-label"><i class="ion-person"></i> Display Name</label>
+          <label class="control-label" translate="PROFILE.DISPLAY_NAME"></label>
           <input type="text" class="form-control" ng-model="user.displayName" />
         </div>
         <div class="form-group">
-          <label class="control-label"><i class="ion-at"></i> Email Address</label>
+          <label class="control-label" translate="PROFILE.EMAIL_ADDRESS"></label>
           <input type="email" class="form-control" ng-model="user.email" />
         </div>
-        <button class="btn btn-lg btn-success">Update Information</button>
+        <div class="form-group">
+          <label class="control-label" translate="PROFILE.LOCALE" ></label>
+          <select ng-model="profile.data.locale" class="form-control"
+            ng-options="option.name for option in profile.data.interfaceLanguage track by option.id"  >
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" translate="PROFILE.WHAT_LANGUAGE_YOU_WOULD_LIKE_TO_LEARN"></label>
+          <select ng-model="profile.data.languageToLearn" class="form-control"
+            ng-options="option.name for option in profile.data.whatToLearnLanguage track by option.id" >
+          </select>
+        </div>
+        <button class="btn btn-lg btn-success" translate="PROFILE.BTN_UPDATE"></button>
       </form>
     </div>
   </div>
