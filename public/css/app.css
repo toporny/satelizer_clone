@@ -25,11 +25,10 @@ h6 {
 .navbar-nav li a:hover {
   background-color: red !important;
 }
-
 .btn-change-language {
   display: block;
   margin: 5px;
-  width: 128px;
+  width: 200px;
   text-align: left;
 }
 .btn-change-language-cancel {
@@ -39,7 +38,9 @@ h6 {
   text-align: center;
   float: right;
 }
+.border-gray {
+  border: 1px solid gray;
+  margin-top: 1px;
+}
 
- .toast {
-  opacity:0.9 !important;
 /*# sourceMappingURL=app.css.map */
