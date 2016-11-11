@@ -34,6 +34,12 @@
               FREE: 'no',
               PREMIUM: 'yes'
             },
+            TABLE_ROW_6:  {
+              DESCRIPTION: 'Official certificate',
+              FREE: 'tak',
+              PREMIUM: 'tak'
+            },
+
 
             BTN_BUY: 'Buy premium now'
           },
@@ -67,6 +73,11 @@
             TABLE_ROW_5:  {
               DESCRIPTION: 'Przypomnienia',
               FREE: 'nie',
+              PREMIUM: 'tak'
+            },
+            TABLE_ROW_6:  {
+              DESCRIPTION: 'Oficjalny certyfikat',
+              FREE: 'tak',
               PREMIUM: 'tak'
             },
 
