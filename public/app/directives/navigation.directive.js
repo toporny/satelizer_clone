@@ -56,6 +56,7 @@
             var currentLanguage  = $translate.use();
             var options = {
                 message: 'Select Language',
+                size: "small",
                 className: 'test-class',
                 buttons: {
                     Polish: {
@@ -97,7 +98,7 @@
                     },
                     cancel: {
                         label: 'Cancel',
-                        className: "btn-change-language btn-change-language-cancel btn-warning",
+                        className: "btn-change-language btn-warning btn-change-language-cancel",
                         callback: function(e) {
 
                         }

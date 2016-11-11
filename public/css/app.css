@@ -27,16 +27,19 @@ h6 {
 }
 .btn-change-language {
   display: block;
-  margin: 5px;
+  margin-top: 5px;
+  margin-left: auto !important;
+  margin-right: auto;
   width: 200px;
   text-align: left;
 }
 .btn-change-language-cancel {
   display: block;
-  margin: 5px;
-  width: 128px;
+  margin-top: 15px;
+  margin-left: auto !important;
+  margin-right: auto;
+  width: 200px;
   text-align: center;
-  float: right;
 }
 .border-gray {
   border: 1px solid gray;
