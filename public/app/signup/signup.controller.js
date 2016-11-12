@@ -18,7 +18,6 @@ angular
 
  
     function signup() {
-      console.log('vm.data.user',vm.data);
       $auth.signup(vm.data)
         .then(function(response) {
           $auth.setToken(response);

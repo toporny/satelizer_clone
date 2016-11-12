@@ -118,14 +118,14 @@ class AuthController extends Controller {
         ];
 
         // Step 1. Exchange authorization code for access token.
-        $accessTokenResponse = $client->request('GET', 'https://graph.facebook.com/v2.5/oauth/access_token', [
+        $accessTokenResponse = $client->request('GET', 'https://graph.facebook.com/v2.8/oauth/access_token', [
             'query' => $params
         ]);
         $accessToken = json_decode($accessTokenResponse->getBody(), true);
 
         // Step 2. Retrieve profile information about the current user.
         $fields = 'id,email,first_name,last_name,link,name,locale';
-        $profileResponse = $client->request('GET', 'https://graph.facebook.com/v2.5/me', [
+        $profileResponse = $client->request('GET', 'https://graph.facebook.com/v2.8/me', [
             'query' => [
                 'access_token' => $accessToken['access_token'],
                 'fields' => $fields

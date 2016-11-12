@@ -10,7 +10,7 @@
         {id: 'de_DE', name: 'german'},
         {id: 'pl_PL', name: 'polish'}
     ])
-    .constant('definedLanguages',{
+    .constant('definedLanguages',{ // todo: remove this
         'FR_fr': { label: 'French',  words:4000,  free_words: 2000 },
         'GE_ge': { label: 'German',  words:3000,  free_words: 2000 },
         'es_ES': { label: 'Spain',   words:10000, free_words: 2000 },

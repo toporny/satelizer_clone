@@ -33,7 +33,6 @@
         $ctrl.isAuthenticated = null;
         $ctrl.isActive = isActive;
         $ctrl.flag = 'en';
-        $ctrl.currentLanguage = $translate.use();
 
         $ctrl.changeLanguage = changeLanguage;
         //$ctrl.delideli = delideli;
@@ -53,7 +52,6 @@
 
         function changeLanguage(){
 
-            var currentLanguage  = $translate.use();
             var options = {
                 message: 'Select Language',
                 size: "small",
@@ -63,7 +61,6 @@
                         label: '<span class="lang-sm" lang="pl"></span> Polski',
                         className: "btn-change-language btn-info",
                         callback: function() {
-                            $ctrl.currentLanguage = 'pl';
                             $translate.use('pl');
                         }
                     },
@@ -71,7 +68,6 @@
                         label: '<span class="lang-sm" lang="en"></span> English',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
-                            $ctrl.currentLanguage = 'en';
                             $translate.use('en');
                         }
                     },

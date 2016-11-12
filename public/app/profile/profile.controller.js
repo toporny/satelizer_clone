@@ -4,9 +4,9 @@ angular
   .module('MyApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account', 'languagesDefinitions'];
+  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account', 'languagesDefinitions', '$translate'];
 
-  function ProfileCtrl($scope, $auth, toastr, Account, languagesDefinitions) {
+  function ProfileCtrl($scope, $auth, toastr, Account, languagesDefinitions, $translate) {
 
     vm = this;
     vm.getProfile = getProfile;
@@ -39,6 +39,13 @@ angular
       console.log('$scope.user', $scope.user);
       $scope.user.locale = vm.data.locale;
       $scope.user.languageToLearn = vm.data.languageToLearn;
+
+      switch (vm.data.locale.id) {
+        case 'gb_GB' : $translate.use('en'); break;
+        case 'pl_PL' : $translate.use('pl'); break;
+        default : $translate.use('en'); break;
+      }
+
 
       Account.updateProfile($scope.user)
         .then(function() {

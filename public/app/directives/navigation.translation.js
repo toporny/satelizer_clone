@@ -17,6 +17,7 @@
             PREMIUM: 'Premium',
             PROFILE: 'Profile',
             LOGOUT: 'Logout',
+            FLAG: 'en',
           },
         });
      
@@ -32,6 +33,7 @@
             PREMIUM: 'Premium',
             PROFILE: 'Profil',
             LOGOUT: 'Wyloguj się',
+            FLAG: 'pl',
           },
       });
      
