@@ -61,3 +61,13 @@ Stack trace:
 #58 C:\Users\uzytkownik\development\satelizer_clone\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #59 C:\Users\uzytkownik\development\satelizer_clone\server.php(21): require_once('C:\\Users\\uzytko...')
 #60 {main}  
+[2016-11-12 09:20:14] development.ERROR: exception 'Symfony\Component\Console\Exception\CommandNotFoundException' with message 'Command "server" is not defined.
+
+Did you mean this?
+    serve' in C:\Users\uzytkownik\development\satelizer_clone\vendor\symfony\console\Application.php:515
+Stack trace:
+#0 C:\Users\uzytkownik\development\satelizer_clone\vendor\symfony\console\Application.php(183): Symfony\Component\Console\Application->find('server')
+#1 C:\Users\uzytkownik\development\satelizer_clone\vendor\symfony\console\Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Users\uzytkownik\development\satelizer_clone\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Users\uzytkownik\development\satelizer_clone\artisan(36): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 {main}  
