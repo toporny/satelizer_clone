@@ -36,22 +36,43 @@ class UserController extends Controller {
         $user = User::find($request['user']['sub']);
         
         $languageToLearn_string = $user['languageToLearn'];
+
         $languageToLearn = json_decode ($languageToLearn_string, true);
         $locale = json_decode ($user['locale'], true);
 
-        // $availableDictionaries = DB::table('available_dictionaries')
-        // ->select( 'language_id', 'language_name')
-        // ->select( 'language_id', 'language_name')
-        // ;
- 
+
         $results = DB::table('available_dictionaries')
                 ->select('language_id', 'language_name', 'available_languages')
                 ->where('language_id', $user['locale'])
                 ->get();
 
+// print "<pre>";
+// print_r($results);
+// exit;
 
-        if ($results) {
-            return response()->json(['status'=> 1, 'languages' => array($results)]);
+        // SET LANGUAGETOLEARN ITEM IN THE FIRST PLACE
+                
+        $json_decoded = json_decode($results[0]->available_languages);
+
+        // if user doesn't have languageToLearn defined THEN ignore 
+        $baloon = false;
+        foreach (array_keys($json_decoded) as $key) {
+            if ($json_decoded[$key]->id == $user['languageToLearn']) {
+                $tmp_id = $json_decoded[$key]->id;
+                $tmp_name = $json_decoded[$key]->name;
+                unset($json_decoded[$key]);
+                $baloon = true;
+            }
+        }
+
+        if ($baloon == true ) {
+            $new_array = ['id'=>$tmp_id, 'name'=>$tmp_name]  ;
+            array_push ($json_decoded , $new_array );
+            $json_decoded = array_reverse ($json_decoded);
+        }
+
+        if ($json_decoded) {
+            return response()->json(['status'=> 1, 'languages' =>  $json_decoded ]);
         }
         else {
             return response('no available languages for '.$user['locale'], 500);

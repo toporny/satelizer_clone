@@ -1,19 +1,3 @@
-angular.module('MyApp')
-  .factory('common', common);
-
-  common.$inject = ['$http'];
-
-  function common($http) {
-    return {
-    	getAvailableDictionaries:getAvailableDictionaries
-    };
-
-    function getAvailableDictionaries() {
-        return $http.get('/api/get_dictionaries/');
-	}
-
-  };
-
 (function () {
   angular
     .module('MyApp')
@@ -36,7 +20,7 @@ angular.module('MyApp')
 //		common.getAvailableDictionaries()
 
 
-		common.getAvailableDictionaries()
+		common.getAvailableDictionariesForLanguage()
         .then(function(response) {
 			vm.data.availableDictionaries = angular.fromJson(response.data.languages);
         })

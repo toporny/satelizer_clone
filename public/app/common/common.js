@@ -1,15 +1,18 @@
-// angular.module('MyApp')
-//   .factory('common', common);
+(function () {
+angular.module('MyApp')
+  .factory('common', common);
 
-//   common.$inject = ['$http'];
+  common.$inject = ['$http'];
 
-//   function common($http) {
-//     return {
-//     	getAvailableDictionaries:getAvailableDictionaries;
-//     };
+  function common($http) {
+    return {
+    	getAvailableDictionariesForLanguage:getAvailableDictionariesForLanguage
+    };
 
-//     function getAvailableDictionaries(language) {
-//         return $http.get('/api/get_dictionaries/'+language);
-// 	}
+    function getAvailableDictionariesForLanguage() {
+      return $http.get('/api/get_dictionaries/');
+	  }
 
-//   };
+  };
+
+})();
