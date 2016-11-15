@@ -5,18 +5,34 @@
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
           <p>Please select language</p>
-                <button type="button" style="width:200px; text-align:left; margin:4px; " class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="en"></span></button>
-                <div id="derp" class="slideable">
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="de"></span></button>
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="es"></span></button>
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="pl"></span></button>
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="fr"></span></button>
+
+                <!-- TODO: make this ugly way to different way -->
+                <!-- first button always visible -->
+                <div ng-repeat="dictionary in pick.data.availableDictionaries">
+                  <button ng-if="$first" type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span></button>
                 </div>
+
+                <!-- rest buttons visible under "more" button -->
+                <div id="derp" class="slideable">
+                  <div ng-repeat="dictionary in pick.data.availableDictionaries">
+                    <button ng-if="!$first" type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span></button>
+                  </div>
+                </div>
+
                 <button class="btn btn-link" style="margin-top:10px;margin-left:4px;margin-bottom:24px" slide-toggle="#derp">more..</button>
 
         </div>
 
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10"
+            aria-valuemin="0" aria-valuemax="100" style="width:10%">
+              10%
+            </div>
+          </div>
+
+
           <p>Please select level. (<b>Level 1</b> means 500 most used words, etc..)</p>
           <button ng-click="next()" type="button" class="btn btn-lg btn-success ng-binding" style="text-align:left;font-weight: normal; margin:4px; width:185px"><b>LEVEL 1</b> (1-500)</button>
           <button ng-click="next()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left;font-weight: normal; margin:4px; width:185px"><b>LEVEL 2</b> (501-1000)</button>
@@ -30,6 +46,8 @@
           <button ng-click="next()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 9</b> (4001-4500)</button>
           <button ng-click="next()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 10</b> (4500-5000)</button>
           <br/>
+
+          
             <button ng-click="pick.next()" type="button" class="btn btn-lg btn-warning ng-binding" style="margin:4px; width:185px"> SUBMIT</button>
         </div>
 

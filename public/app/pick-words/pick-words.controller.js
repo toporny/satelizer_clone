@@ -1,35 +1,56 @@
+angular.module('MyApp')
+  .factory('common', common);
+
+  common.$inject = ['$http'];
+
+  function common($http) {
+    return {
+    	getAvailableDictionaries:getAvailableDictionaries
+    };
+
+    function getAvailableDictionaries() {
+        return $http.get('/api/get_dictionaries/');
+	}
+
+  };
+
 (function () {
   angular
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = ['$ngBootbox', '$state'];
+    PickCtrl.$inject = ['$ngBootbox', '$state', 'common'];
 
-    function PickCtrl ($ngBootbox, $state) {
+    function PickCtrl ($ngBootbox, $state, common) {
 		vm = this;
 		vm.next = next;
 		vm.showModal = showModal;
 
-		// get this from DB
-		var languages = [
-			{ value: ''     , label: '--select--'  },
-			{ value: 'FR_fr', label: 'French'  },
-			{ value: 'GE_ge', label: 'German' },
-			{ value: 'SP_sp', label: 'Spain' },
-			{ value: 'RU_ru', label: 'Russian' },
-			{ value: 'PL_pl', label: 'Polish' }
-		];
-	
+
 		vm.data = {
-			languages: languages,
-			//config: config, 
-			languageSelected: languages[0], // we need this to pick first element as selected
+			// languages: languages,
+			// //config: config, 
+			// languageSelected: languages[0], // we need this to pick first element as selected
 		};
 
+//		common.getAvailableDictionaries()
 
-		vm.data.selected = vm.data.languages[0];
+
+		common.getAvailableDictionaries()
+        .then(function(response) {
+			vm.data.availableDictionaries = angular.fromJson(response.data.languages);
+        })
+        .catch(function(response) {
+          toastr.error(response.data.message, response.status);
+        });
+
+
+
+
+//		vm.data.selected = vm.data.languages[0];
 
 		function next() {
+			common.getAvailableDictionaries();
 			$state.go('words-list');
 		}
 

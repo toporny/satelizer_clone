@@ -43,5 +43,9 @@ Route::post('auth/unlink/', ['middleware' => 'auth', 'uses' => 'AuthController@u
 Route::get('api/me', ['middleware' => 'auth', 'uses' => 'UserController@getUser']);
 Route::put('api/me', ['middleware' => 'auth', 'uses' => 'UserController@updateUser']);
 
+Route::get('api/get_dictionaries/', ['middleware' => 'auth', 'uses' => 'UserController@getDictionaries']);
+
 // Initialize Angular.js App Route.
 Route::get('/', 'HomeController@index');
+
+
