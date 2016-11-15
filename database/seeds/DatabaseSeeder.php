@@ -38,11 +38,11 @@ class DatabaseSeeder extends Seeder
 
         $available_dictionaries = array(
                 ['language_id' => 'en_EN', 'language_name' => 'english', 'available_languages' => '[{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
-                ['language_id' => 'es_ES', 'language_name' => 'english', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
-                ['language_id' => 'ru_RU', 'language_name' => 'english', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
-                ['language_id' => 'fr_FR', 'language_name' => 'english', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
-                ['language_id' => 'de_DE', 'language_name' => 'english', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"pl_PL", "name":"polish"}]'],
-                ['language_id' => 'pl_PL', 'language_name' => 'english', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"polish"}]'],
+                ['language_id' => 'es_ES', 'language_name' => 'spanish', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
+                ['language_id' => 'ru_RU', 'language_name' => 'russian', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
+                ['language_id' => 'fr_FR', 'language_name' => 'fremnch', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]'],
+                ['language_id' => 'de_DE', 'language_name' => 'deutsch', 'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"pl_PL", "name":"polish"}]'],
+                ['language_id' => 'pl_PL', 'language_name' => 'polish',  'available_languages' => '[{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"polish"}]'],
         );
 
 

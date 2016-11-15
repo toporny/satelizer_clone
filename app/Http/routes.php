@@ -45,6 +45,9 @@ Route::put('api/me', ['middleware' => 'auth', 'uses' => 'UserController@updateUs
 
 Route::get('api/get_dictionaries/', ['middleware' => 'auth', 'uses' => 'UserController@getDictionaries']);
 
+Route::get('api/get_dictionaries1/', 'UserController@getDictionaries' );
+
+
 // Initialize Angular.js App Route.
 Route::get('/', 'HomeController@index');
 

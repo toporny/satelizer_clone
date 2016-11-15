@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Config;
 use Firebase\JWT\JWT;
 use App\User;
+use DB;
 
 class UserController extends Controller {
 
@@ -36,38 +37,25 @@ class UserController extends Controller {
         
         $languageToLearn_string = $user['languageToLearn'];
         $languageToLearn = json_decode ($languageToLearn_string, true);
-
         $locale = json_decode ($user['locale'], true);
-        // print_r($user);
-        // exit;
-        // TODO: it should me taken from DB
-        // now its hardcoded
-        $return = array(
-            array('id' => 'en_EN', 'name' => 'english'),
-            array('id' => 'fr_FR', 'name' => 'french'),
-            array('id' => 'de_DE', 'name' => 'deutsch'),
-            array('id' => 'es_ES', 'name' => 'spanish'),
-            array('id' => 'ru_RU', 'name' => 'russian'),
-            array('id' => 'pl_PL', 'name' => 'polish')
-        );
 
-        // for ($i = 0; $i<count($return); $i++) {
-        //     if ($locale ==  $return[$i]) {
-        //         unset($return[$i]); // remove locale from the list.
-        //        break;
-        //     }
-        // }
+        // $availableDictionaries = DB::table('available_dictionaries')
+        // ->select( 'language_id', 'language_name')
+        // ->select( 'language_id', 'language_name')
+        // ;
+ 
+        $results = DB::table('available_dictionaries')
+                ->select('language_id', 'language_name', 'available_languages')
+                ->where('language_id', $user['locale'])
+                ->get();
 
-        // for ($i = 0; $i<count($return); $i++) {
-        //     print_R( $languageToLearn_string);
-        //     if ((array_key_exists($i, $return)) && ($languageToLearn ==  $return[$i]) ) {
-        //         unset($return[$i]); // remove locale from the list.
-        //         break;
-        //     }   
-        // }
 
-        // make $languageToLearn to a first place
-        return response()->json(['status'=> 1, 'languages' => array($languageToLearn)+$return]);
+        if ($results) {
+            return response()->json(['status'=> 1, 'languages' => array($results)]);
+        }
+        else {
+            return response('no available languages for '.$user['locale'], 500);
+        }
 
     }
 
@@ -78,8 +66,9 @@ class UserController extends Controller {
     public function updateUser(Request $request)
     {
         $user = User::find($request['user']['sub']);
-        $user->locale = json_encode ( $request->input('locale') );
-        $user->languageToLearn = json_encode ( $request->input('languageToLearn') );
+        $tmp = json_encode ( $request->input('locale') );
+        $user->locale =  json_decode($tmp)->id ;
+        $user->languageToLearn = $request->input('languageToLearn')['id'];
         $user->displayName =  $request->input('displayName');
         $user->email = $request->input('email');
 
