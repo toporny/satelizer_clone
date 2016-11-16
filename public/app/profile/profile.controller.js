@@ -4,9 +4,9 @@ angular
   .module('MyApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account', '$translate', 'common', 'translations'];
+  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account', '$translate', '$state', 'common', 'translations'];
 
-  function ProfileCtrl($scope, $auth, toastr, Account, $translate, common, translations) {
+  function ProfileCtrl($scope, $auth, toastr, Account, $translate, $state, common, translations) {
 
     vm = this;
     vm.getProfile = getProfile;
@@ -58,44 +58,11 @@ angular
                vm.data.languageToLearn = {id: value.id, name: value.name};
             }
           });
-          
-
-
-          // languageToLearn // set default for  whatToLearnLanguage
-
-          // {id: 'en_EN', name: 'english'},
-          // {id: 'pl_PL', name: 'polish'}
-          // set default for interfaceLanguage
-
-
-//          vm.data.locale = {id: "$scope.user", name: "russian"};
-            //$scope.user.locale;
-    
-// /          vm.data.languageToLearn 
-
-          //vm.data.interfaceLanguage = data.languages;
-
-//           vm.data.locale : vm.data.interfaceLanguage[0];
-//           vm.data.whatToLearnLanguage: languagesDefinitions,
-//           vm.data.languageToLearn : languagesDefinitions[1]     
-        
-
-//           console.log('response',response);
-//           $scope.user = response.data;
-// // id:"ru_RU"
-// name:"russian"
-          // zrobic ponizej tak ze defaultowo ustawia taki jezyk jaki jest.
-          // vm.data.languageToLearn =  response.data.languageToLearn ;
-          // vm.data.locale = response.data.locale;
-          // console.log('response.data.languageToLearn',response.data.languageToLearn);
-          // console.log('interfaceLanguage', vm.data.interfaceLanguage);
-          // console.log('languagesDefinitions[0]',vm.data.languagesDefinitions[0]);
-          // console.log('whatToLearnLanguage', vm.data.whatToLearnLanguage);
-          // console.log('languagesDefinitions[1]', vm.data.languagesDefinitions[1] );
-
         })
         .catch(function(response) {
-           toastr.error(response.data.message, response.status);
+          toastr.error(response.data.message, response.status);
+          console.log('logout');
+          $state.go('logout');          
         });
     };
 

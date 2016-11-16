@@ -11,8 +11,11 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
+        $this->call(DatabaseTwoSeeder::class);
+
         Model::unguard();
 
         DB::table('users')->delete();

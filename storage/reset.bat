@@ -1,0 +1,1 @@
+copy zero.txt database.sqlite
