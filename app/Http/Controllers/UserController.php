@@ -61,9 +61,10 @@ class UserController extends Controller {
         
         $transactions = $transactions->paginate($records_on_page);
 
-        print("<pre>");
-        print_r($transactions);
+        // print("<pre>");
+        // print_r($transactions);
 
+return response()->json(['status'=> 1, 'words' =>  $transactions ]);
 
         // print($language);
         // print($page);
