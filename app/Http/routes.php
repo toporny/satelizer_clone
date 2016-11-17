@@ -44,8 +44,13 @@ Route::get('api/me', ['middleware' => 'auth', 'uses' => 'UserController@getUser'
 Route::put('api/me', ['middleware' => 'auth', 'uses' => 'UserController@updateUser']);
 
 Route::get('api/get_dictionaries/', ['middleware' => 'auth', 'uses' => 'UserController@getDictionaries']);
+Route::get('api/get_words_list/', ['middleware' => 'auth', 'uses' => 'UserController@getWordsList']);
 
 
+
+
+// development
+Route::get('api/get_words_list1/{language}/{pagination_page?}', 'UserController@getWordsList');
 //Route::get('api/get_dictionaries1/', 'UserController@getDictionaries' );
 
 

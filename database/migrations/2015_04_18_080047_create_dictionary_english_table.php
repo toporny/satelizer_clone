@@ -13,7 +13,7 @@ class CreateDictionaryEnglishTable extends Migration
      */
     public function up()
     {
-        Schema::create('dictionary_english', function (Blueprint $table) {
+        Schema::create('dictionary_en', function (Blueprint $table) {
             $table->increments('id');
             $table->string('word')->index();
             $table->string('de_DE')->nullable();
@@ -31,6 +31,6 @@ class CreateDictionaryEnglishTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dictionary_english');
+        Schema::dropIfExists('dictionary_en');
     }
 }

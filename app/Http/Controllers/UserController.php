@@ -21,6 +21,9 @@ class UserController extends Controller {
         return JWT::encode($payload, Config::get('app.token_secret'));
     }
 
+
+
+
     /**
      * Get signed in user's profile.
      */
@@ -29,6 +32,47 @@ class UserController extends Controller {
         $user = User::find($request['user']['sub']);
         return $user;
     }
+
+
+
+    /**
+     * Get Words pagination list from dictionary table 
+     */
+    public function getWordsList($language, $page = 1)
+    {
+        $baloon = false;
+
+        // check in config and test if $language is supported
+        foreach (Config::get('app.supported_languages') as $value) {
+            if ($value == $language)  $baloon = 1;
+        }
+        if ($baloon ==false) {
+            return response('language '.$language.' not supported', 500);
+        }
+
+
+        $records_on_page = 100;
+
+        $transactions = DB::table('dictionary_en')
+        ->select(
+            'word',
+            'pl_PL')
+       ;
+        
+        $transactions = $transactions->paginate($records_on_page);
+
+        print("<pre>");
+        print_r($transactions);
+
+
+        // print($language);
+        // print($page);
+
+        //$user = User::find($request['user']['sub']);
+        //return 1;
+    }
+
+
 
 
     public function getDictionaries(Request $request)

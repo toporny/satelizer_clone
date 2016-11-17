@@ -2,6 +2,8 @@
 
 return [
 
+ 
+	'supported_languages' => ['pl_PL','de_DE','fr_FR','ru_RU','es_ES','en_EN'],
 	'token_secret' => 'werwwqrqwersdfasdfewrtwegsdfgsdfg',
 	'facebook_secret' => '72d7b2a52c26474df26a491ca69b3962',
 	'foursquare_secret' => '',

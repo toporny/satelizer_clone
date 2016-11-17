@@ -8,7 +8,7 @@
     function PickCtrl ($ngBootbox, $state, common) {
 		vm = this;
 		vm.next = next;
-		vm.showModal = showModal;
+		vm.show_premium_modal = show_premium_modal;
 
 
 		vm.data = {
@@ -34,12 +34,13 @@
 //		vm.data.selected = vm.data.languages[0];
 
 		function next() {
-			common.getAvailableDictionaries();
+			console.log('next');
+			//common.getAvailableDictionaries();
 			$state.go('words-list');
 		}
 
-		function showModal() {
-
+		function show_premium_modal() {
+			console.log('show_premium_modal');
 			var options = {
 			    message: 'This feature is available only for premium users.',
 			    title: 'Premium required',

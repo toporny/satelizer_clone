@@ -12,7 +12,7 @@ class DatabaseTwoSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        DB::table('dictionary_english')->delete();
+        DB::table('dictionary_en')->delete();
 
 $words_5000_eng_pol = array(
     array( // row #0
@@ -4842,32 +4842,20 @@ $words_5000_eng_pol = array(
 
 );
 
-DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 1, 400));
-DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 401, 400));
-DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 801, 400));
-DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 1201, 400));
-DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 1601, 400));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 501, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 1001, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 1501, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 2001, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 2501, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 3001, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 3501, 500));
-// DB::table('dictionary_english')->insert(array_slice ( $words_5000_eng_pol  , 4001, 500));
-        
-        // $users = array(
-        //         ['displayName' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
-        //         ['displayName' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret')],
-        //         ['displayName' => 'Holly Lloyd', 'email' => 'holly@scotch.io', 'password' => Hash::make('secret')],
-        //         ['displayName' => 'Adnan Kukic', 'email' => 'adnan@scotch.io', 'password' => Hash::make('secret')],
-        // );
-            
-        // // Loop through each user above and create the record for them in the database
-        // foreach ($users as $user)
-        // {
-        //     User::create($user);
-        // }
+DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 1, 400));
+DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 401, 400));
+DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 801, 400));
+DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 1201, 400));
+DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 1601, 400));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 501, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 1001, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 1501, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 2001, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 2501, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 3001, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 3501, 500));
+// DB::table('dictionary_en')->insert(array_slice ( $words_5000_eng_pol  , 4001, 500));
+ 
         Model::reguard();
  
     }
