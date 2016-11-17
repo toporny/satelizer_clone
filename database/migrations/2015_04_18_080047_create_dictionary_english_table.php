@@ -16,11 +16,16 @@ class CreateDictionaryEnglishTable extends Migration
         Schema::create('dictionary_en', function (Blueprint $table) {
             $table->increments('id');
             $table->string('word')->index();
-            $table->string('de_DE')->nullable();
-            $table->string('fr_FR')->nullable();
-            $table->string('ru_RU')->nullable();
-            $table->string('es_ES')->nullable();
-            $table->string('pl_PL')->nullable();
+            $table->string('de_DE_translations')->nullable();
+            $table->string('de_DE_examples')    ->nullable();
+            $table->string('fr_FR_translations')->nullable();
+            $table->string('fr_FR_examples')    ->nullable();
+            $table->string('ru_RU_translations')->nullable();
+            $table->string('ru_RU_examples')    ->nullable();
+            $table->string('es_ES_translations')->nullable();
+            $table->string('es_ES_examples')    ->nullable();
+            $table->string('pl_PL_translations')->nullable();
+            $table->string('pl_PL_examples')    ->nullable();
         });
     }
 
