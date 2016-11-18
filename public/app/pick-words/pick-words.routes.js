@@ -18,10 +18,9 @@
                 templateUrl: 'app/pick-words/words-list/words-list.html',
                 controller: 'WordsListCtrl as wordsList',
                 authenticate: true,
-                // params: {
-                //     selected_language: null,
-                //     level: null
-                // }
+                params: {
+                    words_counter: null
+                }
             })
     }
 })();

@@ -14,6 +14,10 @@
               </div>
             </div>
 
+    <ul uib-pagination direction-links="false" ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="500" num-pages="smallnumPages"></ul>
+    <pre>The selected page no: {{wordsList.data.currentPage}}</pre>
+<!--     <button type="button" class="btn btn-info" ng-click="wordsList.setPage(3)">Set current page to: 3</button> -->
+
             <table class="table table-hover">
               <thead>
                 <tr class="">
@@ -27,12 +31,13 @@
               </thead>
               <tbody>
                 <tr class="success ahawords" ng-repeat="item in wordsList.data.words" id="word_{{item.id}}">
-                  <td lass="small"></td>
+                  <td lass="small">{{item.id}}</td>
                   <td>{{item.word}}</td>
                   <td class="text-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
                 </tr>
               </tbody>
             </table
+
 
             <p class="text-right margin-top10">
             <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#">Next »</a>

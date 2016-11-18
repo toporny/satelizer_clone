@@ -57,23 +57,36 @@
     .module('MyApp')
     .controller('WordsListCtrl',WordsListCtrl);
 
-    WordsListCtrl.$inject = ['$ngBootbox', '$state', '$stateParams', 'common'];
+    WordsListCtrl.$inject = ['$state', '$stateParams', 'common'];
 
-    function WordsListCtrl ($ngBootbox, $state, $stateParams, common) {
+    function WordsListCtrl ($state, $stateParams, common) {
 		vm = this;
 		vm.selectAll = selectAll; 
 		vm.selectNone = selectNone;
+        vm.changePage = changePage;
 
         // pagination 
         // language
         //  https://blog.kettle.io/dynamic-pagination-angularjs-laravel/
 
         // TODO: consider this <!-- http://www.memrise.com/course/250031/learn-5000-english-words/ -->
+        // spinner: http://embed.plnkr.co/XLL3li/preview
 
         console.log('$stateParams',$stateParams);
 
+        function changePage() {
+            var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
+            common.getListOfWords(paramString)
+             .then(function(response){
+                //console.log(response.data.words.data);
+                vm.data.words = response.data.words.data;
+            });
+        }
+
         vm.data = {};
-        
+        vm.data.totalItems = $stateParams.words_counter;
+        vm.data.currentPage = 1;
+
         var paramString = $stateParams.selected_language+'?page='+$stateParams.level;
         common.getListOfWords(paramString)
          .then(function(response){

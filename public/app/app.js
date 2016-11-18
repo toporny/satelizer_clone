@@ -7,7 +7,9 @@ angular
   'toastr',
   'ui.router',
   'ngBootbox',
-  'satellizer'])
+  'satellizer',
+  'ui.bootstrap'
+  ])
 
 .config(function($translateProvider, $stateProvider, $urlRouterProvider, $authProvider, $ngBootboxConfigProvider) {
     /**
