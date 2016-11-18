@@ -20,7 +20,7 @@
 //		common.getAvailableDictionaries()
 
 
-		common.getAvailableDictionariesForLanguage()
+		common.getAvailableDictionariesForUser()
         .then(function(response) {
 			vm.data.availableDictionaries = angular.fromJson(response.data.languages);
         })
@@ -33,10 +33,10 @@
 
 //		vm.data.selected = vm.data.languages[0];
 
-		function next() {
-			console.log('next');
+		function next(selectedLevel) {
 			//common.getAvailableDictionaries();
-			$state.go('words-list');
+			//$state.go('words-list', {selected_language: 'en_EN', level: selectedLevel});
+			$state.go('words-list/:selected_language/:level', {selected_language: 'en_EN', level:'2'});
 		}
 
 		function show_premium_modal() {

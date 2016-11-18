@@ -6,47 +6,47 @@
         <div class="col-sm-12 col-md-12">
           <h2 translate="WORDS_LIST.TITLE"></h2>
 
+            <p  translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10"
+              aria-valuemin="0" aria-valuemax="100" style="width:10%">
+                10%
+              </div>
+            </div>
 
+            <table class="table table-hover">
+              <thead>
+                <tr class="">
+                  <th></th>
+                  <th>WORD</th>
+                  <td class="text-center">
+                    <button ng-click="wordsList.selectAll()" type="button" class="btn btn-primary btn-sm">ALL</button>
+                    <button ng-click="wordsList.selectNone()" type="button" class="btn btn-primary btn-sm">NONE</button>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="success ahawords" ng-repeat="item in wordsList.data.words" id="word_{{item.id}}">
+                  <td lass="small"></td>
+                  <td>{{item.word}}</td>
+                  <td class="text-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                </tr>
+              </tbody>
+            </table
 
-<p  translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
-<div class="progress">
-  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10"
-  aria-valuemin="0" aria-valuemax="100" style="width:10%">
-    10%
-  </div>
-</div>
-
-
-<table class="table table-hover">
-  <thead>
-    <tr class="">
-      <th></th>
-      <th>WORD</th>
-      <td class="text-center">
-        <button ng-click="wordsList.selectAll()" type="button" class="btn btn-primary btn-sm">ALL</button>
-        <button ng-click="wordsList.selectNone()" type="button" class="btn btn-primary btn-sm">NONE</button>
-      </td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="success ahawords"><td class="small"> 1 </td><td>word</td><td class="text-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td></tr>
-    <tr class="danger ahawords"><td class="small"> 3 </td><td style="font-weight:bold;color:#AA0000">ham</td><td class="text-center"><i class="fa fa-thumbs-down" aria-hidden="true"></i></td></tr>
-  </tbody>
-</table
-
-              <p class="text-right margin-top10">
-              <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#">Next »</a>
-            </p>
-        </div>
+            <p class="text-right margin-top10">
+            <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#">Next »</a>
+          </p>
       </div>
     </div>
-    <div class="panel-footer text-center">
-      <ul class="list-inline">
-        <li><i class="ion-star"></i> {{stars | number}} stars</li>
-        <li><i class="ion-fork-repo"></i> {{forks | number}} forks</li>
-        <li><i class="ion-pull-request"></i> {{issues | number}} issues</li>
-      </ul>
-    </div>
   </div>
+  <div class="panel-footer text-center">
+    <ul class="list-inline">
+      <li><i class="ion-star"></i> {{stars | number}} stars</li>
+      <li><i class="ion-fork-repo"></i> {{forks | number}} forks</li>
+      <li><i class="ion-pull-request"></i> {{issues | number}} issues</li>
+    </ul>
+  </div>
+</div>
 </div>
 

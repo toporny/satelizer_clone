@@ -11,34 +11,41 @@ angular
     vm = this;
     vm.getProfile = getProfile;
     vm.updateProfile = updateProfile;
+    vm.renewLanguageToLearn = renewLanguageToLearn;
     vm.link = link;
     vm.unlink = unlink;
 
     vm.data = {};
 
-    //   whatToLearnLanguage: languagesDefinitions,
-    //   languageToLearn : languagesDefinitions[1]     
-    // };
-    // .constant('languagesDefinitions',[
-    //     {id: 'en_EN', name: 'english'},
-    //     {id: 'es_ES', name: 'spanish'},
-    //     {id: 'ru_RU', name: 'russian'},
-    //     {id: 'fr_FR', name: 'french'},
-    //     {id: 'de_DE', name: 'deutsch'},
-    //     {id: 'pl_PL', name: 'polish'}
-    // ])
+    function renewLanguageToLearn() {
+      //console.log('vm.data.locale',vm.data.locale.id);
+      common.getDictionariesAlphabetically(vm.data.locale.id)
+        .then(function(response) {
+          //console.log('response', response);
+          vm.data.whatToLearnLanguage = response.data.languages;
+          console.log('vm.data.whatToLearnLanguage',vm.data.whatToLearnLanguage);
+          // $scope.user = response.data;
+          // return common.getAvailableDictionariesForLanguage();
+        });
+
+      // Account.updateProfile($scope.user)
+      //   .then(function() {
+      //     getProfile();
+
+      //   })
+      //   .catch(function(response) {
+      //     toastr.error(response.data.message, response.status);
+      //   });
+    }
+
 
     function getProfile() {
-
-      // common.getAvailableDictionariesForLanguage()
-      // .then(Account.getProfile())
-
 
       Account.getProfile()
         .then(function(response) {
           console.log('response', response);
           $scope.user = response.data;
-          return common.getAvailableDictionariesForLanguage();
+          return common.getAvailableDictionariesForUser();
         })
         .then(function(response_data) {
           console.log('response_data', response_data );
@@ -61,7 +68,6 @@ angular
         })
         .catch(function(response) {
           toastr.error(response.data.message, response.status);
-          console.log('logout');
           $state.go('logout');          
         });
     };

@@ -43,15 +43,23 @@ Route::post('auth/unlink/', ['middleware' => 'auth', 'uses' => 'AuthController@u
 Route::get('api/me', ['middleware' => 'auth', 'uses' => 'UserController@getUser']);
 Route::put('api/me', ['middleware' => 'auth', 'uses' => 'UserController@updateUser']);
 
+// returns possible dictionaries for logged user (all dictionaries except user's locale language)
 Route::get('api/get_dictionaries/', ['middleware' => 'auth', 'uses' => 'UserController@getDictionaries']);
-Route::get('api/get_words_list/', ['middleware' => 'auth', 'uses' => 'UserController@getWordsList']);
+
+// returns possible dictionaries selected language sorted alphabeticaly
+Route::get('api/get_dictionaries_alphabeticaly/{language}', 'UserController@getDictionariesAlphabetically');
+
+Route::get('api/get_list_of_words/{language_and_page}', ['middleware' => 'auth', 'uses' => 'UserController@getListOfWords']);
 
 
 
 
+
+Route::get('api/get_list_of_words1/{language_and_page}', 'UserController@getListOfWords');
 // development
-Route::get('api/get_words_list1/{language}/{pagination_page?}', 'UserController@getWordsList');
-//Route::get('api/get_dictionaries1/', 'UserController@getDictionaries' );
+Route::get('api/get_words_list1/{language}?page={pagination_page}', 'UserController@getWordsList');
+Route::get('api/get_dictionaries1/{language?}', 'UserController@getDictionaries' );
+
 
 
 // Initialize Angular.js App Route.

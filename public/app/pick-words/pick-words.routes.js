@@ -13,11 +13,15 @@
                 controller: 'PickCtrl as pick',
                 authenticate: true,
             })
-            .state('words-list', {
-                url: '/pick/words-list',
+            .state('words-list/:selected_language/:level', {
+                url: '/pick/words-list/:selected_language/:level',
                 templateUrl: 'app/pick-words/words-list/words-list.html',
                 controller: 'WordsListCtrl as wordsList',
                 authenticate: true,
+                // params: {
+                //     selected_language: null,
+                //     level: null
+                // }
             })
     }
 })();

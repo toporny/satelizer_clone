@@ -38,79 +38,98 @@ class UserController extends Controller {
     /**
      * Get Words pagination list from dictionary table 
      */
-    public function getWordsList($language, $page = 1)
+    public function getListOfWords($language_and_page)
     {
-        $baloon = false;
-
-        // check in config and test if $language is supported
-        foreach (Config::get('app.supported_languages') as $value) {
-            if ($value == $language)  $baloon = 1;
-        }
-        if ($baloon ==false) {
-            return response('language '.$language.' not supported', 500);
-        }
-
-
         $records_on_page = 100;
-
-        $transactions = DB::table('dictionary_en')
-        ->select(
-            'word',
-            'pl_PL')
-       ;
-        
+        $transactions = DB::table('dictionary_en')->select( 'id', 'word' )->orderby('id');
         $transactions = $transactions->paginate($records_on_page);
 
-        // print("<pre>");
-        // print_r($transactions);
-
-return response()->json(['status'=> 1, 'words' =>  $transactions ]);
-
-        // print($language);
-        // print($page);
-
-        //$user = User::find($request['user']['sub']);
-        //return 1;
+        return response()->json(['status'=> 1, 'words' =>  $transactions ]);
     }
 
 
 
+    /**
+     * get Dictionaries Alphabetically
+     * input: language
+     * API_COMMAND:  api/get_dictionaries_alphabeticaly/{language}'     
+     */
+    public function getDictionariesAlphabetically($language) {
 
+        $tmp = 0;
+        foreach (Config::get('app.supported_languages') as $value) {
+            if ($value == $language)  $tmp = 1;
+        }
+
+        if ($tmp == 0) {
+            return response('no available languages for '.$language, 500);            
+        }
+
+        $results = DB::table('available_dictionaries')
+                ->select('language_id', 'language_name', 'available_languages')
+                ->where('language_id', $language)
+                ->get();
+
+
+        if (count($results) == 0) {
+            return response('problem with getting from DB or no available languages for '.$language, 500);
+        }
+        else {
+            $json_decoded = json_decode($results[0]->available_languages);
+            return response()->json(['status'=> 1, 'languages' =>  $json_decoded ]);
+        }
+
+    }
+
+
+
+    /**
+     * get dictionaries
+     * input: language
+     * API_COMMAND:  api/get_dictionaries/'     
+     */
     public function getDictionaries(Request $request)
     {
+
         $user = User::find($request['user']['sub']);
-        
-        $languageToLearn_string = $user['languageToLearn'];
 
-        $languageToLearn = json_decode ($languageToLearn_string, true);
-        $locale = json_decode ($user['locale'], true);
+        // if from some reason user doesn't have $locale set let $locale='en_EN' 
+        $tmp = 0;
+        foreach (Config::get('app.supported_languages') as $value) {
+            if ($value == $user['locale'])  $tmp = 1;
+        }
 
-
+        if ($tmp == 0) {
+            $user['locale'] = 'en_EN';
+            // set in database locale 'en_EN'
+            DB::table('users')
+                ->where('id', $request['user']['sub'])
+                ->update(['locale' => 'en_EN']);
+        }
+     
         $results = DB::table('available_dictionaries')
                 ->select('language_id', 'language_name', 'available_languages')
                 ->where('language_id', $user['locale'])
                 ->get();
 
-// print "<pre>";
-// print_r($results);
-// exit;
-
         // SET LANGUAGETOLEARN ITEM IN THE FIRST PLACE
                 
         $json_decoded = json_decode($results[0]->available_languages);
 
+
+        // if user has languageToLearn defined then set "prefer language' on the top of list
         // if user doesn't have languageToLearn defined THEN ignore 
-        $baloon = false;
+        $tmp = false;
         foreach (array_keys($json_decoded) as $key) {
             if ($json_decoded[$key]->id == $user['languageToLearn']) {
                 $tmp_id = $json_decoded[$key]->id;
                 $tmp_name = $json_decoded[$key]->name;
                 unset($json_decoded[$key]);
-                $baloon = true;
+                $tmp = true;
             }
         }
 
-        if ($baloon == true ) {
+        if ($tmp == true ) {
             $new_array = ['id'=>$tmp_id, 'name'=>$tmp_name]  ;
             array_push ($json_decoded , $new_array );
             $json_decoded = array_reverse ($json_decoded);
