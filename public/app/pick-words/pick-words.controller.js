@@ -8,7 +8,7 @@
     function PickCtrl ($state, common) {
 		vm = this;
 		vm.next = next;
-		vm.show_premium_modal = show_premium_modal;
+		vm.showPremiumModal = showPremiumModal;
 
 		vm.data = {
 			// languages: languages,
@@ -28,11 +28,11 @@
 		function next(selectedLevel) {
 			//common.getAvailableDictionaries();
 			//$state.go('words-list', {selected_language: 'en_EN', level: selectedLevel});
-			$state.go('words-list/:selected_language/:level', {selected_language: 'en_EN', level:'2', words_counter: 4534});
+			$state.go('words-list/:selected_language/:level', {selected_language: 'en_EN', level: selectedLevel, words_counter: 4534});
 		}
 
-		function show_premium_modal() {
-			common.show_premium_modal();
+		function showPremiumModal() {
+			common.showPremiumModal();
 		}		
 
 

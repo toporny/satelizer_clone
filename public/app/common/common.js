@@ -8,7 +8,8 @@ angular.module('MyApp')
     service = {
       getAvailableDictionariesForUser:getAvailableDictionariesForUser,
       getDictionariesAlphabetically:getDictionariesAlphabetically,
-      getListOfWords:getListOfWords
+      getListOfWords:getListOfWords,
+      showPremiumModal:showPremiumModal
     }
     return service;
 
@@ -25,7 +26,7 @@ angular.module('MyApp')
       return $http.get('/api/get_list_of_words1/'+language_and_page);
     }
 
-    function show_premium_modal(language_and_page) {
+    function showPremiumModal(language_and_page) {
     
       var options = {
           message: 'This feature is available only for premium users.',

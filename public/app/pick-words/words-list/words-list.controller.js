@@ -85,7 +85,7 @@
 
         vm.data = {};
         vm.data.totalItems = $stateParams.words_counter;
-        vm.data.currentPage = 1;
+        vm.data.currentPage = $stateParams.level;
 
         var paramString = $stateParams.selected_language+'?page='+$stateParams.level;
         common.getListOfWords(paramString)
