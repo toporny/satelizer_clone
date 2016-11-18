@@ -13,8 +13,8 @@
                 controller: 'PickCtrl as pick',
                 authenticate: true,
             })
-            .state('words-list/:selected_language/:level', {
-                url: '/pick/words-list/:selected_language/:level',
+            .state('words-list/:selected_language/:words_counter/:level', {
+                url: '/pick/words-list/:words_counter/:selected_language/:level',
                 templateUrl: 'app/pick-words/words-list/words-list.html',
                 controller: 'WordsListCtrl as wordsList',
                 authenticate: true,

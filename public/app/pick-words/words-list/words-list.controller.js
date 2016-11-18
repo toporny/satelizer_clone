@@ -57,9 +57,9 @@
     .module('MyApp')
     .controller('WordsListCtrl',WordsListCtrl);
 
-    WordsListCtrl.$inject = ['$state', '$stateParams', 'common'];
+    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location'];
 
-    function WordsListCtrl ($state, $stateParams, common) {
+    function WordsListCtrl ($state, $stateParams, common, $location ) {
 		vm = this;
 		vm.selectAll = selectAll; 
 		vm.selectNone = selectNone;
@@ -76,6 +76,7 @@
 
         function changePage() {
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
+            $location.path('/pick/words-list/'+$stateParams.words_counter+'/'+$stateParams.selected_language+'/'+vm.data.currentPage);
             common.getListOfWords(paramString)
              .then(function(response){
                 //console.log(response.data.words.data);
@@ -87,7 +88,7 @@
         vm.data.totalItems = $stateParams.words_counter;
         vm.data.currentPage = $stateParams.level;
 
-        var paramString = $stateParams.selected_language+'?page='+$stateParams.level;
+        var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
         common.getListOfWords(paramString)
          .then(function(response){
             //console.log(response.data.words.data);

@@ -28,7 +28,7 @@
 		function next(selectedLevel) {
 			//common.getAvailableDictionaries();
 			//$state.go('words-list', {selected_language: 'en_EN', level: selectedLevel});
-			$state.go('words-list/:selected_language/:level', {selected_language: 'en_EN', level: selectedLevel, words_counter: 4534});
+			$state.go('words-list/:selected_language/:words_counter/:level', {selected_language: 'en_EN', level: selectedLevel, words_counter: 4534});
 		}
 
 		function showPremiumModal() {
@@ -36,7 +36,7 @@
 		}		
 
 
-    }
+	}
 
 })();
 
