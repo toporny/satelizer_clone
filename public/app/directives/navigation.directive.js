@@ -62,6 +62,7 @@
                         className: "btn-change-language btn-info",
                         callback: function() {
                             $translate.use('pl');
+                            // TODO: change this in database also!
                         }
                     },
                     English: {
@@ -69,6 +70,7 @@
                         className: "btn-change-language btn-info",
                         callback: function(e) {
                             $translate.use('en');
+                            // TODO: change this in database also!
                         }
                     },
                     Spain: {

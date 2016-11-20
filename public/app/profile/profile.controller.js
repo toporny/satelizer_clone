@@ -71,8 +71,11 @@ angular
       $scope.user.locale = vm.data.localeSelected;
       $scope.user.languageToLearn = vm.data.languageToLearnSelected;
 
-      switch (vm.data.languageToLearnSelected.id) {
+      console.log('vm.data.languageToLearnSelected.id',vm.data.languageToLearnSelected.id);
+      
+      switch (vm.data.localeSelected.id) {
         case 'gb_GB' : $translate.use('en'); break;
+        case 'en_EN' : $translate.use('en'); break;
         case 'pl_PL' : $translate.use('pl'); break;
         default : $translate.use('en'); break;
       }

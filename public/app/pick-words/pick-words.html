@@ -9,13 +9,26 @@
           <!-- TODO: make this ugly way to different way -->
           <!-- first button always visible -->
           <div ng-repeat="dictionary in pick.data.availableDictionaries">
-            <button ng-if="$first" type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg" ng-click="pick.showLevelButtons(dictionary.id)"><span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span></button>
+            <button
+              ng-if="$first"
+              type="button"
+              style="width:200px; text-align:left; margin:4px; display:block;"
+              class="btn btn-info btn-lg"
+              ng-click="pick.showLevelButtons(dictionary.id)">
+              <span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span>
+            </button>
           </div>
 
           <!-- rest buttons visible under "more" button -->
           <div id="derp" class="slideable">
             <div ng-repeat="dictionary in pick.data.availableDictionaries">
-              <button ng-if="!$first" type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span></button>
+              <button
+                ng-if = "!$first"
+                style = "width:200px; text-align:left; margin:4px; display:block;"
+                type = "button"
+                class = "btn btn-info btn-lg">
+                <span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span>
+              </button>
             </div>
           </div>
 

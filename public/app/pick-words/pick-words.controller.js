@@ -12,35 +12,29 @@
 		vm.showLevelButtons = showLevelButtons;
 
 		vm.data = {
+			availableDictionaries : {}
 			// languages: languages,
 			// //config: config, 
 			// languageSelected: languages[0], // we need this to pick first element as selected
 		};
 
-
-
 		common.getAvailableDictionaries()
-        .then(function(response) {
-      
-        	console.log(response);
-        	// response.data.languages
-          
-			angular.forEach(response.data.languages, function(value, key) {
-				// if (response.data.user_locale == value.language.id) {
-				//    console.warn(value.language.id);
+			.then(function(response) {
 
-				//   //vm.data.locale = {id: value.id, name: value.name};
-				// }
+				console.log(response);
+				// response.data.languages
+
+			  	var tmp = [];
+				angular.forEach(response.data.languages, function(value, key) {
+					if (value.language_id != response.data.user_locale){
+						tmp.push({id : value.language_id});
+					}
+				});
+				vm.data.availableDictionaries = tmp;
+			})
+			.catch(function(response) {
+				toastr.error(response.data.message, response.status);
 			});
-
-
-			vm.data.availableDictionaries = angular.fromJson(response.data.languages);
-			// check user_locale and set up user locale button on the TOP
-
-        })
-        .catch(function(response) {
-        	toastr.error(response.data.message, response.status);
-        });
 
 
         function showLevelButtons(dictionaryID) {
