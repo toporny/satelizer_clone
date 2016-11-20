@@ -9,6 +9,7 @@
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
+		vm.showLevelButtons = showLevelButtons;
 
 		vm.data = {
 			// languages: languages,
@@ -17,13 +18,35 @@
 		};
 
 
-		common.getAvailableDictionariesForUser()
+
+		common.getAvailableDictionaries()
         .then(function(response) {
+      
+        	console.log(response);
+        	// response.data.languages
+          
+			angular.forEach(response.data.languages, function(value, key) {
+				// if (response.data.user_locale == value.language.id) {
+				//    console.warn(value.language.id);
+
+				//   //vm.data.locale = {id: value.id, name: value.name};
+				// }
+			});
+
+
 			vm.data.availableDictionaries = angular.fromJson(response.data.languages);
+			// check user_locale and set up user locale button on the TOP
+
         })
         .catch(function(response) {
-          toastr.error(response.data.message, response.status);
+        	toastr.error(response.data.message, response.status);
         });
+
+
+        function showLevelButtons(dictionaryID) {
+        	console.log('showLevelButtons', dictionaryID);
+        }
+
 
 		function next(selectedLevel) {
 			//common.getAvailableDictionaries();

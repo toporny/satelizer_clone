@@ -6,27 +6,27 @@ angular.module('MyApp')
 
   function common($http, $ngBootbox) {
     service = {
-      getAvailableDictionariesForUser:getAvailableDictionariesForUser,
-      getDictionariesAlphabetically:getDictionariesAlphabetically,
+      getAvailableDictionaries:getAvailableDictionaries,
+      // getDictionariesAlphabetically:getDictionariesAlphabetically,
       getListOfWords:getListOfWords,
       showPremiumModal:showPremiumModal
     }
     return service;
 
 
-    function getAvailableDictionariesForUser() {
+    function getAvailableDictionaries() {
       return $http.get('/api/get_dictionaries/');
     }
 
-    function getDictionariesAlphabetically(language) {
-      return $http.get('/api/get_dictionaries_alphabeticaly/'+language);
-    }
+    // function getDictionariesAlphabetically(language) {
+    //   return $http.get('/api/get_dictionaries_alphabeticaly/'+language);
+    // }
 
     function getListOfWords(language_and_page) {
-      return $http.get('/api/get_list_of_words1/'+language_and_page);
+      return $http.get('/api/get_list_of_words1/'+language_and_page); // TODO: remove 1
     }
 
-    function showPremiumModal(language_and_page) {
+    function showPremiumModal() {
     
       var options = {
           message: 'This feature is available only for premium users.',

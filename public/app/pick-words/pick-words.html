@@ -9,7 +9,7 @@
           <!-- TODO: make this ugly way to different way -->
           <!-- first button always visible -->
           <div ng-repeat="dictionary in pick.data.availableDictionaries">
-            <button ng-if="$first" type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span></button>
+            <button ng-if="$first" type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg" ng-click="pick.showLevelButtons(dictionary.id)"><span class="lang-lg lang-lbl" lang="{{dictionary.id | limitTo:2}}"></span></button>
           </div>
 
           <!-- rest buttons visible under "more" button -->
@@ -40,11 +40,11 @@
           <button ng-click="pick.next(4)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left;font-weight: normal; margin:4px; width:185px"><b>LEVEL 4</b> (1501-2000)</button>
           <button ng-click="pick.next(5)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left;font-weight: normal; margin:4px; width:185px"><b>LEVEL 5</b> (2001-2500)</button>
 
-          <button ng-click="pick.showPremiumModal(6)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 6</b> (2501-3000)</button>
-          <button ng-click="pick.showPremiumModal(7)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 7</b> (3001-3500)</button>
-          <button ng-click="pick.showPremiumModal(8)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 8</b> (3501-4000)</button>
-          <button ng-click="pick.showPremiumModal(9)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 9</b> (4001-4500)</button>
-          <button ng-click="pick.showPremiumModal(10)" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 10</b> (4500-5000)</button>
+          <button ng-click="pick.showPremiumModal()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 6</b> (2501-3000)</button>
+          <button ng-click="pick.showPremiumModal()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 7</b> (3001-3500)</button>
+          <button ng-click="pick.showPremiumModal()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 8</b> (3501-4000)</button>
+          <button ng-click="pick.showPremiumModal()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 9</b> (4001-4500)</button>
+          <button ng-click="pick.showPremiumModal()" type="button" class="btn btn-lg btn-default ng-binding" style="text-align:left; font-weight: normal; margin:4px; width:185px"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 10</b> (4500-5000)</button>
           <br/>
 
           

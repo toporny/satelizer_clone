@@ -15,56 +15,46 @@ angular
     vm.link = link;
     vm.unlink = unlink;
 
+    vm.availableDictionary = {};
+
     vm.data = {};
 
+
+    /* set default value to vm.data.languageToLearnSelected */
     function renewLanguageToLearn() {
-      //console.log('vm.data.locale',vm.data.locale.id);
-      common.getDictionariesAlphabetically(vm.data.locale.id)
-        .then(function(response) {
-          //console.log('response', response);
-          vm.data.whatToLearnLanguage = response.data.languages;
-          console.log('vm.data.whatToLearnLanguage',vm.data.whatToLearnLanguage);
-          // $scope.user = response.data;
-          // return common.getAvailableDictionariesForLanguage();
-        });
-
-      // Account.updateProfile($scope.user)
-      //   .then(function() {
-      //     getProfile();
-
-      //   })
-      //   .catch(function(response) {
-      //     toastr.error(response.data.message, response.status);
-      //   });
+      angular.forEach(vm.availableDictionary.data.languages, function(value, key) {
+        if (value.language_id == vm.data.localeSelected.id) {
+          vm.data.languageToLearnArrayList = angular.fromJson(value.available_languages);
+          angular.forEach(vm.data.languageToLearnArrayList, function(value, key) {
+            if (value.id == $scope.user.languageToLearn) {
+              vm.data.languageToLearnSelected = value;
+            }
+          });
+        }
+      });
     }
 
 
     function getProfile() {
-
       Account.getProfile()
         .then(function(response) {
-          console.log('response', response);
-          $scope.user = response.data;
-          return common.getAvailableDictionariesForUser();
+          $scope.user = response.data;  // make scope.user to VM 
+          return common.getAvailableDictionaries();
         })
-        .then(function(response_data) {
-          console.log('response_data', response_data );
-          // prepare languagesDefinitions TODO: (use cache later!)
-          vm.data.whatToLearnLanguage = response_data.data.languages;
-          vm.data.interfaceLanguage = translations;
-
+        .then(function(availableDictionary) {
+          vm.availableDictionary = availableDictionary;
+          /* set default value to vm.data.locale */
+          vm.data.localeArrayList = translations;
+          vm.data.localeSelected = 'en_EN';
           angular.forEach(translations, function(value, key) {
             if (value.id == $scope.user.locale) {
-              vm.data.locale = {id: value.id, name: value.name};
+              vm.data.localeSelected = {id: value.id, name: value.name};
             }
           });
 
-          angular.forEach(response_data.data.languages, function(value, key) {
-            console.log(value);
-            if (value.id == $scope.user.languageToLearn) {
-               vm.data.languageToLearn = {id: value.id, name: value.name};
-            }
-          });
+          /* set default value to vm.data.languageToLearnSelected */
+          renewLanguageToLearn();
+
         })
         .catch(function(response) {
           toastr.error(response.data.message, response.status);
@@ -72,12 +62,16 @@ angular
         });
     };
 
+
+    /*
+    *   Update profile
+    */
     function updateProfile() {
       console.log('$scope.user', $scope.user);
-      $scope.user.locale = vm.data.locale;
-      $scope.user.languageToLearn = vm.data.languageToLearn;
+      $scope.user.locale = vm.data.localeSelected;
+      $scope.user.languageToLearn = vm.data.languageToLearnSelected;
 
-      switch (vm.data.locale.id) {
+      switch (vm.data.languageToLearnSelected.id) {
         case 'gb_GB' : $translate.use('en'); break;
         case 'pl_PL' : $translate.use('pl'); break;
         default : $translate.use('en'); break;

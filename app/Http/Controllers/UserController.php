@@ -16,7 +16,8 @@ class UserController extends Controller {
         $payload = [
             'sub' => $user->id,
             'iat' => time(),
-            'exp' => time() + (2 * 7 * 24 * 60 * 60)
+            // 'exp' => time() + (2 * 7 * 24 * 60 * 60)   // two weeks valid
+            'exp' => time() + (1 * 1 * 24 * 60 * 60)  // one one day valid
         ];
         return JWT::encode($payload, Config::get('app.token_secret'));
     }
@@ -99,47 +100,48 @@ class UserController extends Controller {
             if ($value == $user['locale'])  $tmp = 1;
         }
 
-        if ($tmp == 0) {
+        if ($tmp == 0) {   // if user doesn't have locale set then set locale to 'en_EN' 
             $user['locale'] = 'en_EN';
-            // set in database locale 'en_EN'
             DB::table('users')
                 ->where('id', $request['user']['sub'])
                 ->update(['locale' => 'en_EN']);
         }
      
         $results = DB::table('available_dictionaries')
-                ->select('language_id', 'language_name', 'available_languages')
-                ->where('language_id', $user['locale'])
+                ->select('language_id', 'language_name', 'count_words', 'available_languages')
+                // ->where('language_id', $user['locale'])
                 ->get();
 
         // SET LANGUAGETOLEARN ITEM IN THE FIRST PLACE
                 
-        $json_decoded = json_decode($results[0]->available_languages);
 
-
+        //         $json_decoded = json_decode($results);
+        // print_r($json_decoded);
+        // exit;
+/* this logic has to be moved to frontend part */ 
         // if user has languageToLearn defined then set "prefer language' on the top of list
         // if user doesn't have languageToLearn defined THEN ignore 
-        $tmp = false;
-        foreach (array_keys($json_decoded) as $key) {
-            if ($json_decoded[$key]->id == $user['languageToLearn']) {
-                $tmp_id = $json_decoded[$key]->id;
-                $tmp_name = $json_decoded[$key]->name;
-                unset($json_decoded[$key]);
-                $tmp = true;
-            }
-        }
+        // $tmp = false;
+        // foreach (array_keys($json_decoded) as $key) {
+        //     if ($json_decoded[$key]->id == $user['languageToLearn']) {
+        //         $tmp_id = $json_decoded[$key]->id;
+        //         $tmp_name = $json_decoded[$key]->name;
+        //         unset($json_decoded[$key]);
+        //         $tmp = true;
+        //     }
+        // }
 
-        if ($tmp == true ) {
-            $new_array = ['id'=>$tmp_id, 'name'=>$tmp_name]  ;
-            array_push ($json_decoded , $new_array );
-            $json_decoded = array_reverse ($json_decoded);
-        }
+        // if ($tmp == true ) {
+        //     $new_array = ['id'=>$tmp_id, 'name'=>$tmp_name]  ;
+        //     array_push ($json_decoded , $new_array );
+        //     $json_decoded = array_reverse ($json_decoded);
+        // }
 
-        if ($json_decoded) {
-            return response()->json(['status'=> 1, 'languages' =>  $json_decoded ]);
+        if ($results) {
+            return response()->json(['status'=> 1, 'user_locale' => $user['locale'], 'languages' =>  $results]);
         }
         else {
-            return response('no available languages for '.$user['locale'], 500);
+            return response('problem with getting data from /available_dictionaries/', 500);
         }
 
     }
@@ -150,11 +152,13 @@ class UserController extends Controller {
      */
     public function updateUser(Request $request)
     {
+        // PRINT_R($request['user']);
+        // EXIT;
         $user = User::find($request['user']['sub']);
         $tmp = json_encode ( $request->input('locale') );
-        $user->locale =  json_decode($tmp)->id ;
+        $user->locale = json_decode($tmp)->id;
         $user->languageToLearn = $request->input('languageToLearn')['id'];
-        $user->displayName =  $request->input('displayName');
+        $user->displayName = $request->input('displayName');
         $user->email = $request->input('email');
 
         $user->save();

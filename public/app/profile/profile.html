@@ -18,14 +18,14 @@
         </div>
         <div class="form-group">
           <label class="control-label" translate="PROFILE.LOCALE" ></label>
-          <select ng-change="profile.renewLanguageToLearn()" ng-model="profile.data.locale" class="form-control"
-            ng-options="option.name for option in profile.data.interfaceLanguage track by option.id"  >
+          <select ng-change="profile.renewLanguageToLearn()" ng-model="profile.data.localeSelected" class="form-control"
+            ng-options="option.name for option in profile.data.localeArrayList track by option.id"  >
           </select>
         </div>
         <div class="form-group">
           <label class="control-label" translate="PROFILE.WHAT_LANGUAGE_YOU_WOULD_LIKE_TO_LEARN"></label>
-          <select ng-model="profile.data.languageToLearn" class="form-control"
-            ng-options="option.name for option in profile.data.whatToLearnLanguage track by option.id" >
+          <select ng-model="profile.data.languageToLearnSelected" class="form-control"
+            ng-options="option.name for option in profile.data.languageToLearnArrayList track by option.id" >
           </select>
         </div>
         <button class="btn btn-lg btn-success" translate="PROFILE.BTN_UPDATE"></button>
