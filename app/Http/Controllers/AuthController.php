@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
 use App\User;
+use DB;
 
 // IMPORTANT: locale are set only for GOOGLE and FACEBOOK
 // TODO: make locale also for rest of providers
@@ -76,6 +77,7 @@ class AuthController extends Controller {
             $return = [
                 'languageToLearn' => $user->languageToLearn,
                 'locale' => $user->locale,
+                'availableDictionaries' => $this->getAvailableDictionaries(),
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -110,12 +112,23 @@ class AuthController extends Controller {
 
         $return = [
             'locale' => $user->locale,
+            'availableDictionaries' => $this->getAvailableDictionaries(),
             'token' => $this->createToken($user)
             ];
         return response()->json($return);
 
        // return response()->json(['token' => $this->createToken($user)]);
     }
+
+
+    private function getAvailableDictionaries() {
+        $results = DB::table('available_dictionaries')
+                ->select('id', 'language_id', 'count_words', 'language_name', 'available_languages')
+                ->get();
+
+        return $results;
+    }
+
 
     /**
      * Login with Facebook.
@@ -151,8 +164,7 @@ class AuthController extends Controller {
         if ($request->header('Authorization'))
         {
             $user = User::where('facebook', '=', $profile['id']);
-// print "zzzzzzz";
-// exit;
+
             if ($user->first())
             {
                 return response()->json(['message' => 'There is already a Facebook account that belongs to you'], 409);
@@ -168,6 +180,7 @@ class AuthController extends Controller {
             $user->save();
             $return = [
                 'locale' => $user->locale,
+                'availableDictionaries' => $this->getAvailableDictionaries(),
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -189,6 +202,7 @@ class AuthController extends Controller {
                 $return = [
                     'locale' => $user->first()->locale,
                     'languageToLearn' => $user->first()->languageToLearn,
+                    'availableDictionaries' => $this->getAvailableDictionaries(),
                     'token' => $this->createToken($user->first())
                     ];
                 return response()->json($return);                
@@ -204,6 +218,7 @@ class AuthController extends Controller {
             $user->save();
             $return = [
                 'locale' => $user->locale,
+                'availableDictionaries' => $this->getAvailableDictionaries(),
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -257,7 +272,15 @@ class AuthController extends Controller {
             $user->displayName = $user->displayName ?: $profile['name'];
             $user->save();
 
-            return response()->json(['token' => $this->createToken($user)]);
+            $return = [
+                'locale' => $user->locale,
+                'availableDictionaries' => $this->getAvailableDictionaries(),
+                'token' => $this->createToken($user)
+                ];
+            return response()->json($return);
+
+
+            // return response()->json(['token' => $this->createToken($user)]);
         }
         // Step 3b. Create a new user account or return an existing one.
         else
@@ -276,8 +299,16 @@ class AuthController extends Controller {
             $user->locale = $profile['locale'];
             $user->email = $profile['email'];
             $user->save();
+            
+            $return = [
+                'locale' => $user->locale,
+                'availableDictionaries' => $this->getAvailableDictionaries(),
+                'token' => $this->createToken($user)
+                ];
+            return response()->json($return);
 
-            return response()->json(['token' => $this->createToken($user)]);
+
+            //return response()->json(['token' => $this->createToken($user)]);
         }
     }
 

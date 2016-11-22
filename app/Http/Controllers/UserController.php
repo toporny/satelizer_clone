@@ -144,4 +144,65 @@ class UserController extends Controller {
 
         return response()->json(['token' => $token]);
     }
+
+
+    /**
+     * Update signed in user's profile.
+     */
+    public function generateConfigFiles(Request $request)
+    {
+        $results = DB::table('available_dictionaries')
+                ->select('language_id', 'language_name', 'count_words', 'available_languages')
+                ->get();
+
+$string = '';
+foreach ($results as $item) {
+   // $tmp = addcslashes($item->available_languages);
+   //'en_EN':{'count_words': '4586', 'language_name': 'english', 'available_languages': [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
+$string .= "      '".$item->language_id."':{'count_words': '".$item->count_words."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },':\n";
+//    "'".en_EN."'":{'count_words': '4586', 'language_name': 'english', 'available_languages': [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
+}
+            // [language_id] => en_EN
+            // [language_name] => english
+            // [count_words] => 4586
+            // [available_languages] => [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]
+ 
+
+$file1 = <<<END1
+(function() {
+    // this file is automaticaly generated everytime GET request for this url: /api/regenerate_config_files
+    angular
+    .module('MyApp')
+    .constant('availableDictionaries', {
+
+END1;
+// 'en_EN':{'count_words': '4586', 'language_name': 'english', 'available_languages': [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
+// 'es_ES':{'count_words': '5000', 'language_name': 'spanish', 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
+// 'ru_RU':{'count_words': '5500', 'language_name': 'russian', 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
+// 'fr_FR':{'count_words': '6000', 'language_name': 'french' , 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
+// 'de_DE':{'count_words': '6500', 'language_name': 'deutsch', 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"pl_PL", "name":"polish"}]},
+// 'pl_PL':{'count_words': '7000', 'language_name': 'polish' , 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}]}
+
+$file2 = <<<END2
+    })
+})();
+END2;
+//print "<pre>";
+// print $file1 . $string . $file2;
+// exit; 
+        $return = file_put_contents(public_path().'/app/configs/generated_by_laravel.js', $file1 . $string . $file2);
+        if ($return) {
+            return response()->json(['status' => 1]);
+        }
+        else 
+        {
+            return response('problem with generation config files', 500);            
+        }
+
+
+    }
+
+
+
+
 }

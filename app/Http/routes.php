@@ -64,6 +64,8 @@ Route::get('api/get_list_of_words/{language_and_page}', ['middleware' => 'auth',
 
 
 
+Route::get('api/generate_config_files/', 'UserController@generateConfigFiles');
+
 
 Route::get('api/get_list_of_words1/{language_and_page}', 'UserController@getListOfWords');
 // development

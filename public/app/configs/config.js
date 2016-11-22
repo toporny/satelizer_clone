@@ -18,15 +18,6 @@
         de: 'de_DE',
         pl: 'pl_PL',
     })
-    // .constant('definedLanguages',{ // todo: remove this
-    //     'en_EN': { label: 'english',  words:4000,  free_words: 2000 },
-    //     'es_ES': { label: 'spanish',  words:10000, free_words: 2000 },
-    //     'ru_RU': { label: 'russian',  words:10000, free_words: 2000 },
-    //     'fr_FR': { label: 'french',   words:4000,  free_words: 2000 },
-    //     'de_DE': { label: 'deutsch',  words:3000,  free_words: 2000 },
-    //     'pl_PL': { label: 'polish',   words:5000,  free_words: 2000 },
-    // });
-
 
 })();
 
