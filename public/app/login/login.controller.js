@@ -1,10 +1,11 @@
 (function () {
+
 angular.module('MyApp')
   .controller('LoginCtrl', LoginCtrl);
 
-  LoginCtrl.$inject = ['$scope', '$location', '$auth', '$translate', 'toastr'];
+  LoginCtrl.$inject = ['$scope', '$location', '$auth', '$translate', 'toastr', 'Account'];
 
-  function LoginCtrl ($scope, $location, $auth, $translate, toastr ) {
+  function LoginCtrl ($scope, $location, $auth, $translate, toastr, Account ) {
 
     var vm = this;
 
@@ -14,8 +15,10 @@ angular.module('MyApp')
 
     function login() {
       $auth.login(vm.data.user)
-        .then(function() {
+        .then(function(results) {
+          console.log('login with success',results);
           toastr.success('You have successfully signed in!');
+          //Account.setLanguageToLearn
           $location.path('/');
         })
         .catch(function(error) {
@@ -31,7 +34,7 @@ angular.module('MyApp')
         })
         .catch(function(error) {
           if (error.message) {
-            // Satellizer promise reject error.
+            // promise reject error.
             toastr.error(error.message);
           } else if (error.data) {
             // HTTP response error from server

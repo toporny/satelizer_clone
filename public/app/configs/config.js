@@ -10,6 +10,14 @@
         // {id: 'de_DE', name: 'deutsch'},
         {id: 'pl_PL', name: 'polish'}
     ])
+    .constant('translatePluginToISO', {
+        en: 'en_EN',
+        es: 'es_ES',
+        ru: 'ru_RU',
+        fr: 'fr_FR',
+        de: 'de_DE',
+        pl: 'pl_PL',
+    })
     // .constant('definedLanguages',{ // todo: remove this
     //     'en_EN': { label: 'english',  words:4000,  free_words: 2000 },
     //     'es_ES': { label: 'spanish',  words:10000, free_words: 2000 },

@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
 
         $users = array(
-                ['displayName' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
-                ['displayName' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret')],
-                ['displayName' => 'Holly Lloyd', 'email' => 'holly@scotch.io', 'password' => Hash::make('secret')],
-                ['displayName' => 'Adnan Kukic', 'email' => 'adnan@scotch.io', 'password' => Hash::make('secret')],
+                ['id' => 5, 'displayName' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
+                ['id' => 6, 'displayName' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret')],
+                ['id' => 7, 'displayName' => 'Holly Lloyd', 'email' => 'holly@scotch.io', 'password' => Hash::make('secret')],
+                ['id' => 8, 'displayName' => 'Adnan Kukic', 'email' => 'adnan@scotch.io', 'password' => Hash::make('secret')],
         );
             
         // Loop through each user above and create the record for them in the database
@@ -57,6 +57,15 @@ class DatabaseSeeder extends Seeder
         {
             User::create($user);
         }
+
+
+        $level_progress = array(
+            ['user_id' => '8', 'dictionary_id'=> 1, 'levels_progress' => '[{"lvl_name": "lvl1EN", "available":"yes"},{"lvl_name": "lvl2EN", "available":"no"},{"lvl_name": "lvl3EN", "available":"yes"},{"lvl_name": "lvl4EN", "available":"no"},{"lvl_name": "lvl5EN", "available":"no"},{"lvl_name": "lvl6EN", "available":"yes"},{"lvl_name": "lvl7EN", "available":"no"}]'],
+            ['user_id' => '8', 'dictionary_id'=> 2, 'levels_progress' => '[{"lvl_name": "lvl1EN", "available":"no"},{"lvl_name": "lvl2EN", "available":"no"},{"lvl_name": "lvl3EN", "available":"no"},{"lvl_name": "lvl4EN", "available":"no"},{"lvl_name": "lvl5EN", "available":"no"},{"lvl_name": "lvl6EN", "available":"no"},{"lvl_name": "lvl7EN", "available":"no"}]'],
+        );
+
+        DB::table('users_level_progress')->insert($level_progress);
+
 
 
         Model::reguard();

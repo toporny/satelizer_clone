@@ -31,6 +31,10 @@ class UserController extends Controller {
     public function getUser(Request $request)
     {
         $user = User::find($request['user']['sub']);
+
+        if (!isset($user->locale)) {
+            $user->locale = 'en_EN';
+        }
         return $user;
     }
 
@@ -51,35 +55,43 @@ class UserController extends Controller {
 
 
     /**
-     * get Dictionaries Alphabetically
+     * get dictionaries and levels (for pick words #/pick)
      * input: language
-     * API_COMMAND:  api/get_dictionaries_alphabeticaly/{language}'     
+     * API_COMMAND:  api/get_dictionaries_and_levels/'     
      */
-    public function getDictionariesAlphabetically($language) {
+    public function getDictionariesAndLevels(Request $request)
+    {
+        // TODO: this function uses the same part of code like getDictionaries
+
+        $user = User::find($request['user']['sub']);
 
         $tmp = 0;
         foreach (Config::get('app.supported_languages') as $value) {
-            if ($value == $language)  $tmp = 1;
-        }
-
-        if ($tmp == 0) {
-            return response('no available languages for '.$language, 500);            
+            if ($value == $user['locale'])  $tmp = 1;
         }
 
         $results = DB::table('available_dictionaries')
-                ->select('language_id', 'language_name', 'available_languages')
-                ->where('language_id', $language)
+                ->select('language_id', 'language_name', 'count_words', 'available_languages')
                 ->get();
 
+        $usersLevelProgress = DB::table('users_level_progress')
+                ->select('available_dictionaries.language_id', 'levels_progress')
+                ->join('available_dictionaries', 'available_dictionaries.id', '=', 'users_level_progress.dictionary_id')
+                ->where('user_id', $request['user']['sub'])
+                ->get();
 
-        if (count($results) == 0) {
-            return response('problem with getting from DB or no available languages for '.$language, 500);
+        if ($results) {
+            $return = [
+                'status'=> 1,
+                'languages' => $results,
+                'levels' => $usersLevelProgress
+            ];
+
+            return response()->json($return);
         }
         else {
-            $json_decoded = json_decode($results[0]->available_languages);
-            return response()->json(['status'=> 1, 'languages' =>  $json_decoded ]);
+            return response('problem with getting data from /get_dictionaries_and_levels/', 500);
         }
-
     }
 
 
@@ -91,54 +103,19 @@ class UserController extends Controller {
      */
     public function getDictionaries(Request $request)
     {
+        // TODO: this function uses the same part of code like getDictionariesAndLevels
 
-        $user = User::find($request['user']['sub']);
-
-        // if from some reason user doesn't have $locale set let $locale='en_EN' 
-        $tmp = 0;
-        foreach (Config::get('app.supported_languages') as $value) {
-            if ($value == $user['locale'])  $tmp = 1;
-        }
-
-        if ($tmp == 0) {   // if user doesn't have locale set then set locale to 'en_EN' 
-            $user['locale'] = 'en_EN';
-            DB::table('users')
-                ->where('id', $request['user']['sub'])
-                ->update(['locale' => 'en_EN']);
-        }
-     
         $results = DB::table('available_dictionaries')
                 ->select('language_id', 'language_name', 'count_words', 'available_languages')
-                // ->where('language_id', $user['locale'])
                 ->get();
-
-        // SET LANGUAGETOLEARN ITEM IN THE FIRST PLACE
-                
-
-        //         $json_decoded = json_decode($results);
-        // print_r($json_decoded);
-        // exit;
-/* this logic has to be moved to frontend part */ 
-        // if user has languageToLearn defined then set "prefer language' on the top of list
-        // if user doesn't have languageToLearn defined THEN ignore 
-        // $tmp = false;
-        // foreach (array_keys($json_decoded) as $key) {
-        //     if ($json_decoded[$key]->id == $user['languageToLearn']) {
-        //         $tmp_id = $json_decoded[$key]->id;
-        //         $tmp_name = $json_decoded[$key]->name;
-        //         unset($json_decoded[$key]);
-        //         $tmp = true;
-        //     }
-        // }
-
-        // if ($tmp == true ) {
-        //     $new_array = ['id'=>$tmp_id, 'name'=>$tmp_name]  ;
-        //     array_push ($json_decoded , $new_array );
-        //     $json_decoded = array_reverse ($json_decoded);
-        // }
-
+        
         if ($results) {
-            return response()->json(['status'=> 1, 'user_locale' => $user['locale'], 'languages' =>  $results]);
+            $return = [
+                'status'=> 1,
+                'languages' =>  $results
+            ];
+
+            return response()->json($return);
         }
         else {
             return response('problem with getting data from /available_dictionaries/', 500);

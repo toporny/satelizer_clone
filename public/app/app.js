@@ -8,10 +8,11 @@ angular
   'ui.router',
   'ngBootbox',
   'satellizer',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngStorage'
   ])
 
-.config(function($translateProvider, $stateProvider, $urlRouterProvider, $authProvider, $ngBootboxConfigProvider) {
+.config(function($translateProvider, $stateProvider, $urlRouterProvider, $authProvider, $ngBootboxConfigProvider, apiUrl) {
     /**
      * App routes
      */
@@ -25,7 +26,7 @@ angular
       
     $urlRouterProvider.otherwise('/');
 
-    $authProvider.baseUrl = 'http://localhost:3000/';
+    $authProvider.baseUrl = apiUrl;
     // $authProvider.tokenPrefix = 'satellizer';
     /**
      *  Satellizer config

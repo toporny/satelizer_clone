@@ -17,7 +17,7 @@
     "bootstrap": "3.3.*",
     "bootstrap-language" : "*",
     "font-awesome" : "4.7.*",
-    "angular-bootstrap": "*"
-
+    "angular-bootstrap": "2.2.*",
+    "ngstorage": "0.3.*"
   }
 }

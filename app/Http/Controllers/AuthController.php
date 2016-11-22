@@ -24,6 +24,7 @@ class AuthController extends Controller {
             'iat' => time(),
             //'exp' => time() + (2 * 7 * 24 * 60 * 60) // 2 weeks
             'exp' => time() +       (1 * 24 * 60 * 60)  // 1 day
+            // 'exp' => time() +       ( 10)  // 10 seconds
         ];
         return JWT::encode($payload, Config::get('app.token_secret'));
     }
@@ -72,7 +73,12 @@ class AuthController extends Controller {
         {
             unset($user->password);
 
-            return response()->json(['token' => $this->createToken($user)]);
+            $return = [
+                'languageToLearn' => $user->languageToLearn,
+                'locale' => $user->locale,
+                'token' => $this->createToken($user)
+                ];
+            return response()->json($return);
         }
         else
         {
@@ -98,10 +104,17 @@ class AuthController extends Controller {
         $user = new User;
         $user->displayName = $request->input('displayName');
         $user->email = $request->input('email');
+        $user->locale = 'en_EN';
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        return response()->json(['token' => $this->createToken($user)]);
+        $return = [
+            'locale' => $user->locale,
+            'token' => $this->createToken($user)
+            ];
+        return response()->json($return);
+
+       // return response()->json(['token' => $this->createToken($user)]);
     }
 
     /**
@@ -138,7 +151,8 @@ class AuthController extends Controller {
         if ($request->header('Authorization'))
         {
             $user = User::where('facebook', '=', $profile['id']);
-
+// print "zzzzzzz";
+// exit;
             if ($user->first())
             {
                 return response()->json(['message' => 'There is already a Facebook account that belongs to you'], 409);
@@ -146,18 +160,24 @@ class AuthController extends Controller {
 
             $token = explode(' ', $request->header('Authorization'))[1];
             $payload = (array) JWT::decode($token, Config::get('app.token_secret'), array('HS256'));
-
             $user = User::find($payload['sub']);
             $user->facebook = $profile['id'];
+            $user->locale = $profile['locale'];
             $user->email = $user->email ?: $profile['email'];
             $user->displayName = $user->displayName ?: $profile['name'];
             $user->save();
+            $return = [
+                'locale' => $user->locale,
+                'token' => $this->createToken($user)
+                ];
+            return response()->json($return);
 
-            return response()->json(['token' => $this->createToken($user)]);
+            //return response()->json(['token' => $this->createToken($user)]);
         }
         // Step 3b. Create a new user account or return an existing one.
         else
         {
+     
             // $b =$profile;
             // file_put_contents('filename.txt', print_r($b, true));
             // exit;
@@ -165,7 +185,14 @@ class AuthController extends Controller {
 
             if ($user->first())
             {
-                return response()->json(['token' => $this->createToken($user->first())]);
+                //$a = $user->first();
+                $return = [
+                    'locale' => $user->first()->locale,
+                    'languageToLearn' => $user->first()->languageToLearn,
+                    'token' => $this->createToken($user->first())
+                    ];
+                return response()->json($return);                
+                //return response()->json(['token' => $this->createToken($user->first())]);
             }
 
             $user = new User;
@@ -173,9 +200,15 @@ class AuthController extends Controller {
             $user->locale = $profile['locale'];
             $user->email = $profile['email'];
             $user->displayName = $profile['name'];
-            $user->save();
 
-            return response()->json(['token' => $this->createToken($user)]);
+            $user->save();
+            $return = [
+                'locale' => $user->locale,
+                'token' => $this->createToken($user)
+                ];
+            return response()->json($return);
+
+            //return response()->json(['token' => $this->createToken($user)]);
         }
     }
 
