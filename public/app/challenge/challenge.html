@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading" translate="CHALLENGE.HEAD_TITLE"></div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <h2  translate="CHALLENGE.TITLE"></h2>
+          <p class="margin-bottom10" translate="CHALLENGE.DESCRIPTION"></p>
+
+            <div class="row margin-top10">
+              <div class="col-xs-6 col-sm-4 col-md-3">
+               <!-- the same is in "test" menu -->
+                <button type="button" style="width:200px; text-align:left; margin:4px; " class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="en"></span></button>
+                
+                <div id="derp" class="slideable">
+                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="de"></span></button>
+                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="es"></span></button>
+                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="pl"></span></button>
+                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="fr"></span></button>
+                </div>
+                
+                <button class="btn btn-link" style="margin-left:4px" slide-toggle="#derp">more..</button>
+
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer text-center">
+      <ul class="list-inline">
+        <li><i class="ion-star"></i> {{stars | number}} stars</li>
+        <li><i class="ion-fork-repo"></i> {{forks | number}} forks</li>
+        <li><i class="ion-pull-request"></i> {{issues | number}} issues</li>
+      </ul>
+    </div>
+  </div>
+</div>
+

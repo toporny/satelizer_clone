@@ -7,12 +7,14 @@
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/learn')}" href="/#/learn" translate="NAVIGATION.LEARN"></a></li>
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/tests')}" href="/#/tests" translate="NAVIGATION.TEST"></a></li>
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/results')}" href="/#/results" translate="NAVIGATION.RESULTS"></a></li>
+
       </ul>
       <ul ng-if="!$ctrl.isAuthenticated()" class="nav navbar-nav pull-right">
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/login')}" href="/#/login" translate="NAVIGATION.LOGIN"></a></li>
         <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/signup')}" href="/#/signup" translate="NAVIGATION.SIGNUP"></a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
+        <li><a ng-class="{'font-weight-bold': $ctrl.isActive('/challenge')}" href="/#/challenge" translate="NAVIGATION.CHALLENGE"></a></li>      
         <li><a ng-click="$ctrl.changeLanguage()" ng-class="{'font-weight-bold': $ctrl.isActive('/language')}"><span class="lang-sm" lang="{{'NAVIGATION.FLAG' | translate}}" style="border:1px solid gray; margin-top:1px"></span></a></li>
         <li><a class="premium" ng-class="{'font-weight-bold': $ctrl.isActive('/premium')}" href="/#/premium" translate="NAVIGATION.PREMIUM"></a></li>
         <li ng-if="$ctrl.isAuthenticated()"><a ng-class="{'font-weight-bold': $ctrl.isActive('/profile')}" href="/#/profile" translate="NAVIGATION.PROFILE"></a></li>
