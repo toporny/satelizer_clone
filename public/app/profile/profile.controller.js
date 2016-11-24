@@ -4,9 +4,9 @@ angular
   .module('MyApp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'Account', '$translate', '$state', 'common', 'translations'];
+  ProfileCtrl.$inject = ['$scope', '$auth', 'toastr', 'user', '$translate', '$state', 'common', 'translationsSoFar', 'availableDictionaries', 'user'];
 
-  function ProfileCtrl($scope, $auth, toastr, Account, $translate, $state, common, translations) {
+  function ProfileCtrl($scope, $auth, toastr, user, $translate, $state, common, translationsSoFar, availableDictionaries, user) {
 
     vm = this;
     vm.getProfile = getProfile;
@@ -19,11 +19,14 @@ angular
 
     vm.data = {};
 
+    getProfile();
+
+    // -------------------------------------------------------------------
 
     /* set default value to vm.data.languageToLearnSelected */
     function renewLanguageToLearn() {
-      angular.forEach(vm.availableDictionary.data.languages, function(value, key) {
-        if (value.language_id == vm.data.localeSelected.id) {
+      angular.forEach(vm.availableDictionary, function(value, key) {
+        if (key == vm.data.localeSelected.id) {
           vm.data.languageToLearnArrayList = angular.fromJson(value.available_languages);
           angular.forEach(vm.data.languageToLearnArrayList, function(value, key) {
             if (value.id == $scope.user.languageToLearn) {
@@ -35,22 +38,21 @@ angular
     }
 
 
+    /*
+    * getProfile from API
+    */
     function getProfile() {
-      Account.getProfile()
+      user.getProfileFromAPI()
         .then(function(response) {
-          $scope.user = response.data;  // make scope.user to VM 
-          return common.getAvailableDictionaries();
-        })
-        .then(function(availableDictionary) {
-          vm.availableDictionary = availableDictionary;
+          $scope.user = response.data; 
+          vm.availableDictionary = availableDictionaries;
           /* set default value to vm.data.locale */
-          vm.data.localeArrayList = translations;
+          vm.data.localeArrayList = translationsSoFar;
           vm.data.localeSelected = 'en_EN';
-          angular.forEach(translations, function(value, key) {
-            if (value.id == $scope.user.locale) {
-              vm.data.localeSelected = {id: value.id, name: value.name};
-            }
-          });
+
+          angular.forEach(translationsSoFar, function(el){
+           if (el.id.substr(0,2) == $translate.use()) vm.data.localeSelected = el;
+          })
 
           /* set default value to vm.data.languageToLearnSelected */
           renewLanguageToLearn();
@@ -67,28 +69,38 @@ angular
     *   Update profile
     */
     function updateProfile() {
-      console.log('$scope.user', $scope.user);
       $scope.user.locale = vm.data.localeSelected;
       $scope.user.languageToLearn = vm.data.languageToLearnSelected;
-
-      console.log('vm.data.languageToLearnSelected.id',vm.data.languageToLearnSelected.id);
-      
+     
       switch (vm.data.localeSelected.id) {
-        case 'gb_GB' : $translate.use('en'); break;
-        case 'en_EN' : $translate.use('en'); break;
-        case 'pl_PL' : $translate.use('pl'); break;
-        default : $translate.use('en'); break;
+        case 'gb_GB' : user.changeLocaleForThisAPP('en_EN'); break;
+        case 'en_EN' : user.changeLocaleForThisAPP('en_EN'); break;
+        case 'pl_PL' : user.changeLocaleForThisAPP('pl_PL'); break;
+        default : user.changeLocaleForThisAPP('en_EN'); break;
       }
 
-
-      Account.updateProfile($scope.user)
+      user.updateProfileByAPI($scope.user)
         .then(function() {
+
+          // reset variable 'languageToLearn' in storage
+          if ( vm.data.languageToLearnSelected !== null ) {
+            user.setLocalStorage(['languageToLearn'], {
+              'languageToLearn' :  vm.data.languageToLearnSelected.id
+            });
+          } else {
+            user.setLocalStorage(['languageToLearn'], {
+              'languageToLearn' : null
+            });
+          }
+
           toastr.success('Profile has been updated');
         })
         .catch(function(response) {
           toastr.error(response.data.message, response.status);
         });
     };
+
+
     function link(provider) {
       $auth.link(provider)
         .then(function() {
@@ -99,6 +111,8 @@ angular
           toastr.error(response.data.message, response.status);
         });
     };
+
+
     function unlink(provider) {
       alert(provider);
       $auth.unlink(provider)
@@ -111,7 +125,6 @@ angular
         });
     };
 
-    getProfile();
   };
 
 })();

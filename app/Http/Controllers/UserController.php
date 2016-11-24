@@ -32,7 +32,7 @@ class UserController extends Controller {
     {
         $user = User::find($request['user']['sub']);
 
-        if (!isset($user->locale)) {
+        if ((isset($user)) && (!isset($user->locale)) ) {
             $user->locale = 'en_EN';
         }
         return $user;
@@ -53,84 +53,12 @@ class UserController extends Controller {
     }
 
 
-
-    /**
-     * get dictionaries and levels (for pick words #/pick)
-     * input: language
-     * API_COMMAND:  api/get_dictionaries_and_levels/'     
-     */
-    public function getDictionariesAndLevels(Request $request)
-    {
-        // TODO: this function uses the same part of code like getDictionaries
-
-        $user = User::find($request['user']['sub']);
-
-        $tmp = 0;
-        foreach (Config::get('app.supported_languages') as $value) {
-            if ($value == $user['locale'])  $tmp = 1;
-        }
-
-        $results = DB::table('available_dictionaries')
-                ->select('language_id', 'language_name', 'count_words', 'available_languages')
-                ->get();
-
-        $usersLevelProgress = DB::table('users_level_progress')
-                ->select('available_dictionaries.language_id', 'levels_progress')
-                ->join('available_dictionaries', 'available_dictionaries.id', '=', 'users_level_progress.dictionary_id')
-                ->where('user_id', $request['user']['sub'])
-                ->get();
-
-        if ($results) {
-            $return = [
-                'status'=> 1,
-                'languages' => $results,
-                'levels' => $usersLevelProgress
-            ];
-
-            return response()->json($return);
-        }
-        else {
-            return response('problem with getting data from /get_dictionaries_and_levels/', 500);
-        }
-    }
-
-
-
-    /**
-     * get dictionaries
-     * input: language
-     * API_COMMAND:  api/get_dictionaries/'     
-     */
-    public function getDictionaries(Request $request)
-    {
-        // TODO: this function uses the same part of code like getDictionariesAndLevels
-
-        $results = DB::table('available_dictionaries')
-                ->select('language_id', 'language_name', 'count_words', 'available_languages')
-                ->get();
-        
-        if ($results) {
-            $return = [
-                'status'=> 1,
-                'languages' =>  $results
-            ];
-
-            return response()->json($return);
-        }
-        else {
-            return response('problem with getting data from /available_dictionaries/', 500);
-        }
-
-    }
-
-
     /**
      * Update signed in user's profile.
      */
     public function updateUser(Request $request)
     {
-        // PRINT_R($request['user']);
-        // EXIT;
+
         $user = User::find($request['user']['sub']);
         $tmp = json_encode ( $request->input('locale') );
         $user->locale = json_decode($tmp)->id;
@@ -148,6 +76,7 @@ class UserController extends Controller {
 
     /**
      * Update signed in user's profile.
+     * http://localhost:3000/api/generate_config_files
      */
     public function generateConfigFiles(Request $request)
     {
@@ -155,17 +84,10 @@ class UserController extends Controller {
                 ->select('language_id', 'language_name', 'count_words', 'available_languages')
                 ->get();
 
-$string = '';
-foreach ($results as $item) {
-   // $tmp = addcslashes($item->available_languages);
-   //'en_EN':{'count_words': '4586', 'language_name': 'english', 'available_languages': [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
-$string .= "      '".$item->language_id."':{'count_words': '".$item->count_words."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },':\n";
-//    "'".en_EN."'":{'count_words': '4586', 'language_name': 'english', 'available_languages': [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
-}
-            // [language_id] => en_EN
-            // [language_name] => english
-            // [count_words] => 4586
-            // [available_languages] => [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]
+        $string = '';
+        foreach ($results as $item) {
+        $string .= "      '".$item->language_id."':{'count_words': '".$item->count_words."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },\n";
+        }
  
 
 $file1 = <<<END1
@@ -176,20 +98,12 @@ $file1 = <<<END1
     .constant('availableDictionaries', {
 
 END1;
-// 'en_EN':{'count_words': '4586', 'language_name': 'english', 'available_languages': [{"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
-// 'es_ES':{'count_words': '5000', 'language_name': 'spanish', 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
-// 'ru_RU':{'count_words': '5500', 'language_name': 'russian', 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
-// 'fr_FR':{'count_words': '6000', 'language_name': 'french' , 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"de_DE", "name":"deutsch"}, {"id":"pl_PL", "name":"polish"}]},
-// 'de_DE':{'count_words': '6500', 'language_name': 'deutsch', 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"pl_PL", "name":"polish"}]},
-// 'pl_PL':{'count_words': '7000', 'language_name': 'polish' , 'available_languages': [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}]}
 
 $file2 = <<<END2
     })
 })();
 END2;
-//print "<pre>";
-// print $file1 . $string . $file2;
-// exit; 
+
         $return = file_put_contents(public_path().'/app/configs/generated_by_laravel.js', $file1 . $string . $file2);
         if ($return) {
             return response()->json(['status' => 1]);

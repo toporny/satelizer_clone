@@ -1,51 +1,51 @@
-(function () {
+// (function () {
 
-  angular
-    .module('MyApp')
-    .factory('Account', Account);
+//   angular
+//     .module('MyApp')
+//     .factory('Account', Account);
 
-    Account.$inject = ['$http', '$localStorage'];
+//     Account.$inject = ['$http', '$localStorage'];
 
-    function Account($http, $localStorage) {
+//     function Account($http, $localStorage) {
 
-      var locale = null;
-      var languageToLearn = null;
+//       var locale = null;
+//       var languageToLearn = null;
 
-      services = {
-        getProfile: getProfile,
-        updateProfile:updateProfile,
-        setLanguageToLearn:setLanguageToLearn,
-        getLanguageToLearn:getLanguageToLearn,
-        setLocale:setLocale,
-        getLocale:getLocale
-      }
+//       services = {
+//         getProfile: getProfile,
+//         updateProfile:updateProfile,
+//         setLanguageToLearn:setLanguageToLearn,
+//         getLanguageToLearn:getLanguageToLearn,
+//         setLocale:setLocale,
+//         getLocale:getLocale
+//       }
 
-      return services;
+//       return services;
 
-      function getProfile () {
-        return $http.get('/api/me');
-      }
+//       function getProfile () {
+//         return $http.get('/api/me');
+//       }
 
-      function updateProfile (profileData) {
-        return $http.put('/api/me', profileData);
-      }
+//       function updateProfile (profileData) {
+//         return $http.put('/api/me', profileData);
+//       }
 
-      function setLanguageToLearn (languageToLearn) {
-        // $localStorage.junk
-      }
+//       function setLanguageToLearn (languageToLearn) {
+//         // $localStorage.junk
+//       }
       
-      function getLanguageToLearn () {
-        // $localStorage.junk
-      }
+//       function getLanguageToLearn () {
+//         // $localStorage.junk
+//       }
 
-      function setLocale (locale) {
-        // $localStorage.junk
-      }
+//       function setLocale (locale) {
+//         // $localStorage.junk
+//       }
       
-      function getLocale () {
-        // $localStorage.junk
-      }      
-  }
+//       function getLocale () {
+//         // $localStorage.junk
+//       }      
+//   }
 
-})();  
+// })();  
 

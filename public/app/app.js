@@ -39,6 +39,9 @@ angular
       clientId: '908156294400-qdqgta0rukfi3el2rl8qgsjtcel3ka87.apps.googleusercontent.com'
     });
 
+    // ngStorage storage place
+    //localStorageServiceProvider.setStorageType('sessionStorage');
+
     // default language
     $translateProvider.preferredLanguage('en');
     // Enable escaping of HTML

@@ -11,7 +11,7 @@
             url: '/learn',
             templateUrl: 'app/learn/learn.html',
             controller: 'LearnCtrl as learn',
-            authenticate: true
+            authenticate: false
         })
     }
 })();

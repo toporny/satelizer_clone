@@ -11,7 +11,7 @@
                 url: '/results',
                 templateUrl: 'app/results/results.html',
                 controller: 'ResultsCtrl as results',
-                authenticate: true,
+                authenticate: false,
             })
         }
 })();

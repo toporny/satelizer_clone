@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
 
         $users = array(
-                ['id' => 5, 'displayName' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
-                ['id' => 6, 'displayName' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret')],
-                ['id' => 7, 'displayName' => 'Holly Lloyd', 'email' => 'holly@scotch.io', 'password' => Hash::make('secret')],
-                ['id' => 8, 'displayName' => 'Adnan Kukic', 'email' => 'adnan@scotch.io', 'password' => Hash::make('secret')],
+                ['id' => 5, 'locale' => 'en_EN', 'userStatus'=> 'premium' ,'displayName' => 'Ryan',  'firstName' => 'Ryan',  'lastName' => 'Chenkie',   'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
+                ['id' => 6, 'locale' => 'es_ES', 'userStatus'=> 'normal' ,'displayName' => 'Chris', 'firstName' => 'Chris', 'lastName' => 'Sevilleja', 'email' => 'chris@scotch.io',       'password' => Hash::make('secret')],
+                ['id' => 7, 'locale' => '',      'userStatus'=> 'normal' ,'displayName' => 'Holly', 'firstName' => 'Holly', 'lastName' => 'Lloyd',     'email' => 'holly@scotch.io',       'password' => Hash::make('secret')],
+                ['id' => 8, 'locale' => 'pl_PL', 'userStatus'=> 'premium' ,'displayName' => 'Adnan', 'firstName' => 'Adnan', 'lastName' => 'Kukic',     'email' => 'adnan@scotch.io',       'password' => Hash::make('secret')],
         );
             
         // Loop through each user above and create the record for them in the database

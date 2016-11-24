@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
 use App\User;
-use DB;
+//use DB;
 
 // IMPORTANT: locale are set only for GOOGLE and FACEBOOK
 // TODO: make locale also for rest of providers
@@ -77,7 +77,8 @@ class AuthController extends Controller {
             $return = [
                 'languageToLearn' => $user->languageToLearn,
                 'locale' => $user->locale,
-                'availableDictionaries' => $this->getAvailableDictionaries(),
+                'userStatus' => $user->userStatus,
+                'displayName' => $user->firstName ? $user->firstName : $user->displayName,
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -106,29 +107,19 @@ class AuthController extends Controller {
         $user = new User;
         $user->displayName = $request->input('displayName');
         $user->email = $request->input('email');
-        $user->locale = 'en_EN';
+        $user->locale = 'en_EN'; // take this from browser variable locale.
+        $user->userStatus = 'normal';
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
         $return = [
             'locale' => $user->locale,
-            'availableDictionaries' => $this->getAvailableDictionaries(),
             'token' => $this->createToken($user)
             ];
         return response()->json($return);
 
        // return response()->json(['token' => $this->createToken($user)]);
     }
-
-
-    private function getAvailableDictionaries() {
-        $results = DB::table('available_dictionaries')
-                ->select('id', 'language_id', 'count_words', 'language_name', 'available_languages')
-                ->get();
-
-        return $results;
-    }
-
 
     /**
      * Login with Facebook.
@@ -151,7 +142,7 @@ class AuthController extends Controller {
         $accessToken = json_decode($accessTokenResponse->getBody(), true);
 
         // Step 2. Retrieve profile information about the current user.
-        $fields = 'id,email,first_name,last_name,link,name,locale';
+        $fields = 'id,email, first_name, last_name, link, name, locale';
         $profileResponse = $client->request('GET', 'https://graph.facebook.com/v2.8/me', [
             'query' => [
                 'access_token' => $accessToken['access_token'],
@@ -176,11 +167,10 @@ class AuthController extends Controller {
             $user->facebook = $profile['id'];
             $user->locale = $profile['locale'];
             $user->email = $user->email ?: $profile['email'];
-            $user->displayName = $user->displayName ?: $profile['name'];
+            $user->displayName = $profile['first_name'] ? $profile['first_name']  : $profile['name'];
             $user->save();
             $return = [
                 'locale' => $user->locale,
-                'availableDictionaries' => $this->getAvailableDictionaries(),
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -190,10 +180,7 @@ class AuthController extends Controller {
         // Step 3b. Create a new user account or return an existing one.
         else
         {
-     
-            // $b =$profile;
-            // file_put_contents('filename.txt', print_r($b, true));
-            // exit;
+
             $user = User::where('facebook', '=', $profile['id']);
 
             if ($user->first())
@@ -201,8 +188,9 @@ class AuthController extends Controller {
                 //$a = $user->first();
                 $return = [
                     'locale' => $user->first()->locale,
+                    'displayName' => $profile['first_name'] ? $profile['first_name']  : $profile['name'],
                     'languageToLearn' => $user->first()->languageToLearn,
-                    'availableDictionaries' => $this->getAvailableDictionaries(),
+                    'userStatus' => $user->first()->userStatus,
                     'token' => $this->createToken($user->first())
                     ];
                 return response()->json($return);                
@@ -212,13 +200,17 @@ class AuthController extends Controller {
             $user = new User;
             $user->facebook = $profile['id'];
             $user->locale = $profile['locale'];
+            $user->userStatus = 'normal';
             $user->email = $profile['email'];
-            $user->displayName = $profile['name'];
+            $user->firstName = $profile['first_name'];
+            $user->lastName = $profile['last_name'];
+            $user->displayName = $profile['first_name'] ? $profile['first_name']  : $profile['name'];
 
             $user->save();
             $return = [
                 'locale' => $user->locale,
-                'availableDictionaries' => $this->getAvailableDictionaries(),
+                'userStatus' => $user->userStatus,
+                'displayName' => $profile['first_name'] ? $profile['first_name']  : $profile['name'],
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -274,7 +266,8 @@ class AuthController extends Controller {
 
             $return = [
                 'locale' => $user->locale,
-                'availableDictionaries' => $this->getAvailableDictionaries(),
+                'userStatus' => $user->userStatus,
+                'displayName' => $user->displayName,                
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);
@@ -289,12 +282,19 @@ class AuthController extends Controller {
 
             if ($user->first())
             {
-                return response()->json(['token' => $this->createToken($user->first())]);
+                return response()->json([
+                    'token' => $this->createToken($user->first()),
+                    'locale' => $profile['locale'],
+                    'userStatus' => 'normal',
+                    'displayName' => $profile['given_name'],
+                ]);
             }
-
+            
             $user = new User;
             $user->google = $profile['sub'];
-            $user->displayName = $profile['name'];
+            // $user->displayName = $profile['name'];
+            $user->displayName = $profile['given_name'] ? $profile['given_name']  : $profile['name'];
+            $user->userStatus = 'normal';
             $user->picture = $profile['picture'];
             $user->locale = $profile['locale'];
             $user->email = $profile['email'];
@@ -302,7 +302,8 @@ class AuthController extends Controller {
             
             $return = [
                 'locale' => $user->locale,
-                'availableDictionaries' => $this->getAvailableDictionaries(),
+                'userStatus' => $user->userStatus,
+                'displayName' => $user->displayName,
                 'token' => $this->createToken($user)
                 ];
             return response()->json($return);

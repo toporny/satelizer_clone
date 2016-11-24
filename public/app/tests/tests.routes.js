@@ -10,7 +10,7 @@
             .state('tests', {
                 url: '/tests',
                 templateUrl: 'app/tests/tests.html',
-                authenticate: true,
+                authenticate: false,
                 controller: 'TestsCtrl as test',
             })
         }

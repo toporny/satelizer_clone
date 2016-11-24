@@ -23,10 +23,10 @@
 
 
     // ---------------------------------------------
-    navCtrl.$inject = ['$scope', '$auth', '$state', '$location', '$ngBootbox', '$translate', '$rootScope', 'toastr'];
+    navCtrl.$inject = ['$scope', '$auth', '$state', '$location', '$ngBootbox', '$translate', '$rootScope', 'toastr', 'user'];
 
 
-    function navCtrl($scope, $auth, $state, $location, $ngBootbox, $translate, $rootScope, toastr) {
+    function navCtrl($scope, $auth, $state, $location, $ngBootbox, $translate, $rootScope, toastr, user) {
 
         var $ctrl = this;
         $ctrl.init = init;
@@ -35,6 +35,8 @@
         $ctrl.flag = 'en';
 
         $ctrl.changeLanguage = changeLanguage;
+        $ctrl.isAuthenticated = isAuthenticated;
+
         //$ctrl.delideli = delideli;
 
 
@@ -61,7 +63,7 @@
                         label: '<span class="lang-sm" lang="pl"></span> Polski',
                         className: "btn-change-language btn-info",
                         callback: function() {
-                            $translate.use('pl');
+                            user.changeLocaleForThisAPP('pl_PL');
                             $rootScope.$emit('AppLanguageChanged', {  value: 'pl_PL' });
                             // TODO: change this in database also!
                         }
@@ -70,7 +72,7 @@
                         label: '<span class="lang-sm" lang="en"></span> English',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
-                            $translate.use('en');
+                            user.changeLocaleForThisAPP('en_EN');
                             $rootScope.$emit('AppLanguageChanged', {  value: 'en_EN' });
                             // TODO: change this in database also!
                         }
@@ -79,24 +81,28 @@
                         label: '<span class="lang-sm" lang="es"></span> Spain',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
-                          $rootScope.$emit('AppLanguageChanged', {  value: 'es_ES' });
-                          toastr.warning('Not yet ready','Warning');
+                            toastr.warning('Not yet ready', 'Warning');
+                            //$rootScope.$emit('AppLanguageChanged', {  value: 'es_ES' });
+                            //user.changeLocaleForThisAPP('es_ES');
                         }
                     },
                     German: {
                         label: '<span class="lang-sm" lang="de"></span> German',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
-                          $rootScope.$emit('AppLanguageChanged', {  value: 'de_DE' });
-                          toastr.warning('Not yet ready','Warning');
+                            //$rootScope.$emit('AppLanguageChanged', {  value: 'de_DE' });
+                            //user.changeLocaleForThisAPP('de_DE');
+                            toastr.warning('Not yet ready', 'Warning');
                         }
                     },
                     French: {
                         label: '<span class="lang-sm" lang="fr"></span> French',
                         className: "btn-change-language btn-info",
                         callback: function(e) {
-                          $rootScope.$emit('AppLanguageChanged', {  value: 'fr_FR' });
-                          toastr.warning('Not yet ready','Warning');
+                          //$rootScope.$emit('AppLanguageChanged', {  value: 'fr_FR' });
+                            //$rootScope.$emit('AppLanguageChanged', {  value: 'fr_FR' });
+                            //user.changeLocaleForThisAPP('fr_FR');
+                            toastr.warning('Not yet ready', 'Warning');
                         }
                     },
                     cancel: {
@@ -113,10 +119,19 @@
         }
 
 
-        function init(){
-          $ctrl.isAuthenticated = function() {
+        
+
+        function isAuthenticated(){
             return $auth.isAuthenticated();
-          };
+        }
+
+        function init() {
+            user.getPersonalData()
+            .then(function(userData){
+                console.log(userData);
+                var locale = user.getLocalStorage('locale');
+                $translate.use(locale.substr(0, 2));
+            });
         }
 
         activate();

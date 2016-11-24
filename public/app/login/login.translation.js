@@ -33,7 +33,10 @@
             MSG_DONT_HAVE_AN_ACCOUNT_YET: 'Don\'t have an account yet?',
             BTN_SIGN_UP: 'Sign up',
             BTN_SIGN_IN_WITH_FACEBOOK: 'Sign in with Facebook',
-            BTN_SIGN_IN_WITH_GOOGLE: 'Sign in with Google'
+            BTN_SIGN_IN_WITH_GOOGLE: 'Sign in with Google',
+            //toastr.success($translate.instant('LOGIN.YOU_HAVE_SUCCESSFULLY_SIGNED_IN_WITH_PROVIDER', {provider: provider}));
+            YOU_HAVE_BEEN_LOGGED_OUT: 'You have been logged out',
+            YOU_HAVE_SUCCESSFULLY_SIGNED_IN_WITH_PROVIDER: 'You have successfully signed in with provider'
           },
         });
      
@@ -46,7 +49,9 @@
             MSG_DONT_HAVE_AN_ACCOUNT_YET: 'Nie masz jeszcze konta?',
             BTN_SIGN_UP: 'Załóż konto',
             BTN_SIGN_IN_WITH_FACEBOOK: 'Zaloguj przez Facebook',
-            BTN_SIGN_IN_WITH_GOOGLE: 'Zaloguj przez Google'
+            BTN_SIGN_IN_WITH_GOOGLE: 'Zaloguj przez Google',
+            YOU_HAVE_BEEN_LOGGED_OUT: 'Zostałeś wylogowany',
+            YOU_HAVE_SUCCESSFULLY_SIGNED_IN_WITH_PROVIDER: 'Zalogowano z sukcesem przez {{provider}}'
           },
       });
      

@@ -3,16 +3,16 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = ['$state', '$translate', 'translatePluginToISO', '$rootScope', 'common'];
+    PickCtrl.$inject = ['$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries'];
 
-    function PickCtrl ($state,  $translate, translatePluginToISO, $rootScope, common) {
+    function PickCtrl ($state,  $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
 		vm.showLevelButtons = showLevelButtons;
 
 		vm.data = {
-			availableDictionaries : {},
+			//availableDictionaries : {},
 			languageToLearn  : null
 			// languages: languages,
 			// //config: config, 
@@ -22,33 +22,24 @@
 
 
 		function showLeftButtons(currentLocaleISO){
-			common.getAvailableDictionariesAndLevels()
-				.then(function(response) {
-					vm.data.languageToLearn = response.data.language_to_learn;
-					//vm.data.levels = [{"lvl_name": "lvl1ES", "available":"yes"},{"lvl_name": "lvl2ES", "available":"no"},{"lvl_name": "lvl3ES", "available":"yes"},{"lvl_name": "lvl4ES", "available":"no"},{"lvl_name": "lvl5ES", "available":"no"},{"lvl_name": "lvl6ES", "available":"yes"},{"lvl_name": "lvl7ES", "available":"no"}];
-					var tmp = [];
-					angular.forEach(response.data.languages, function(value, key) {
-						// don't show the same language as current locale is
-						if (value.language_id != currentLocaleISO) {
-								tmp.push({id : value.language_id});
-						}
-					});
-					vm.data.availableDictionaries = tmp;
 
-					// TODO: if languageToLearn is set then set vm.data.levels !!!!!!!!!!!!
-					//vm.data.availableDictionaries = response.data.languages;
+			// user.getPersonalData()
+			// .then(function(userData){
 
-					// if language_to_learn is not defined then
-					// -- SHOW all buttons list 
-					// -- DONT SHOW more/less buttons
-					// -- show empty space on the right side
+			// 		console.log('userData', userData);
+			// 		vm.data.languageToLearn = userData.language_to_learn;
+			// 		//vm.data.levels = [{"lvl_name": "lvl1ES", "available":"yes"},{"lvl_name": "lvl2ES", "available":"no"},{"lvl_name": "lvl3ES", "available":"yes"},{"lvl_name": "lvl4ES", "available":"no"},{"lvl_name": "lvl5ES", "available":"no"},{"lvl_name": "lvl6ES", "available":"yes"},{"lvl_name": "lvl7ES", "available":"no"}];
+			// 		var tmp = [];
+			// 		angular.forEach(availableDictionaries, function(value, key) {
+			// 			// don't show the same language as current locale is
+			// 			if (key != currentLocaleISO) {
+			// 					tmp.push({id : key});
+			// 			}
+			// 		});
+			// 		console.log('tmp',tmp);
+			// 		vm.data.availableDictionaries = tmp;
+			// });
 
-					// if language_to_learn is defined then SHOW all buttons list and DONT SHOW more/less buttons
-					// set class "active" to "language_to_learn" button (mostly on the top)
-				})
-				.catch(function(response) {
-					toastr.error(response.data.message, response.status);
-				});
 		}
 
 

@@ -20,8 +20,11 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->nullable();
 			$table->string('password')->nullable();
 			$table->string('locale')->nullable();
+			$table->string('userStatus')->nullable();
 			$table->string('languageToLearn')->nullable();
 			$table->string('displayName')->nullable();
+			$table->string('firstName')->nullable();
+			$table->string('lastName')->nullable();
 			$table->string('facebook')->nullable();
 			$table->string('google')->nullable();
 			// $table->string('foursquare')->nullable();

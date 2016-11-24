@@ -6,8 +6,8 @@ angular.module('MyApp')
 
   function common($http, $ngBootbox) {
     service = {
-      getAvailableDictionaries: getAvailableDictionaries,
-      getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
+//      getAvailableDictionaries: getAvailableDictionaries,
+      //getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
       // getDictionariesAlphabetically:getDictionariesAlphabetically,
       getListOfWords: getListOfWords,
       showPremiumModal: showPremiumModal
@@ -15,13 +15,13 @@ angular.module('MyApp')
     return service;
 
 
-    function getAvailableDictionaries() {
-      return $http.get('/api/get_dictionaries/');
-    }
+    // function getAvailableDictionaries() {
+    //   return $http.get('/api/get_dictionaries/');
+    // }
 
-    function getAvailableDictionariesAndLevels() {
-      return $http.get('/api/get_dictionaries_and_levels/');
-    }
+    // function getAvailableDictionariesAndLevels() {
+    //   return $http.get('/api/get_dictionaries_and_levels/');
+    // }
 
 
 
