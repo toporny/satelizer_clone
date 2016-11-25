@@ -76,7 +76,7 @@
 <script src="app/signup/signup.routes.js"></script>
 
 <script src="app/learn/learn.controller.js"></script>
-<script src="app/learn/learn.translate.js"></script>
+<script src="app/learn/learn.translation.js"></script>
 <script src="app/learn/learn.routes.js"></script>
 
 <script src="app/tests/tests.controller.js"></script>
@@ -104,29 +104,9 @@
 <script src="app/premium/premium.routes.js"></script>
 <script src="app/premium/premium.translation.js"></script>
 
-
-
-
 </head>
 <body  ng-app="MyApp">
-
-  <div id="fb-root"></div>
-  <script>
-    window.fbAsyncInit = function() {
-        FB.init({appId: 'YOUR APP ID', status: true, cookie: true,
-        xfbml: true});
-    };
-    (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-        '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-    }());
-  </script>
-	<!-- to do: remove this -->
-
   <nav></nav>
   <div ui-view></div>
-
 </body>
 </html>

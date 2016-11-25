@@ -4,9 +4,9 @@
 	.module('MyApp')
   .controller('LogoutCtrl', LogoutCtrl);
 
-  LogoutCtrl.$inject = ['$location', '$auth', 'toastr', 'user' ];
+  LogoutCtrl.$inject = ['$location', '$auth', '$translate', 'toastr', 'user' ];
 
-  function LogoutCtrl($location, $auth, toastr, user ) {
+  function LogoutCtrl($location, $auth, $translate, toastr, user ) {
     if (!$auth.isAuthenticated()) { return; }
     $auth.logout()
       .then(function() {
