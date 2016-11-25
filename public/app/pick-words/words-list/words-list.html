@@ -14,6 +14,13 @@
               </div>
             </div>
 
+  <div
+  class="well well-lg bs-loading-container"
+  bs-loading-overlay
+>
+    Some content here
+  </div>
+
     <ul uib-pagination direction-links="false" ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="500" num-pages="smallnumPages"></ul>
     <pre>The selected page no: {{wordsList.data.currentPage}}</pre>
 <!--     <button type="button" class="btn btn-info" ng-click="wordsList.setPage(3)">Set current page to: 3</button> -->

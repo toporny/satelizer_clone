@@ -75,6 +75,11 @@
         console.log('$stateParams',$stateParams);
 
         function changePage() {
+            //bsLoadingOverlayService.start();
+            //$timeout(bsLoadingOverlayService.stop, 5000);
+
+
+
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
             $location.path('/pick/words-list/'+$stateParams.words_counter+'/'+$stateParams.selected_language+'/'+vm.data.currentPage);
             common.getListOfWords(paramString)

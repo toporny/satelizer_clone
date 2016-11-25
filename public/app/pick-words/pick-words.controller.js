@@ -58,11 +58,8 @@
 		*/
 		function showLevelButtonsForAnonymous(dictionaryID) {
 			vm.data.languageToLearn = dictionaryID;
-			console.log('dictionaryID', dictionaryID);
 			var count_words = availableDictionaries[dictionaryID].count_words;
 			var free_words = availableDictionaries[dictionaryID].free_words_for_not_premium_users;
-			console.log('count_words',count_words);
-			console.log('free_words',free_words);
 			vm.data.levels = [];
 			var counter = 1;
 			for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
@@ -75,19 +72,6 @@
 				vm.data.levels.push(obj);
 				counter++;
 			}
-			console.log('vm.data.levels',vm.data.levels);
-			// <button
-			// ng-click="pick.next(1)"
-			// type="button"
-			// class="btn btn-lg btn-success ng-binding level_button"><b>LEVEL 1</b>
-			// (1-500)</button>
- 	
-
-			// var result = false;
-			// angular.forEach(availableDictionaries, function(value, key) {
-			// 	if (value.language.id == dictionaryID) result == value.language.availableLanguages;
-			// }
-			// return angular.fromJson(result);
 		}
 
 
