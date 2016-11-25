@@ -45,7 +45,7 @@ class UserController extends Controller {
      */
     public function getListOfWords($language_and_page)
     {
-        $records_on_page = 500;
+        $records_on_page = 250;
         $transactions = DB::table('dictionary_en')->select( 'id', 'word' )->orderby('id');
         $transactions = $transactions->paginate($records_on_page);
 

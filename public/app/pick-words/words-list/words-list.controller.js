@@ -81,12 +81,11 @@
 
         var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
         
-        $loading.start('sample-1');  
+        $loading.start('loading-div');
         common.getListOfWords(paramString)
          .then(function(response){
             //console.log(response.data.words.data);
-            $loading.finish('sample-1');  
-
+            $loading.finish('loading-div');
             vm.data.words = response.data.words.data;
         });
 
