@@ -17,6 +17,8 @@
     "bootstrap-language": "*",
     "font-awesome": "4.7.*",
     "angular-bootstrap": "2.2.*",
-    "ngstorage": "0.3.*" 
+    "ngstorage": "0.3.*",
+    "angular-loading": "^0.1.4",
+    "spin.js": "^2.3.2"
   }
 }

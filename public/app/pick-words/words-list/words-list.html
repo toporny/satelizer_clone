@@ -14,12 +14,18 @@
               </div>
             </div>
 
-  <div
-  class="well well-lg bs-loading-container"
-  bs-loading-overlay
->
-    Some content here
-  </div>
+
+
+      <div class="sample sample-1">
+        <h2>Basic</h2>
+        <div class="box small" dw-loading="sample-1">
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+        </div>
+      </div>
+
+
+
 
     <ul uib-pagination direction-links="false" ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="500" num-pages="smallnumPages"></ul>
     <pre>The selected page no: {{wordsList.data.currentPage}}</pre>

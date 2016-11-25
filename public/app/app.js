@@ -10,6 +10,7 @@ angular
   'satellizer',
   'ui.bootstrap',
   'ngStorage'
+  ,'darthwade.dwLoading'
   ])
 
 .config(function($translateProvider, $stateProvider, $urlRouterProvider, $authProvider, $ngBootboxConfigProvider, apiUrl) {
@@ -41,14 +42,6 @@ angular
     $authProvider.google({
       clientId: '908156294400-qdqgta0rukfi3el2rl8qgsjtcel3ka87.apps.googleusercontent.com'
     });
-
-
-    // bsLoadingOverlayService.setGlobalConfig({
-    //   delay: 0, // Minimal delay to hide loading overlay in ms.
-    //   // activeClass: undefined, // Class that is added to the element where bs-loading-overlay is applied when the overlay is active.
-    //   // templateUrl: undefined // Template url for overlay element. If not specified - no overlay element is created.
-    //   // templateOptions: undefined // Options that are passed to overlay template (specified by templateUrl option above).
-    // });
 
     // ngStorage storage place
     //localStorageServiceProvider.setStorageType('sessionStorage');

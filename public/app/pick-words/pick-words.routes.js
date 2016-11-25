@@ -19,8 +19,9 @@
                 controller: 'WordsListCtrl as wordsList',
                 authenticate: false,
                 params: {
-                    words_counter: null
+                    words_counter: null // ?? check this later
                 }
+                //$loading
             })
     }
 })();

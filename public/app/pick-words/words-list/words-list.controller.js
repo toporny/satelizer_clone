@@ -57,9 +57,9 @@
     .module('MyApp')
     .controller('WordsListCtrl',WordsListCtrl);
 
-    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location'];
+    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location', '$loading'];
 
-    function WordsListCtrl ($state, $stateParams, common, $location ) {
+    function WordsListCtrl ($state, $stateParams, common, $location, $loading ) {
 		vm = this;
 		vm.selectAll = selectAll; 
 		vm.selectNone = selectNone;
@@ -74,29 +74,19 @@
 
         console.log('$stateParams',$stateParams);
 
-        function changePage() {
-            //bsLoadingOverlayService.start();
-            //$timeout(bsLoadingOverlayService.stop, 5000);
-
-
-
-            var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
-            $location.path('/pick/words-list/'+$stateParams.words_counter+'/'+$stateParams.selected_language+'/'+vm.data.currentPage);
-            common.getListOfWords(paramString)
-             .then(function(response){
-                //console.log(response.data.words.data);
-                vm.data.words = response.data.words.data;
-            });
-        }
 
         vm.data = {};
         vm.data.totalItems = $stateParams.words_counter;
         vm.data.currentPage = $stateParams.level;
 
         var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
+        
+        $loading.start('sample-1');  
         common.getListOfWords(paramString)
          .then(function(response){
             //console.log(response.data.words.data);
+            $loading.finish('sample-1');  
+
             vm.data.words = response.data.words.data;
         });
 
@@ -108,6 +98,23 @@
         function selectNone() {
             alert('selectNone');
         }
+
+
+        function changePage() {
+            //bsLoadingOverlayService.start();
+            //$timeout(bsLoadingOverlayService.stop, 5000);
+            //$loading.start('sample-1');            
+
+            var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
+            $location.path('/pick/words-list/'+$stateParams.words_counter+'/'+$stateParams.selected_language+'/'+vm.data.currentPage);
+            // common.getListOfWords(paramString)
+            //  .then(function(response){
+            //     console.log('http request done');
+            //     $loading.finish('sample-1'); 
+            //     //vm.data.words = response.data.words.data;
+            // });
+        }
+
 
     }
 
