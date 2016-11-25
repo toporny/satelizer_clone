@@ -31,43 +31,14 @@
             </div>
           </div>
 
-<div ng-repeat="item in pick.data.levels">
-          <button ng-click="pick.next(1)"  type="button" class="btn btn-lg btn-success ng-binding level_button"><b>{{item.name}}</b> {{item.available}}</button>
+      <p>Please select level. (<b>Level 1</b> means 500 most used words, etc..)</p>
 
-</div>
-<!--           <p>Please select level. (<b>Level 1</b> means 500 most used words, etc..)</p>
-          <button ng-click="pick.next(1)"  type="button" class="btn btn-lg btn-success ng-binding level_button"><b>LEVEL 1</b> (1-500)</button>
-          <button ng-click="pick.next(2)"  type="button" class="btn btn-lg btn-default ng-binding level_button"><b>LEVEL 2</b> (501-1000)</button>
-          <button ng-click="pick.next(3)"  type="button" class="btn btn-lg btn-default ng-binding level_button"><b>LEVEL 3</b> (1001-1500)</button>
-          <button ng-click="pick.next(4)"  type="button" class="btn btn-lg btn-default ng-binding level_button"><b>LEVEL 4</b> (1501-2000)</button>
-          <button ng-click="pick.next(5)"  type="button" class="btn btn-lg btn-default ng-binding level_button"><b>LEVEL 5</b> (2001-2500)</button>
-          <button ng-click="pick.next(6)"  type="button" class="btn btn-lg btn-default ng-binding level_button"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 6</b> (2501-3000)</button>
-          <button ng-click="pick.next(7)"  type="button" class="btn btn-lg btn-default ng-binding level_button"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 7</b> (3001-3500)</button>
-          <button ng-click="pick.next(8)"  type="button" class="btn btn-lg btn-default ng-binding level_button"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 8</b> (3501-4000)</button>
-          <button ng-click="pick.next(9)"  type="button" class="btn btn-lg btn-default ng-binding level_button"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 9</b> (4001-4500)</button>
-          <button ng-click="pick.next(10)" type="button" class="btn btn-lg btn-default ng-binding level_button"> <i class="fa fa-lock" aria-hidden="true"></i><b>LEVEL 10</b> (4500-5000)</button>
-          <br/> level_button
- -->
-          
-<!--           <button ng-click="pick.next(1)" type="button" class="btn btn-lg btn-warning ng-binding" style="margin:4px; width:185px"> NEXT</button>
- --> 
+        <button ng-click="pick.next(item.i)" ng-repeat="item in pick.data.levels"
+          type="button"
+          class="btn btn-lg btn-default ng-binding level_button">
+          <b>{{item.level_name}}</b> {{item.counter_from_to}}
+        </button>
 
-
-<!--             
-            <select name="language" class="form-control width50 margin-bottom10"
-              ng-model="pick.data.languageSelected"
-              ng-options="opt as opt.label for opt in pick.data.languages">
-            </select>
-
-             <div show-level-buttons
-                next = "pick.next(selectedLanguage)"
-                show-modal = "pick.showModal()"
-                language-sele = "pick.data.languageSelected">
-              </div>
-
-              <p class="text-right margin-top10">
-                <a class="btn btn-primary" ng-click="pick.next(pick.data.languageSelected)" href="#">Next »</a>
-              </p> -->
         </div>
       </div>
     </div>

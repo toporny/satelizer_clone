@@ -2,9 +2,9 @@
 angular.module('MyApp')
   .factory('user', user);
 
-  user.$inject = ['$log','$http', '$auth', '$q', '$localStorage', '$window', '$translate', 'translationsSoFar', 'translatePluginToISO'];
+  user.$inject = ['$log','$http', '$auth', '$q', '$localStorage', '$window', '$translate', 'translationsSoFar', 'translatePluginToISO', '$state'];
 
-  function user($log, $http, $auth, $q, $localStorage, $window, $translate, translationsSoFar,translatePluginToISO ) {
+  function user($log, $http, $auth, $q, $localStorage, $window, $translate, translationsSoFar,translatePluginToISO,$state ) {
 
     //examine browser settings. If (en,es,ru,fr,de, pl) then setup settings
     var lang = $window.navigator.language || $window.navigator.userLanguage; 
@@ -35,13 +35,17 @@ angular.module('MyApp')
     }
 
     service = {
-      getProfileFromAPI:  getProfileFromAPI,
-      updateProfileByAPI: updateProfileByAPI,      
-      getPersonalData:    getPersonalData,
-      setPersonalData:    setPersonalData,
-      getLocalStorage:    getLocalStorage,
-      setLocalStorage:    setLocalStorage,
-      changeLocaleForThisAPP: changeLocaleForThisAPP
+      getProfileFromAPI:      getProfileFromAPI,
+      updateProfileByAPI:     updateProfileByAPI,      
+      getPersonalData:        getPersonalData,
+      setPersonalData:        setPersonalData,
+      getLocalStorage:        getLocalStorage,
+      setLocalStorage:        setLocalStorage,
+      changeLocaleForThisAPP: changeLocaleForThisAPP,
+      getUserStatus:          getUserStatus,
+      setLanguageToLearn:     setLanguageToLearn,
+      getLanguageToLearn:     getLanguageToLearn
+
     }
     return service;
 
@@ -80,7 +84,6 @@ angular.module('MyApp')
       $http.get('/api/me')
       .then(function(dataFromApi){
         // update localStorage
-        console.log('dataFromApi',dataFromApi);
         deferred.resolve(dataFromApi);
       })
       .catch(function(response) {
@@ -111,10 +114,10 @@ angular.module('MyApp')
         
         // if (storage variable) email is defined then get data from storage
         if ( (angular.isDefined($localStorage.email)) && ($localStorage.email != '') ) {
-          console.warn('storageUser.email is defined');
+          //console.warn('storageUser.email is defined');
           deferred.resolve($localStorage);
         } else {
-          console.warn('storageUser.email is NOT defined');
+          //console.warn('storageUser.email is NOT defined');
           getProfileFromAPI()
             .then(function(dataFromAPI){
               console.log('getProfileFromAPI data',dataFromAPI);
@@ -144,7 +147,7 @@ angular.module('MyApp')
       }
 
       //deferred.resolve('Hello, ' + name + '!');
-      deferred.reject('Greeting ' + name + ' is not allowed.');
+      deferred.reject('Greeting!!! ' + name + ' is not allowed.');
 
       return deferred.promise;
 		}
@@ -172,14 +175,37 @@ angular.module('MyApp')
       return $localStorage[str]
     }
 
-		function setPersonalData(data) {
+    function setPersonalData(data) {
       alert('not yet ready');
+    }
 
-// $localStorage.counter = $scope.counter;
+    function setLanguageToLearn(value) {
+      $localStorage.languageToLearn = value;
+    }
+    
+    function getLanguageToLearn() {
+      if (angular.isDefined($localStorage.languageToLearn)) {
+        return $localStorage.languageToLearn;
+      } else {
+        return '';
+      }
+    }
+    
 
-			// if token is valid then get data from local storage 
+    function getUserStatus() {
+      console.log('$localStorage.userStatus = ',$localStorage.userStatus);
+      if (angular.isDefined($localStorage.userStatus)) {
+        switch ($localStorage.userStatus) {
+          case 'anonymous': return $localStorage.userStatus; break;
+          case 'normal': return $localStorage.userStatus; break;
+          case 'premium': return $localStorage.userStatus; break;
+          default: $state.go('logout', { error: 'unknown error' } );
+          break;
 
-		}
+        }
+      };
+    }
+
 
 		
 

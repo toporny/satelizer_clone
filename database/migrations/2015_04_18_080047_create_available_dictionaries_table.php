@@ -19,6 +19,7 @@ class CreateAvailableDictionariesTable extends Migration
             //$table->string('remembered_json');
             $table->string('language_id');
             $table->integer('count_words');
+            $table->integer('free_words_for_not_premium_users');
             $table->string('language_name');
             $table->string('available_languages');
             //$table->timestamp('updated')->nullable();

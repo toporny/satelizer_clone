@@ -4,10 +4,11 @@
 	.module('MyApp')
   .controller('LogoutCtrl', LogoutCtrl);
 
-  LogoutCtrl.$inject = ['$location', '$auth', '$translate', 'toastr', 'user' ];
+  LogoutCtrl.$inject = ['$location', '$auth', '$translate', '$stateParams', 'toastr', 'user' ];
 
-  function LogoutCtrl($location, $auth, $translate, toastr, user ) {
+  function LogoutCtrl($location, $auth, $translate, $stateParams, toastr, user ) {
     if (!$auth.isAuthenticated()) { return; }
+    console.log('$stateParams.error = ', $stateParams.error);
     $auth.logout()
       .then(function() {
         toastr.success($translate.instant('LOGIN.YOU_HAVE_BEEN_LOGGED_OUT'));

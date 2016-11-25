@@ -22,6 +22,9 @@ angular
         template: null,
         controller: 'LogoutCtrl',
         authenticate: false,
+        params: {
+          error: null,
+        },
       })
       
     $urlRouterProvider.otherwise('/');

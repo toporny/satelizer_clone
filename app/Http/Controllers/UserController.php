@@ -81,18 +81,18 @@ class UserController extends Controller {
     public function generateConfigFiles(Request $request)
     {
         $results = DB::table('available_dictionaries')
-                ->select('language_id', 'language_name', 'count_words', 'available_languages')
+                ->select('language_id', 'language_name', 'count_words', 'free_words_for_not_premium_users', 'available_languages')
                 ->get();
 
         $string = '';
         foreach ($results as $item) {
-        $string .= "      '".$item->language_id."':{'count_words': '".$item->count_words."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },\n";
+        $string .= "      '".$item->language_id."':{'count_words': '".$item->count_words."','free_words_for_not_premium_users': '".$item->free_words_for_not_premium_users."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },\n";
         }
  
 
 $file1 = <<<END1
 (function() {
-    // this file is automaticaly generated everytime GET request for this url: /api/regenerate_config_files
+    // this file is automaticaly generated everytime GET request for this url: /api/generate_config_files
     angular
     .module('MyApp')
     .constant('availableDictionaries', {

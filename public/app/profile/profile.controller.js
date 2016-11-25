@@ -83,7 +83,8 @@ angular
         .then(function() {
 
           // reset variable 'languageToLearn' in storage
-          if ( vm.data.languageToLearnSelected !== null ) {
+          if ( vm.data.languageToLearnSelected !== undefined ) {
+            console.log('vm.data.languageToLearnSelected',vm.data.languageToLearnSelected);
             user.setLocalStorage(['languageToLearn'], {
               'languageToLearn' :  vm.data.languageToLearnSelected.id
             });

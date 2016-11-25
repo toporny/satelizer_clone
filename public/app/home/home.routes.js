@@ -12,6 +12,9 @@
                 controller: 'HomeCtrl as home',
                 templateUrl: 'app/home/home.html',
                 authenticate: false,
+                onEnter: function(){
+                    console.log('onEnter: function(){');
+                },                
             })
     }
 })();

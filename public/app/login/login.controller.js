@@ -14,6 +14,17 @@ angular.module('MyApp')
     vm.data = {user: { login: '', password: ''} };
 
     function login() {
+      // TODO: zresetowac
+
+      user.setLocalStorage([ 'displayName', 'languageToLearn', 'userStatus' , 'email'],
+        {
+          displayName: '',
+          languageToLearn: '',
+          userStatus: '',
+          email: ''
+        }
+      );      
+
       $auth.login(vm.data.user)
         .then(function(results) {
           //console.log('login with success', results);
