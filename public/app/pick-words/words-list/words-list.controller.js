@@ -77,7 +77,7 @@
 
         vm.data = {};
         vm.data.totalItems = $stateParams.words_counter;
-        vm.data.currentPage = $stateParams.level;
+        vm.data.currentPage = $location.search().level;
 
         var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
         

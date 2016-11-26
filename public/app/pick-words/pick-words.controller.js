@@ -3,9 +3,9 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = ['$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
+    PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
 
-    function PickCtrl ($state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
+    function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
@@ -152,9 +152,9 @@
 				level: selectedLevel
 			};
 
-			// $location.url("/pick/words-list/4534/en_EN/").search(param);
+			 $location.url("/pick/words-list/4534/en_EN/").search(param);
 
-			$state.go('words-list/:words_counter/:selected_language/:level?', {level: selectedLevel, words_counter: 4534,  selected_language: 'en_EN'});
+			//$state.go('words-list/:words_counter/:selected_language/:level?', {level: selectedLevel, words_counter: 4534,  selected_language: 'en_EN'});
 		}
 
 		function showPremiumModal() {
