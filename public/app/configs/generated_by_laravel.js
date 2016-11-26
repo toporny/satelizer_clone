@@ -1,5 +1,6 @@
 (function() {
-    // this file is automaticaly generated everytime GET request for this url: /api/generate_config_files
+    // this file is automaticaly generated everytime GET request for this url:
+    // http://localhost:3000/api/generate_config_files
     angular
     .module('MyApp')
     .constant('availableDictionaries', {
@@ -10,4 +11,5 @@
       'de_DE':{'count_words': '6500','free_words_for_not_premium_users': '3200', 'language_name': 'deutsch', 'available_languages':  [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"pl_PL", "name":"polish"}] },
       'pl_PL':{'count_words': '7000','free_words_for_not_premium_users': '4400', 'language_name': 'polish', 'available_languages':  [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}] },
     })
+    .constant('maxWordsPerPage', 250);
 })();

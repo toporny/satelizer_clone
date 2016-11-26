@@ -16,6 +16,8 @@ return [
 	'twitter_key' => '',
 	'twitter_secret' => '',
 
+	'records_on_page' => '250', // for pagination
+
 
 	/*
     |--------------------------------------------------------------------------

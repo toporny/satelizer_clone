@@ -18,7 +18,7 @@
         de: 'de_DE',
         pl: 'pl_PL',
     })
-    .constant('maxWordsPerPage', 250); 
+
 
 })();
 

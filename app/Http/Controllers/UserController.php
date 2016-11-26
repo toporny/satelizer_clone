@@ -45,7 +45,8 @@ class UserController extends Controller {
      */
     public function getListOfWords($language_and_page)
     {
-        $records_on_page = 250;
+        $records_on_page = Config::get('app.records_on_page');
+        
         $transactions = DB::table('dictionary_en')->select( 'id', 'word' )->orderby('id');
         $transactions = $transactions->paginate($records_on_page);
 
@@ -92,7 +93,8 @@ class UserController extends Controller {
 
 $file1 = <<<END1
 (function() {
-    // this file is automaticaly generated everytime GET request for this url: /api/generate_config_files
+    // this file is automaticaly generated everytime GET request for this url:
+    // http://localhost:3000/api/generate_config_files
     angular
     .module('MyApp')
     .constant('availableDictionaries', {
@@ -101,10 +103,16 @@ END1;
 
 $file2 = <<<END2
     })
-})();
-END2;
 
-        $return = file_put_contents(public_path().'/app/configs/generated_by_laravel.js', $file1 . $string . $file2);
+END2;
+$file2 .= "    .constant('maxWordsPerPage', ".Config::get('app.records_on_page').");";
+
+$file3 = <<<END3
+
+})();
+END3;
+
+        $return = file_put_contents(public_path().'/app/configs/generated_by_laravel.js', $file1 . $string . $file2. $file3);
         if ($return) {
             return response()->json(['status' => 1]);
         }
