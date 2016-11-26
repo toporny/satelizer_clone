@@ -100,18 +100,20 @@
 
 
         function changePage() {
-            //bsLoadingOverlayService.start();
-            //$timeout(bsLoadingOverlayService.stop, 5000);
-            //$loading.start('sample-1');            
-
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
-            $location.path('/pick/words-list/'+$stateParams.words_counter+'/'+$stateParams.selected_language+'/'+vm.data.currentPage);
-            // common.getListOfWords(paramString)
-            //  .then(function(response){
-            //     console.log('http request done');
-            //     $loading.finish('sample-1'); 
-            //     //vm.data.words = response.data.words.data;
-            // });
+            console.log('vm.data.currentPage',vm.data.currentPage);
+//                           http://localhost:3000/#/pick/words-list/4534/en_EN/?level=3
+            location.href='http://localhost:3000/#/pick/words-list/4534/en_EN/?level='+vm.data.currentPage;
+//            $state.go('words-list/:selected_language/:words_counter/:level', {selected_language: 'en_EN', level: vm.data.currentPage, words_counter: 4534});
+            $loading.start('loading-div');
+            var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;            
+            common.getListOfWords(paramString)
+             .then(function(response){
+                //console.log(response.data.words.data);
+                $loading.finish('loading-div');
+                vm.data.words = response.data.words.data;
+            });
+
         }
 
 

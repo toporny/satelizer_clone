@@ -3,9 +3,9 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = ['$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
+    PickCtrl.$inject = ['$location', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
 
-    function PickCtrl ($state,  $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
+    function PickCtrl ($location,  $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
@@ -144,12 +144,18 @@
 		function next(selectedLevel) {
 			//common.getAvailableDictionaries();
 			//$state.go('words-list', {selected_language: 'en_EN', level: selectedLevel});
-			$state.go('words-list/:selected_language/:words_counter/:level', {selected_language: 'en_EN', level: selectedLevel, words_counter: 4534});
+			var param = {
+				level: selectedLevel
+			};
+
+			$location.url("/pick/words-list/4534/en_EN/").search(param);
+
+			//$state.go('words-list/:words_counter/:selected_language/:level?', {level:'?level=2', words_counter: 4534,  selected_language: 'en_EN'}).search('page', 2);
 		}
 
 		function showPremiumModal() {
 			common.showPremiumModal();
-		}		
+		}
 
 
 	}

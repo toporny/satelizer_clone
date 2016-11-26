@@ -1,29 +1,27 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading" translate="WORDS_LIST.HEAD_TITLE"></div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <h2 translate="WORDS_LIST.TITLE"></h2>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <h2 translate="WORDS_LIST.TITLE"></h2>
 
-    <div dw-loading="loading-div1">
-           <p translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
-            <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10"
-              aria-valuemin="0" aria-valuemax="100" style="width:{{(wordsList.data.currentPage*10/2)}}%">
-                {{(wordsList.data.currentPage*10/2)}}%
+            <div dw-loading="loading-div">
+              <p translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:{{(wordsList.data.currentPage*10/2)}}%">
+                  {{(wordsList.data.currentPage*10/2)}}%
+                </div>
               </div>
             </div>
-    </div>
-
-
-
-    <ul uib-pagination direction-links="false" ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="250" num-pages="smallnumPages"></ul>
-    <!-- <pre>The selected page no: {{wordsList.data.currentPage}}</pre> -->
+<!-- direction-links="false"
+ num-pages="smallnumPages"
+ -->
+            <ul boundary-link-numbers="true" force-ellipses="true" max-size="6" next-text=">>" previous-text="<<" rotate="true" uib-pagination ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="250"></ul>
+            <!-- <pre>The selected page no: {{wordsList.data.currentPage}}</pre> -->
             <table class="table table-hover">
               <thead>
                 <tr class="">
-                  <th></th>
                   <th>WORD</th>
                   <th class="text-center">
                     <button ng-click="wordsList.selectAll()" type="button" class="btn btn-primary btn-sm">ALL</button>
@@ -33,20 +31,19 @@
               </thead>
               <tbody>
                 <tr class="success ahawords" ng-repeat="item in wordsList.data.words" id="word_{{item.id}}">
-                  <td lass="small">{{item.id}}</td>
+                  <!-- <td lass="small">{{item.id}}</td> -->
                   <td>{{item.word}}</td>
                   <td class="text-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
                 </tr>
               </tbody>
             </table>
 
-
             <p class="text-right margin-top10">
-            <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#">Next »</a>
-          </p>
+              <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#">Next »</a>
+            </p>
+        </div>
       </div>
     </div>
-  </div>
   <div class="panel-footer text-center">
     <ul class="list-inline">
       <li><i class="ion-star"></i> {{stars | number}} stars</li>
