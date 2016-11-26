@@ -3,17 +3,20 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = ['$location', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
+    PickCtrl.$inject = ['$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
 
-    function PickCtrl ($location,  $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
+    function PickCtrl ($state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
 		vm.showLevelButtons = showLevelButtons;
 
+
 		vm.data = {
 			//availableDictionaries : {},
-			languageToLearn  : null
+			languageToLearn  : null,
+			maxWordsPerPage: maxWordsPerPage
+
 			// languages: languages,
 			// //config: config, 
 			// languageSelected: languages[0], // we need this to pick first element as selected
@@ -66,6 +69,7 @@
 				obj = {
 					i: i,
 					level_name: 'Level ' + counter,
+					level: counter,
 					available: (i<free_words) ? 'yes' : 'no',
 					counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
 				};
@@ -148,9 +152,9 @@
 				level: selectedLevel
 			};
 
-			$location.url("/pick/words-list/4534/en_EN/").search(param);
+			// $location.url("/pick/words-list/4534/en_EN/").search(param);
 
-			//$state.go('words-list/:words_counter/:selected_language/:level?', {level:'?level=2', words_counter: 4534,  selected_language: 'en_EN'}).search('page', 2);
+			$state.go('words-list/:words_counter/:selected_language/:level?', {level:'2', words_counter: 4534,  selected_language: 'en_EN'});
 		}
 
 		function showPremiumModal() {

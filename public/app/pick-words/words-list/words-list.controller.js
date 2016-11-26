@@ -101,10 +101,7 @@
 
         function changePage() {
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
-            console.log('vm.data.currentPage',vm.data.currentPage);
-//                           http://localhost:3000/#/pick/words-list/4534/en_EN/?level=3
             location.href='http://localhost:3000/#/pick/words-list/4534/en_EN/?level='+vm.data.currentPage;
-//            $state.go('words-list/:selected_language/:words_counter/:level', {selected_language: 'en_EN', level: vm.data.currentPage, words_counter: 4534});
             $loading.start('loading-div');
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;            
             common.getListOfWords(paramString)

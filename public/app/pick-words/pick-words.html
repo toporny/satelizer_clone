@@ -31,9 +31,9 @@
             </div>
           </div>
 
-      <p>Please select level. (<b>Level 1</b> means 500 most used words, etc..)</p>
+      <p>Please select level. (<b>Level 1</b> means {{pick.data.maxWordsPerPage}} most used words, etc..)</p>
 
-        <button ng-click="pick.next(item.i)" ng-repeat="item in pick.data.levels"
+        <button ng-click="pick.next(item.level)" ng-repeat="item in pick.data.levels"
           type="button"
           class="btn btn-lg btn-default ng-binding level_button">
           <b>{{item.level_name}}</b> {{item.counter_from_to}}
