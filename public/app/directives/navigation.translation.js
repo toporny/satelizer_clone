@@ -8,7 +8,7 @@
         .translations('en', {
           NAVIGATION: {
             HOME: 'Home',
-            PICK_WORDS: 'Pick Words',
+            PICK_WORDS: 'Pick Unknown Words',
             LEARN: 'Learn',
             TEST: 'Test',
             RESULTS: 'Results',
@@ -25,7 +25,7 @@
       $translateProvider.translations('pl', {
           NAVIGATION: {
             HOME: 'Start',
-            PICK_WORDS: 'Wybierz słowa',
+            PICK_WORDS: 'Wybierz nieznane słowa',
             LEARN: 'Nauka',
             TEST: 'Testy',
             RESULTS: 'Wyniki',

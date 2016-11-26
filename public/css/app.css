@@ -85,7 +85,7 @@ h6 {
   content: '';
   display: inline-block;
   height: 100%;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .dw-loading.dw-loading-active {
   display: block;
@@ -96,7 +96,7 @@ h6 {
 }
 .dw-loading > .dw-loading-body {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
   position: relative;
 }
 .dw-loading > .dw-loading-body > .dw-loading-spinner {

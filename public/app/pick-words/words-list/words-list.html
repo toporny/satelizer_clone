@@ -5,18 +5,16 @@
         <div class="row">
           <div class="col-sm-12 col-md-12">
             <h2 translate="WORDS_LIST.TITLE"></h2>
-
-            <div dw-loading="loading-div">
-              <p translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
-              <div class="progress">
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:{{(wordsList.data.currentPage*10/2)}}%">
-                  {{(wordsList.data.currentPage*10/2)}}%
-                </div>
+            <p translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:{{(wordsList.data.currentPage*10/2)}}%">
+                {{(wordsList.data.currentPage*10/2)}}%
               </div>
             </div>
-<!-- direction-links="false"
- num-pages="smallnumPages"
- -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-6" dw-loading="loading-div">
             <ul boundary-link-numbers="true" force-ellipses="true" max-size="6" next-text=">>" previous-text="<<" rotate="true" uib-pagination ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="250"></ul>
             <!-- <pre>The selected page no: {{wordsList.data.currentPage}}</pre> -->
             <table class="table table-hover">

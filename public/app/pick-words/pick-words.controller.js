@@ -154,7 +154,7 @@
 
 			// $location.url("/pick/words-list/4534/en_EN/").search(param);
 
-			$state.go('words-list/:words_counter/:selected_language/:level?', {level:'2', words_counter: 4534,  selected_language: 'en_EN'});
+			$state.go('words-list/:words_counter/:selected_language/:level?', {level: selectedLevel, words_counter: 4534,  selected_language: 'en_EN'});
 		}
 
 		function showPremiumModal() {
