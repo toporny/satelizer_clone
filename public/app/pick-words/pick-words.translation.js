@@ -13,7 +13,7 @@
             WORD: 'Word',
             ALL: 'ALL',
             NONE: 'NONE',
-            PROGRESS_BAR_SHOWS_HOW_MANY_WORDS_YOU_HAVE_ALREADY_REVIEWED: 'Progress bar shows in how many levels you set up unknown words.'
+            PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED: 'Progress bar shows in how many levels you already maintained.'
           },
         });
      
@@ -24,7 +24,7 @@
             WORD: 'Wyraz',
             ALL: 'WSZYSTKO',
             NONE: 'ŻADEN',
-            PROGRESS_BAR_SHOWS_HOW_MANY_WORDS_YOU_HAVE_ALREADY_REVIEWED: 'Pasek postępu pokazuje w ilu poziomach pozaznaczałeś nieznane wyrazy.'
+            PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED: 'Pasek postępu pokazuje w ilu poziomach pozaznaczałeś nieznane wyrazy.'
           },
       });
      
