@@ -8,6 +8,9 @@ use DB;
 
 class UserController extends Controller {
 
+
+// http://ieltsadvantage.com/2015/04/08/25-free-online-language-learning-tools/ 
+
     /**
      * Generate JSON Web Token.
      */
@@ -105,7 +108,8 @@ $file2 = <<<END2
     })
 
 END2;
-$file2 .= "    .constant('maxWordsPerPage', ".Config::get('app.records_on_page').");";
+$file2 .= "    .constant('maxWordsPerPage', ".Config::get('app.records_on_page').")\n";
+$file2 .= "    .constant('apiUrl', '".Config::get('app.apiUrl')."');\n";
 
 $file3 = <<<END3
 

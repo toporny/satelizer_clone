@@ -105,6 +105,16 @@
                             toastr.warning('Not yet ready', 'Warning');
                         }
                     },
+                    Russian: {
+                        label: '<span class="lang-sm" lang="ru"></span> Russian',
+                        className: "btn-change-language btn-info",
+                        callback: function(e) {
+                          //$rootScope.$emit('AppLanguageChanged', {  value: 'fr_FR' });
+                            //$rootScope.$emit('AppLanguageChanged', {  value: 'fr_FR' });
+                            //user.changeLocaleForThisAPP('fr_FR');
+                            toastr.warning('Not yet ready', 'Warning');
+                        }
+                    },
                     cancel: {
                         label: 'Cancel',
                         className: "btn-change-language btn-warning btn-change-language-cancel",

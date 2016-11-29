@@ -24,7 +24,7 @@
             WORD: 'Wyraz',
             ALL: 'WSZYSTKO',
             NONE: 'ŻADEN',
-            PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED: 'Pasek postępu pokazuje w ilu poziomach pozaznaczałeś nieznane wyrazy.'
+            PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED: 'Pasek postępu pokazuje ile poziomów masz za sobą.'
           },
       });
      

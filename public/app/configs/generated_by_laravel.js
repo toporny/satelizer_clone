@@ -11,5 +11,7 @@
       'de_DE':{'count_words': '6500','free_words_for_not_premium_users': '3200', 'language_name': 'deutsch', 'available_languages':  [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"pl_PL", "name":"polish"}] },
       'pl_PL':{'count_words': '7000','free_words_for_not_premium_users': '4400', 'language_name': 'polish', 'available_languages':  [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}] },
     })
-    .constant('maxWordsPerPage', 250);
+    .constant('maxWordsPerPage', 250)
+    .constant('apiUrl', 'http://localhost:3000/');
+
 })();

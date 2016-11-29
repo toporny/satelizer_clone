@@ -58,12 +58,14 @@
         $ctrl.selectNone = selectNone;
 
         function selectAll() {
-            alert('selectAll');
+            console.log('selectAll()');
+            console.log($ctrl.words);
         }
 
         function selectNone() {
-            alert('selectNone');
-        }            
+            console.log('selectNone()');
+            console.log($ctrl.words);
+        }
     }
 
 

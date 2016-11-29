@@ -4,9 +4,9 @@
     .module('MyApp')
     .controller('WordsListCtrl',WordsListCtrl);
 
-    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location', '$loading'];
+    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location', '$loading', 'apiUrl'];
 
-    function WordsListCtrl ($state, $stateParams, common, $location, $loading ) {
+    function WordsListCtrl ($state, $stateParams, common, $location, $loading, apiUrl ) {
 		vm = this;
 		// vm.selectAll = selectAll; 
 		// vm.selectNone = selectNone;
@@ -43,7 +43,7 @@
 
         function changePage() {
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
-            location.href='http://localhost:3000/#/pick/words-list/4534/en_EN/?level='+vm.data.currentPage;
+            location.href = apiUrl+'#/pick/words-list/4534/en_EN/?level='+vm.data.currentPage;
             $loading.start('loading-div');
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;            
             var data1 = [];

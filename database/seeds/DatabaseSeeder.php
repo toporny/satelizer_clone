@@ -34,8 +34,11 @@ class DatabaseSeeder extends Seeder
         }
 
         DB::table('unknown_words')->delete();
+        $level_progress = array(
+            'id' => 1, 'user_id' => '8', 'language'=> 'en_EN' ,'range' => '1-250',  'json_words' => "['with','his','have','never','right','another','house','while','came','not']",
+        );
+        DB::table('unknown_words')->insert($level_progress);
 
-        DB::table('users')->delete();
 
         DB::table('available_dictionaries')->delete();
 
@@ -50,13 +53,6 @@ class DatabaseSeeder extends Seeder
 
 
         DB::table('available_dictionaries')->insert($available_dictionaries);
-
-   
-        // Loop through each user above and create the record for them in the database
-        foreach ($users as $user)
-        {
-            User::create($user);
-        }
 
 
         $level_progress = array(

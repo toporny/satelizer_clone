@@ -1,7 +1,6 @@
 (function() {
   angular
     .module('MyApp')
-    .constant('apiUrl', 'http://localhost:3000/')
     .constant('translationsSoFar',[  // it has to be array for PROFIL/LOCALE
         {id: 'en_EN', name: 'english'},
         // {id: 'es_ES', name: 'spanish'},
