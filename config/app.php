@@ -16,7 +16,7 @@ return [
 	'twitter_key' => '',
 	'twitter_secret' => '',
 
-	'records_on_page' => '125', // after change this don't forget to launch:
+	'records_on_page' => '250', // after change this don't forget to launch:
 	// http://localhost:3000/api/generate_config_files
 
 

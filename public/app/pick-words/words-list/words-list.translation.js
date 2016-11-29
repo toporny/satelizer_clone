@@ -10,8 +10,8 @@
             HEAD_TITLE: 'Words list',
             TITLE: 'Pick unknown words',
             PROGRESS_BAR: 'Progress bar',
-            MARK_UNKNWON_WORDS_AS_RED: 'Mark unknown words as red',
-          } 
+            MARK_UNKNWON_WORDS_AS_RED: 'Mark unknown words as <font color="red">red</font>',
+          }
         });
      
   
@@ -21,7 +21,7 @@
             HEAD_TITLE: 'Lista wyrazów',
             TITLE: 'Zaznacz nieznane Ci wyrazy',
             PROGRESS_BAR: 'Postęp',
-            MARK_UNKNWON_WORDS_AS_RED: 'Zaznacz nieznane wyrazy kolorem czerwonym',
+            MARK_UNKNWON_WORDS_AS_RED: 'Zaznacz nieznane Ci wyrazy kolorem <font color="red">czerwonym</font>',
           } 
         });
      
