@@ -54,7 +54,7 @@ Route::get('/', 'HomeController@index');
 
 
 // development
-Route::get('api/get_words_list1/{language}?page={pagination_page}', 'UserController@getWordsList');
+Route::get('api/get_words_with_unknowns1/{language}?page={pagination_page}', 'UserController@getWordsList');
 Route::get('api/get_dictionaries1/{language?}', 'UserController@getDictionaries' );
 //Route::get('api/get_dictionaries_and_levels/', 'UserController@getDictionariesAndLevels' );
 

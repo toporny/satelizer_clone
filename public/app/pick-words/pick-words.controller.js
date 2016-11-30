@@ -152,7 +152,7 @@
 				level: selectedLevel
 			};
 
-			 $location.url("/pick/words-list/4534/en_EN/").search(param);
+			$location.url("/pick/words-list/"+user.getLanguageToLearn()+"/").search(param);
 
 			//$state.go('words-list/:words_counter/:selected_language/:level?', {level: selectedLevel, words_counter: 4534,  selected_language: 'en_EN'});
 		}

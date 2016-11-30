@@ -4,9 +4,9 @@
     .module('MyApp')
     .controller('WordsListCtrl',WordsListCtrl);
 
-    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location', '$loading', 'apiUrl'];
+    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location', '$loading', 'apiUrl', 'toastr'];
 
-    function WordsListCtrl ($state, $stateParams, common, $location, $loading, apiUrl ) {
+    function WordsListCtrl ($state, $stateParams, common, $location, $loading, apiUrl, toastr ) {
 		vm = this;
 		// vm.selectAll = selectAll; 
 		// vm.selectNone = selectNone;
@@ -22,44 +22,49 @@
         console.log('$stateParams',$stateParams);
 
 
-        vm.data = {};
-        vm.data.totalItems = $stateParams.words_counter;
-        vm.data.currentPage = $location.search().level;
+        vm.data = {
+            totalItems : 5000,  // this is fake. After first http request totalItems takes proper value. ussualy 4500-5000
+            currentPage : $location.search().level,
+       };
+
+
 
         changePage();
-        // var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
-        
-        // $loading.start('loading-div');
-        // common.getListOfWords(paramString)
-        //  .then(function(response){
-        //     //console.log(response.data.words.data);
-        //     $loading.finish('loading-div');
-        //     vm.data.words = response.data.words.data;
-        // });
-
-
-// [14, 3, 77, 12, 13, 145, 15].splice(0, 4)
-
 
         function changePage() {
+
+       //console.log('$stateParams.words_counter', $stateParams.words_counter);
+        console.log('$stateParams.selected_language', $stateParams.selected_language);
+        console.log('$stateParams.level', $stateParams.level);
+
+//http://localhost:3000/#/pick/words-list/4533/en_EN/?level=1
+//http://localhost:3000/#/pick/words-list/4533/es_ES/?level=1
+
+
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
-            location.href = apiUrl+'#/pick/words-list/4534/en_EN/?level='+vm.data.currentPage;
+            location.href = apiUrl+'#/pick/words-list/'+$stateParams.selected_language+'/?level='+vm.data.currentPage;
             $loading.start('loading-div');
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;            
             var data1 = [];
             var data2 = [];
             common.getListOfWords(paramString)
-             .then(function(response){
+            .then(function(response){
+                //console.log('response:', response);
+                vm.data.totalItems = response.data.words.total;
+                //console.log(vm.data.totalItems);
+                $loading.finish('loading-div');
                 var counter = response.data.words.data.length;
-                //console.log('counter', counter);
                 data1 = response.data.words.data.slice(0, counter>>1);
                 data2 = response.data.words.data.slice(counter>>1);
-                $loading.finish('loading-div');
                 vm.data.words1 = data1;
                 vm.data.words2 = data2;
-                // console.log(vm.data.words1);
-                // console.log(vm.data.words2);
+            })
+            .catch(function(fallback) {
+                $loading.finish('loading-div');
+                toastr.error('Problem with getting data');
+                console.log(fallback);
             });
+            ;
 
         }
 

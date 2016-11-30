@@ -33,7 +33,6 @@ angular.module('MyApp')
           
           
           user.changeLocaleForThisAPP(results.data.locale);
-          console.log('results',results);
           user.setLocalStorage([ 'displayName', 'languageToLearn', 'userStatus'],
             {
               displayName: results.data.displayName,

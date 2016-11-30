@@ -147,7 +147,7 @@ angular.module('MyApp')
       }
 
       //deferred.resolve('Hello, ' + name + '!');
-      deferred.reject('Greeting!!! ' + name + ' is not allowed.');
+      deferred.reject(name + ' is not allowed.');
 
       return deferred.promise;
 		}
@@ -221,7 +221,7 @@ angular.module('MyApp')
     // }
 
     function getListOfWords(language_and_page) {
-      return $http.get('/api/get_list_of_words1/'+language_and_page); // TODO: remove 1
+      return $http.get('/api/get_words_with_unknowns1/'+language_and_page); // TODO: remove 1
     }
 
     function showPremiumModal() {

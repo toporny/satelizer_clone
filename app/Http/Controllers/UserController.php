@@ -61,9 +61,17 @@ class UserController extends Controller {
      */
     public function getListOfWordsWithUnknowns($language_and_page)
     {
+		// TODO: move this to external function 
+        switch($language_and_page) {
+            case 'en_EN': $table = 'dictionary_en'; break;
+            case 'es_ES': $table = 'dictionary_es'; break;
+            case 'pl_PL': $table = 'dictionary_pl'; break;
+            default: $table = 'dictionary_en';
+        }
+
         $records_on_page = Config::get('app.records_on_page');
         
-        $transactions = DB::table('dictionary_en')->select( 'id', 'word' )->orderby('id');
+        $transactions = DB::table($table)->select( 'id', 'word' )->orderby('id');
         $transactions = $transactions->paginate($records_on_page);
 
         return response()->json(['status'=> 1, 'words' =>  $transactions ]);
