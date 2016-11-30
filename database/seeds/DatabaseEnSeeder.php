@@ -2,7 +2,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-class DatabaseTwoSeeder extends Seeder
+
+class DatabaseEnSeeder extends Seeder
 {
     /**
      * Run the database seeds.

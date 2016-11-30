@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->call(DatabaseTwoSeeder::class);
+        $this->call(DatabaseEnSeeder::class);
+        $this->call(DatabaseEsSeeder::class);
 
         Model::unguard();
 

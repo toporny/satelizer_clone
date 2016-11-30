@@ -43,10 +43,23 @@ class UserController extends Controller {
 
 
 
+    // /**
+    //  * Get Words pagination list from dictionary table 
+    //  */
+    // public function getListOfWords($language_and_page)
+    // {
+    //     $records_on_page = Config::get('app.records_on_page');
+        
+    //     $transactions = DB::table('dictionary_en')->select( 'id', 'word' )->orderby('id');
+    //     $transactions = $transactions->paginate($records_on_page);
+
+    //     return response()->json(['status'=> 1, 'words' =>  $transactions ]);
+    // }
+
     /**
      * Get Words pagination list from dictionary table 
      */
-    public function getListOfWords($language_and_page)
+    public function getListOfWordsWithUnknowns($language_and_page)
     {
         $records_on_page = Config::get('app.records_on_page');
         
