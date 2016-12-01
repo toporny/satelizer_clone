@@ -13,11 +13,11 @@
             replace: false,
             transclude: false,
             controllerAs: '$ctrl',
-            bindToController: true,            
+            bindToController: true,
             controller: wordsTableController,
             scope: {
-                words: '=words',
-                // item: '=itemdata'
+                words: '=',
+                remember: '&',
             },
             templateUrl: 'app/pick-words/words-list/' + templateUrl,
             link: link
@@ -25,13 +25,18 @@
     }
 
     function link(scope, elem, attrs) {
-        console.log('attrs.words = ',attrs.words);
+        var $ctrl = scope.$ctrl;
+
+        console.log('attrs.words = ', attrs.words);
         elem.bind('click', function(e) {
-            console.log('e.target.parentElement', e.target.parentElement);
+            // console.log('e.target.parentElement', e.target.parentElement);
 
             var stateThumbUp = angular.element(e.target.parentElement).find('i.fa-thumbs-o-down');
             var stateThumbDown = angular.element(e.target.parentElement).find('i.fa-thumbs-o-up');
-  
+
+            console.log(e);
+            $ctrl.remember({e:e});
+
             if (stateThumbUp.length == 1) {
                 stateThumbUp.parent().parent().addClass('success');
                 stateThumbUp.parent().parent().removeClass('danger2');
@@ -50,12 +55,30 @@
     }
 
 
+ 
+
     wordsTableController.$inject = [];
 
     function wordsTableController() {
         var $ctrl = this;
         $ctrl.selectAll = selectAll;
         $ctrl.selectNone = selectNone;
+        //  $ctrl.remember = remember;
+
+
+        // function remember(e) {
+        //     console.warn(e)
+        // }
+
+
+        // function remember (e) {
+        //     //console.log(' remember ', e);
+        //     var a = e.target.parentElement.id;
+        //     //remember();
+
+        //     console.log(a)
+        // }
+
 
         function selectAll() {
             console.log('selectAll()');

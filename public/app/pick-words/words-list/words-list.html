@@ -15,14 +15,16 @@
           <ul boundary-link-numbers="true" force-ellipses="true" max-size="5" next-text=">>" previous-text="<<" rotate="true" uib-pagination ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="250"></ul>
         </div>
       </div>
+
       <div class="row">
         <div class="col-sm-6 col-md-6" dw-loading="loading-div">
-          <div class="words-table" words="wordsList.data.words1"></div>
+          <div class="words-table" remember="wordsList.remember(e)" words="wordsList.data.words1"></div>
         </div>
         <div class="col-sm-6 col-md-6" dw-loading="loading-div">
-          <div class="words-table" words="wordsList.data.words2"></div>
-        </div>        
+          <div class="words-table" remember="wordsList.remember(e)" words="wordsList.data.words2"></div>
+        </div>
       </div>
+
       <div class="row">
         <div class="col-sm-12 col-md-12">      
           <p class="text-right margin-top10">

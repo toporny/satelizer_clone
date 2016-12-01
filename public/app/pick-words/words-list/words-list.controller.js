@@ -4,13 +4,14 @@
     .module('MyApp')
     .controller('WordsListCtrl',WordsListCtrl);
 
-    WordsListCtrl.$inject = ['$state', '$stateParams', 'common', '$location', '$loading', 'apiUrl', 'toastr'];
+    WordsListCtrl.$inject = ['$scope', '$state', '$stateParams', 'common', '$location', '$loading', 'apiUrl', 'toastr'];
 
-    function WordsListCtrl ($state, $stateParams, common, $location, $loading, apiUrl, toastr ) {
+    function WordsListCtrl ($scope, $state, $stateParams, common, $location, $loading, apiUrl, toastr ) {
 		vm = this;
 		// vm.selectAll = selectAll; 
 		// vm.selectNone = selectNone;
         vm.changePage = changePage;
+        vm.remember = remember;
 
         // pagination 
         // language
@@ -19,7 +20,7 @@
         // TODO: consider this <!-- http://www.memrise.com/course/250031/learn-5000-english-words/ -->
         // spinner: http://embed.plnkr.co/XLL3li/preview
 
-        console.log('$stateParams',$stateParams);
+        //console.log('$stateParams',$stateParams);
 
 
         vm.data = {
@@ -31,11 +32,19 @@
 
         changePage();
 
+        function remember (e) {
+
+           // var a = e.target.parentElement.id;
+            console.warn('----------------------');
+            console.log(' remember !!!', e  );
+            console.warn('----------------------');
+        }
+
         function changePage() {
 
        //console.log('$stateParams.words_counter', $stateParams.words_counter);
-        console.log('$stateParams.selected_language', $stateParams.selected_language);
-        console.log('$stateParams.level', $stateParams.level);
+        // console.log('$stateParams.selected_language', $stateParams.selected_language);
+        // console.log('$stateParams.level', $stateParams.level);
 
 //http://localhost:3000/#/pick/words-list/4533/en_EN/?level=1
 //http://localhost:3000/#/pick/words-list/4533/es_ES/?level=1
@@ -67,7 +76,6 @@
             ;
 
         }
-
 
     }
 
