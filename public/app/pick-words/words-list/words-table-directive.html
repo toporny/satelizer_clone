@@ -9,9 +9,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="success" ng-repeat="item in $ctrl.words" id="word_{{item.id}}">
+
+    <tr ng-class="{'success': (item.unknown==0), 'danger2': (item.unknown==1)}" ng-repeat="item in $ctrl.words" id="word_{{item.id}}">
       <td>{{item.word}}</td>
-      <td class="text-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+      <td class="text-center"><i ng-class="{'fa fa-thumbs-o-up': (item.unknown==0), 'fa fa-thumbs-o-down': (item.unknown==1)}" aria-hidden="true"></i></td>
     </tr>
   </tbody>
 </table>

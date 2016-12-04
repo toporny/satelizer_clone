@@ -27,7 +27,7 @@
     function link(scope, elem, attrs) {
         var $ctrl = scope.$ctrl;
 
-        console.log('attrs.words = ', attrs.words);
+        //console.log('attrs.words = ', attrs.words);
         elem.bind('click', function(e) {
             // console.log('e.target.parentElement', e.target.parentElement);
 
@@ -56,38 +56,23 @@
 
 
  
-
     wordsTableController.$inject = [];
 
     function wordsTableController() {
         var $ctrl = this;
         $ctrl.selectAll = selectAll;
         $ctrl.selectNone = selectNone;
-        //  $ctrl.remember = remember;
-
-
-        // function remember(e) {
-        //     console.warn(e)
-        // }
-
-
-        // function remember (e) {
-        //     //console.log(' remember ', e);
-        //     var a = e.target.parentElement.id;
-        //     //remember();
-
-        //     console.log(a)
-        // }
-
 
         function selectAll() {
-            console.log('selectAll()');
-            console.log($ctrl.words);
+            angular.forEach($ctrl.words, function(value, key) {
+              value.unknown = 1;
+            });
         }
 
         function selectNone() {
-            console.log('selectNone()');
-            console.log($ctrl.words);
+            angular.forEach($ctrl.words, function(value, key) {
+              value.unknown = 0;
+            });
         }
     }
 
