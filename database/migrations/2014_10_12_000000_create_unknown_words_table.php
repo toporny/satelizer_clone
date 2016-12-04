@@ -17,7 +17,6 @@ class CreateUnknownWordsTable extends Migration
             $table->increments('id');
             $table->bigInteger('user_id');
             $table->integer('language'); // like "  available dictionaries" table
-            $table->integer('range'); // 1-500, 501-1000, 1001-1500
             $table->text('json_words');
         });
     }

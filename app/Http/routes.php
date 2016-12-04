@@ -47,7 +47,7 @@ Route::get('api/get_list_of_words/{language_and_page}', ['middleware' => 'auth',
 
 Route::get('api/generate_config_files/', 'UserController@generateConfigFiles');
 
-Route::get('api/get_words_with_unknowns/{language_and_page}', 'UserController@getListOfWordsWithUnknowns');
+Route::get('api/get_words_with_unknowns/{language_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getListOfWordsWithUnknowns']);
 
 // Initialize Angular.js App Route.
 Route::get('/', 'HomeController@index');

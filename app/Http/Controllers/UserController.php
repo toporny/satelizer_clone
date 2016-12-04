@@ -59,10 +59,10 @@ class UserController extends Controller {
     /**
      * Get Words pagination list from dictionary table 
      */
-    public function getListOfWordsWithUnknowns($language_and_page)
+    public function getListOfWordsWithUnknowns(Request $request, $language)
     {
 		// TODO: move this to external function 
-        switch($language_and_page) {
+        switch($language) {
             case 'en_EN': $table = 'dictionary_en'; break;
             case 'es_ES': $table = 'dictionary_es'; break;
             case 'pl_PL': $table = 'dictionary_pl'; break;
@@ -74,7 +74,33 @@ class UserController extends Controller {
         $transactions = DB::table($table)->select( 'id', 'word' )->orderby('id');
         $transactions = $transactions->paginate($records_on_page);
 
-        return response()->json(['status'=> 1, 'words' =>  $transactions ]);
+        // if user is logged in compare data with UNKNOWN_WORDS
+        // otherwise return data as a RAW
+        $user = User::find($request['user']['sub']);
+
+        if (isset($user)) {
+            $remembered_unknown_words = 
+                DB::table('unknown_words')
+                ->select( 'json_words' )
+                ->where('user_id', '=', $user->id)
+                ->where('language', '=', $language)
+                ->first();
+            $json_decoded = json_decode($remembered_unknown_words->json_words);
+            $this->remembered_array = array_flip ($json_decoded);
+            $transactions->each(function($value) {
+                if (isset($this->remembered_array[$value->id])) {
+                    $value->{"unknown"} = 1;
+                }
+                else {
+                    $value->{"unknown"} = 0;
+                }
+                return $value;
+            });
+            return response()->json(['status'=> 1, 'words' =>  $transactions ]);        
+        }
+        else {
+            return response()->json(['status'=> 1, 'words' =>  $transactions ]);
+        }        
     }
 
 
@@ -95,7 +121,8 @@ class UserController extends Controller {
 
         $token = $this->createToken($user);
 
-        return response()->json(['token' => $token]);
+        $return = response()->json(['token' => $token]);
+        return $return;
     }
 
 
