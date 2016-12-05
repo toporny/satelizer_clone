@@ -32,11 +32,11 @@
 
         changePage();
 
-        function remember (e) {
+        function remember (data) {
 
            // var a = e.target.parentElement.id;
             console.warn('----------------------');
-            console.log(' remember !!!', e  );
+            console.log(' remember !!!', data  );
             console.warn('----------------------');
         }
 

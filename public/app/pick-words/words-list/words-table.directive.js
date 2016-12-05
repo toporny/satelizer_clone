@@ -27,18 +27,28 @@
 
 
     function link(scope, elem, attrs) {
-        //var $ctrl = scope.$ctrl;
+        var $ctrl = scope.$ctrl;
         elem.bind('click', function(e) {
-            var aha = angular.element(e.target.parentElement).find('i');
-            if (aha.length == 1) {
-                var tr_data = aha[0].parentElement.parentElement;
+            var i_element = angular.element(e.target.parentElement).find('i');
+            if (i_element.length == 1) {
+                var tr_data = i_element[0].parentElement.parentElement;
                 if (angular.element(tr_data).hasClass('danger2')) {
                     angular.element(tr_data).removeClass('danger2')
                     angular.element(tr_data).addClass('success');
+                    data = {
+                        'action': 'add_word_to_list',
+                        'id': angular.element(tr_data).data('id')
+                    }
+                    $ctrl.remember({data:data});
                 }
                 else if (angular.element(tr_data).hasClass('success')) {
                     angular.element(tr_data).removeClass('success');
                     angular.element(tr_data).addClass('danger2');
+                    data = {
+                        'action': 'remove_word_from_list',
+                        'id': angular.element(tr_data).data('id')
+                    }
+                    $ctrl.remember({data:data});
                 }
             }
         });
