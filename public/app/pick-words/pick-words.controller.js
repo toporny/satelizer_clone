@@ -5,11 +5,11 @@
 
     PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
 
-    function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
+  function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
-		vm.showLevelButtons = showLevelButtons;
+		vm.languageSelected = languageSelected;
 
 
 		vm.data = {
@@ -23,7 +23,7 @@
 		};
 
 		showLeftButtons();
-		showLevelButtons(user.getLanguageToLearn());
+		languageSelected(user.getLanguageToLearn());
  
 
     /*
@@ -40,7 +40,7 @@
 						tmp.push({id : key});
 				}
 			});
-			console.log('tmp',tmp);
+			//console.log('tmp',tmp);
 			vm.data.availableDictionaries = tmp;			
 		}
 
@@ -60,6 +60,12 @@
 		*	show Level Buttons For not logged User
 		*/
 		function showLevelButtonsForAnonymous(dictionaryID) {
+			if (dictionaryID == '') {
+				vm.data.levels = [];
+				vm.data.languageToLearn = '';
+				return;
+			}
+
 			vm.data.languageToLearn = dictionaryID;
 			var count_words = availableDictionaries[dictionaryID].count_words;
 			var free_words = availableDictionaries[dictionaryID].free_words_for_not_premium_users;
@@ -68,7 +74,7 @@
 			for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
 				obj = {
 					i: i,
-					level_name: 'Level ' + counter,
+					level_name: 'Stage ' + counter,
 					level: counter,
 					available: (i<free_words) ? 'yes' : 'no',
 					counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
@@ -85,53 +91,61 @@
 		*/
 
 		function showLevelButtonsForLoggedUser(dictionaryID) {
-			// LEVEL 1</b> (1-500)
-			switch(dictionaryID) {
-				case 'en_EN':
-				 	console.log('en_EN');
-					vm.data.levels = [
-						{"lvl_name": "lvl1EN", "available":"yes"},
-						{"lvl_name": "lvl2EN", "available":"no"},
-						{"lvl_name": "lvl3EN", "available":"yes"},
-						{"lvl_name": "lvl4EN", "available":"no"},
-						{"lvl_name": "lvl5EN", "available":"no"},
-						{"lvl_name": "lvl6EN", "available":"yes"},
-						{"lvl_name": "lvl7EN", "available":"no"},
-					];
-				break;
-				case 'es_ES':
-				 	console.log('es_ES');
-					vm.data.levels = [
-						{"lvl_name": "lvl1ES", "available":"no"},
-						{"lvl_name": "lvl2ES", "available":"no"},
-						{"lvl_name": "lvl3ES", "available":"no"},
-						{"lvl_name": "lvl4ES", "available":"no"},
-						{"lvl_name": "lvl5ES", "available":"no"},
-						{"lvl_name": "lvl6ES", "available":"no"},
-						{"lvl_name": "lvl7ES", "available":"no"},
-					];
-				break;
-			}
-			vm.data.languageToLearn = dictionaryID; // make the right of page visible
-		}
 
-		/*
-		*	show Level Buttons
-		*/
-		function showLevelButtons(dictionaryID) {
-
-			if (angular.isUndefined(dictionaryID)) return;
-			// check very quickly if dictionaryID belong to available languages
+			console.log("showLevelButtonsForLoggedUser vm.data.availableDictionaries" , vm.data.availableDictionaries);
+			console.log("showLevelButtonsForLoggedUser vm.data.languageToLearn", vm.data.languageToLearn); 
+			
+			//check very quickly if dictionaryID belong to available languages
 			var belong = false;
 			angular.forEach(availableDictionaries, function(value, key) {
 				if (key == dictionaryID) belong = true;
 			});
 			if (belong == false) return;
 
+			// if (dictionaryID == '') {
+			// 	vm.data.levels = [];
+			// 	vm.data.languageToLearn = '';
+			// 	return;
+			// }
+
+			// vm.data.languageToLearn = dictionaryID;
+			// var count_words = availableDictionaries[dictionaryID].count_words;
+			// var free_words = availableDictionaries[dictionaryID].free_words_for_not_premium_users;
+			// vm.data.levels = [];
+			// var counter = 1;
+			// for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
+			// 	obj = {
+			// 		i: i,
+			// 		level_name: 'Stage ' + counter,
+			// 		level: counter,
+			// 		available: (i<free_words) ? 'yes' : 'no',
+			// 		counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
+			// 	};
+			// 	vm.data.levels.push(obj);
+			// 	counter++;
+
+			vm.data.languageToLearn = dictionaryID; // make the right of page visible
+		}
+
+		/*
+		*	show Level Buttons
+		*/
+		function languageSelected(dictionaryID) {
+
+			if (angular.isUndefined(dictionaryID)) return;
+
+
+			//check very quickly if dictionaryID belong to available languages
+			var belong = false;
+			angular.forEach(availableDictionaries, function(value, key) {
+				if (key == dictionaryID) belong = true;
+			});
+			if (belong == false) return;
+
+
 			user.setLanguageToLearn(dictionaryID);
 
-			console.log('showLevelButtons, dictionaryID = ', dictionaryID);
-			// if user is anonymous
+			// check if user is anonymous
 			var userStatus = user.getUserStatus();
 			
 			if (userStatus == 'anonymous') {
@@ -139,7 +153,7 @@
 				return;
 			}
 
-			showLevelButtonsForLoggedUser(dictionaryID);
+			//showLevelButtonsForLoggedUser(dictionaryID);
 
 
 		}

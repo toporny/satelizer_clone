@@ -120,7 +120,7 @@ angular.module('MyApp')
           //console.warn('storageUser.email is NOT defined');
           getProfileFromAPI()
             .then(function(dataFromAPI){
-              console.log('getProfileFromAPI data',dataFromAPI);
+              //console.log('getProfileFromAPI data',dataFromAPI);
               setLocalStorage(['displayName', 'languageToLearn', 'locale', 'email'], dataFromAPI.data);
               // $localStorage.displayName = dataFromAPI.data.displayName;
               // $localStorage.languageToLearn = dataFromAPI.data.languageToLearn;
@@ -193,7 +193,7 @@ angular.module('MyApp')
     
 
     function getUserStatus() {
-      console.log('$localStorage.userStatus = ',$localStorage.userStatus);
+      //console.log('$localStorage.userStatus = ',$localStorage.userStatus);
       if (angular.isDefined($localStorage.userStatus)) {
         switch ($localStorage.userStatus) {
           case 'anonymous': return $localStorage.userStatus; break;

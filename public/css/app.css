@@ -72,6 +72,9 @@ h6 {
   margin: 4px;
   width: 185px;
 }
+.danger2 > td {
+  background-color: #ff9292;
+}
 .dw-loading {
   position: absolute;
   top: 0;
@@ -110,7 +113,11 @@ h6 {
   font-size: 11px;
   text-shadow: 0 0 2px #ffffff;
 }
-.danger2 > td {
-  background-color: #ff9292;
+.words_list > tbody > .danger2 > td.text-center > i:before {
+  content: "\f088";
 }
+.words_list > tbody > .success > td.text-center > i:before {
+  content: "\f087";
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -24,32 +24,22 @@
         }
     }
 
+
+
     function link(scope, elem, attrs) {
-        var $ctrl = scope.$ctrl;
-
-        //console.log('attrs.words = ', attrs.words);
+        //var $ctrl = scope.$ctrl;
         elem.bind('click', function(e) {
-            // console.log('e.target.parentElement', e.target.parentElement);
-
-            var stateThumbUp = angular.element(e.target.parentElement).find('i.fa-thumbs-o-down');
-            var stateThumbDown = angular.element(e.target.parentElement).find('i.fa-thumbs-o-up');
-
-            console.log(e);
-            $ctrl.remember({e:e});
-
-            if (stateThumbUp.length == 1) {
-                stateThumbUp.parent().parent().addClass('success');
-                stateThumbUp.parent().parent().removeClass('danger2');
-                angular.element(stateThumbUp).addClass('fa-thumbs-o-up');
-                angular.element(stateThumbUp).removeClass('fa-thumbs-o-down');
-                console.log('stateThumbUp',stateThumbUp.length);
-            }
-            if (stateThumbDown.length == 1) {
-                stateThumbDown.parent().parent().removeClass('success');
-                stateThumbDown.parent().parent().addClass('danger2');
-                angular.element(stateThumbDown).removeClass('fa-thumbs-o-up');
-                angular.element(stateThumbDown).addClass('fa-thumbs-o-down');
-                console.log('stateThumbDown',stateThumbDown.length);
+            var aha = angular.element(e.target.parentElement).find('i');
+            if (aha.length == 1) {
+                var tr_data = aha[0].parentElement.parentElement;
+                if (angular.element(tr_data).hasClass('danger2')) {
+                    angular.element(tr_data).removeClass('danger2')
+                    angular.element(tr_data).addClass('success');
+                }
+                else if (angular.element(tr_data).hasClass('success')) {
+                    angular.element(tr_data).removeClass('success');
+                    angular.element(tr_data).addClass('danger2');
+                }
             }
         });
     }

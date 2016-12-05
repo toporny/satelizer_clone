@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table table-hover words_list">
   <thead>
     <tr>
       <th translate="PICK_WORDS.WORD"></th>
@@ -9,10 +9,10 @@
     </tr>
   </thead>
   <tbody>
-
-    <tr ng-class="{'success': (item.unknown==0), 'danger2': (item.unknown==1)}" ng-repeat="item in $ctrl.words" id="word_{{item.id}}">
+    <tr ng-class="(item.unknown==1) ? 'danger2' : 'success'"
+        ng-repeat="item in $ctrl.words" id="word_{{item.id}}">
       <td>{{item.word}}</td>
-      <td class="text-center"><i ng-class="{'fa fa-thumbs-o-up': (item.unknown==0), 'fa fa-thumbs-o-down': (item.unknown==1)}" aria-hidden="true"></i></td>
+      <td class="text-center"><i class="fa" aria-hidden="true"></i></td>
     </tr>
   </tbody>
 </table>
