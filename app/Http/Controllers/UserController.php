@@ -43,6 +43,104 @@ class UserController extends Controller {
 
 
 
+
+    /**
+     * Get signed in user's profile.
+     */
+    public function rememberUnknownWords(Request $request)
+    {
+        $user = User::find($request['user']['sub']);
+        $user_id = $user->id;
+
+        $language_id = $request->input('language_id');
+        if (!$language_id) {
+            return response('language_id is not defined', 500);
+        }
+
+        if (!is_int($user_id)) {
+            return response('problem with getting user_id', 500);
+        }
+
+        $list_of_ids_array = $request->input('list_of_ids');
+
+        $remove_array = [];
+        $add_array = [];
+        foreach ($list_of_ids_array as $item) {
+            if ($item < 0) array_push ($remove_array, -$item);
+            if ($item > 0) {
+                array_push ($add_array, [
+                    'user_id' => $user_id,
+                    'language_id' => $language_id,
+                    'word_id' => $item,
+                    'status' => 3,
+                    ]);
+            }
+        }
+        DB::table('unknown_words_1k')
+            ->where('user_id', '=', $user_id)
+            ->where('language_id', '=', $language_id)
+            ->whereIn('word_id', $remove_array)
+            ->delete();
+
+
+        //DB::table('unknown_words_1k')->insert($add_array);
+
+
+// User::where('votes', '>', 100)->delete();
+        // if (count($remove_array)>0) {
+        //     DB::table('unknown_words_1k')
+        //         ->where('unknown_words_1k.user_id', '=', $user_id)
+        //         ->where('available_dictionaries.id', '=', 'unknown_words_1k.language_id')
+        //         ->where('available_dictionaries.language_id', '=', $language_id)
+        //         ->whereIn('unknown_words_1k.id', $remove_array)
+        //         ->delete();
+        // }
+        // print "<pre>";
+        // print_r($user_id);
+        // print_r($language_id);
+        // print_r($remove_array);
+        // exit;
+
+/*
+        $unknown_words_1k_data = array(
+                ['id' => 1, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 12, 'status' => 1, 'created_at' => '2016-12-07 12:24:18'],
+                ['id' => 2, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 14, 'status' => 2, 'created_at' => '2016-12-07 12:24:18'],
+                ['id' => 3, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 16, 'status' => 3, 'created_at' => '2016-12-07 12:24:18'],
+                ['id' => 4, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 18, 'status' => 0, 'created_at' => '2016-12-07 12:24:18'],
+        );
+            
+        DB::table('unknown_words_1k')->insert($unknown_words_1k_data);
+
+*/
+
+
+        // print "<pre>";
+        // print_r( $tmp);
+        // exit;
+
+        // remove from unknown_words_1k every ID with negative sign
+
+
+        // add to unknown_words_1k every ID with negative sign
+
+
+        // $user->locale = json_decode($tmp)->id;
+        // $user->languageToLearn = $request->input('languageToLearn')['id'];
+        // $user->displayName = $request->input('displayName');
+        // $user->email = $request->input('email');
+
+        // $user->save();
+
+        // $token = $this->createToken($user);
+
+        // $return = response()->json(['token' => $token]);
+        // return $return;
+    }
+
+
+
+
+
     // /**
     //  * Get Words pagination list from dictionary table 
     //  */
@@ -78,13 +176,12 @@ class UserController extends Controller {
         $user = User::find($request['user']['sub']);
 
         if (isset($user)) {
-            $table = 1;
-            ($user->id >= 1000) ? $table = substr("$user->id", -4, 1) : $table = 1;
 
+            ($user->id >= 1000) ? $tableIndex = substr("$user->id", -4, 1) : $tableIndex = 1;
             $transactions = DB::table('dictionary_en')
-                ->leftJoin('unknown_words_1k', 'dictionary_en.id', '=', 'unknown_words_'.$table.'k.word_id')
-                ->select( 'dictionary_en.id', 'dictionary_en.word', 'unknown_words_1k.status')
-                ->orderBy('dictionary_en.id', 'asc');
+                ->leftJoin('unknown_words_1k', $table.'.id', '=', 'unknown_words_'.$tableIndex.'k.word_id')
+                ->select( $table.'.id', $table.'.word', 'unknown_words_'.$tableIndex.'k.status')
+                ->orderBy($table.'.id', 'asc');
 
             $transactions = $transactions->paginate($records_on_page);
             return response()->json(['status'=> 1, 'words' =>  $transactions ]);
@@ -131,12 +228,12 @@ class UserController extends Controller {
     public function generateConfigFiles(Request $request)
     {
         $results = DB::table('available_dictionaries')
-                ->select('language_id', 'language_name', 'count_words', 'free_words_for_not_premium_users', 'available_languages')
+                ->select('id','language_id', 'language_name', 'count_words', 'free_words_for_not_premium_users', 'available_languages')
                 ->get();
 
         $string = '';
         foreach ($results as $item) {
-        $string .= "      '".$item->language_id."':{'count_words': '".$item->count_words."','free_words_for_not_premium_users': '".$item->free_words_for_not_premium_users."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },\n";
+        $string .= "      '".$item->language_id."':{'id': '".$item->id."','count_words': '".$item->count_words."', 'free_words_for_not_premium_users': '".$item->free_words_for_not_premium_users."', 'language_name': '".$item->language_name."', 'available_languages':  ".$item->available_languages." },\n";
         }
  
 
@@ -168,7 +265,7 @@ END3;
         }
         else 
         {
-            return response('problem with generation config files', 500);            
+            return response('problem with generation config files', 500);
         }
 
 

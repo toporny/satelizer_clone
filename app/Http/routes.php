@@ -41,13 +41,17 @@ Route::post('auth/unlink/', ['middleware' => 'auth', 'uses' => 'AuthController@u
 
 // API Routes.
 Route::get('api/me', ['middleware' => 'auth', 'uses' => 'UserController@getUser']);
-Route::put('api/me', ['middleware' => 'auth', 'uses' => 'UserController@updateUser']);
+Route::post('api/me', ['middleware' => 'auth', 'uses' => 'UserController@updateUser']);
 
 Route::get('api/get_list_of_words/{language_and_page}', ['middleware' => 'auth', 'uses' => 'UserController@getListOfWords']);
 
 Route::get('api/generate_config_files/', 'UserController@generateConfigFiles');
 
 Route::get('api/get_words_with_unknowns/{language_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getListOfWordsWithUnknowns']);
+
+Route::post('api/remember_unknown_words/', ['middleware' => 'both', 'uses' => 'UserController@rememberUnknownWords']);
+
+
 
 // Initialize Angular.js App Route.
 Route::get('/', 'HomeController@index');

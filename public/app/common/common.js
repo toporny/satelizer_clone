@@ -10,28 +10,29 @@ angular.module('MyApp')
       //getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
       // getDictionariesAlphabetically:getDictionariesAlphabetically,
       getListOfWords: getListOfWords,
-      showPremiumModal: showPremiumModal
+      showPremiumModal: showPremiumModal,
+      rememberUnknownWords: rememberUnknownWords
     }
     return service;
 
 
-    // function getAvailableDictionaries() {
-    //   return $http.get('/api/get_dictionaries/');
-    // }
-
-    // function getAvailableDictionariesAndLevels() {
-    //   return $http.get('/api/get_dictionaries_and_levels/');
-    // }
 
 
+    function rememberUnknownWords(list_of_IDs, selected_language) {
+      var postData = {
+                        list_of_ids: list_of_IDs,
+                        language_id: selected_language
+                     };
+      return $http.post('/api/remember_unknown_words/', postData); 
+    }
 
-    // function getDictionariesAlphabetically(language) {
-    //   return $http.get('/api/get_dictionaries_alphabeticaly/'+language);
-    // }
+
 
     function getListOfWords(language_and_page) {
-      return $http.get('/api/get_words_with_unknowns/'+language_and_page); // TODO: remove 1
+      return $http.get('/api/get_words_with_unknowns/'+language_and_page);
     }
+
+
 
     function showPremiumModal() {
     
