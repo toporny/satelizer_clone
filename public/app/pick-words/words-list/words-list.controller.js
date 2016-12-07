@@ -32,23 +32,23 @@
 
         changePage();
 
-        function remember (data) {
+        /*
+        * change page
+        */
 
+        function remember (data) {
            // var a = e.target.parentElement.id;
             console.warn('----------------------');
             console.log(' remember !!!', data  );
             console.warn('----------------------');
         }
 
+
+        /*
+        * change page
+        */
+
         function changePage() {
-
-       //console.log('$stateParams.words_counter', $stateParams.words_counter);
-        // console.log('$stateParams.selected_language', $stateParams.selected_language);
-        // console.log('$stateParams.level', $stateParams.level);
-
-//http://localhost:3000/#/pick/words-list/4533/en_EN/?level=1
-//http://localhost:3000/#/pick/words-list/4533/es_ES/?level=1
-
 
             var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
             location.href = apiUrl+'#/pick/words-list/'+$stateParams.selected_language+'/?level='+vm.data.currentPage;
@@ -73,10 +73,7 @@
                 toastr.error('Problem with getting data');
                 console.log(fallback);
             });
-            ;
-
         }
-
     }
 
 })();

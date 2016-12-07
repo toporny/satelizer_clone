@@ -11,6 +11,7 @@
             TITLE: 'Pick unknown words',
             PROGRESS_BAR: 'Progress bar',
             MARK_UNKNWON_WORDS_AS_RED: 'Mark unknown words as <font color="red">red</font>',
+            NEXT: 'Next »',
           }
         });
      
@@ -22,6 +23,7 @@
             TITLE: 'Zaznacz nieznane Ci wyrazy',
             PROGRESS_BAR: 'Postęp',
             MARK_UNKNWON_WORDS_AS_RED: 'Zaznacz nieznane Ci wyrazy kolorem <font color="red">czerwonym</font>',
+            NEXT: 'Następny »',
           } 
         });
      

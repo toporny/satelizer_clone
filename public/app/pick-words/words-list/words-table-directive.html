@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="(item.unknown==1) ? 'danger2' : 'success'"
+    <tr ng-class="(item.status>0) ? 'danger2' : 'success'"
         ng-repeat="item in $ctrl.words" data-id="{{item.id}}">
       <td>{{item.word}}</td>
       <td class="text-center"><i class="fa" aria-hidden="true"></i></td>

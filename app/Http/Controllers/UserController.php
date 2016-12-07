@@ -57,7 +57,10 @@ class UserController extends Controller {
     // }
 
     /**
-     * Get Words pagination list from dictionary table 
+     * Get Words pagination list from "dictionary_**" table 
+     * note: this function works with 'json array string' stored in "unknown_words" table
+     * structure of this string s: 
+     * [12,14,15,17,19,20,21,22,23,24,25,26,27,28,29, etc 
      */
     public function getListOfWordsWithUnknowns(Request $request, $language)
     {
@@ -70,37 +73,32 @@ class UserController extends Controller {
         }
 
         $records_on_page = Config::get('app.records_on_page');
-        
-        $transactions = DB::table($table)->select( 'id', 'word' )->orderby('id');
-        $transactions = $transactions->paginate($records_on_page);
 
-        // if user is logged in compare data with UNKNOWN_WORDS
-        // otherwise return data as a RAW
+
         $user = User::find($request['user']['sub']);
 
         if (isset($user)) {
-            $remembered_unknown_words = 
-                DB::table('unknown_words')
-                ->select( 'json_words' )
-                ->where('user_id', '=', $user->id)
-                ->where('language', '=', $language)
-                ->first();
-            $json_decoded = json_decode($remembered_unknown_words->json_words);
-            $this->remembered_array = array_flip ($json_decoded);
-            $transactions->each(function($value) {
-                if (isset($this->remembered_array[$value->id])) {
-                    $value->{"unknown"} = 1;
-                }
-                else {
-                    $value->{"unknown"} = 0;
-                }
-                return $value;
-            });
-            return response()->json(['status'=> 1, 'words' =>  $transactions ]);        
+            $table = 1;
+            ($user->id >= 1000) ? $table = substr("$user->id", -4, 1) : $table = 1;
+
+            $transactions = DB::table('dictionary_en')
+                ->leftJoin('unknown_words_1k', 'dictionary_en.id', '=', 'unknown_words_'.$table.'k.word_id')
+                ->select( 'dictionary_en.id', 'dictionary_en.word', 'unknown_words_1k.status')
+                ->orderBy('dictionary_en.id', 'asc');
+
+            $transactions = $transactions->paginate($records_on_page);
+            return response()->json(['status'=> 1, 'words' =>  $transactions ]);
+
         }
         else {
+            $transactions = DB::table($table)->select( 'id', 'word' )->orderby('id');
+            $transactions = $transactions->paginate($records_on_page);
+            $transactions->each(function($value) {
+                $value->{"status"} = null;
+                return $value;
+            });
             return response()->json(['status'=> 1, 'words' =>  $transactions ]);
-        }        
+        }
     }
 
 

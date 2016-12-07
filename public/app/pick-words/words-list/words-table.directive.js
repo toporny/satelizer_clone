@@ -36,7 +36,7 @@
                     angular.element(tr_data).removeClass('danger2')
                     angular.element(tr_data).addClass('success');
                     data = {
-                        'action': 'add_word_to_list',
+                        'action': 'remove_word_from_list',
                         'id': angular.element(tr_data).data('id')
                     }
                     $ctrl.remember({data:data});
@@ -45,7 +45,7 @@
                     angular.element(tr_data).removeClass('success');
                     angular.element(tr_data).addClass('danger2');
                     data = {
-                        'action': 'remove_word_from_list',
+                        'action': 'add_word_to_list',
                         'id': angular.element(tr_data).data('id')
                     }
                     $ctrl.remember({data:data});

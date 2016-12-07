@@ -13,15 +13,51 @@ class CreateUnknownWordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('unknown_words', function (Blueprint $table) {
+        Schema::create('unknown_words_1k', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('user_id');
-            $table->integer('language'); // like "  available dictionaries" table
-            $table->text('json_words');
+            $table->unsignedInteger('user_id');
+            $table->unsignedSmallInteger('language_id');
+            $table->unsignedSmallInteger('word_id');
+            $table->tinyInteger('status');
+            $table->timestamps();
+            $table->index('user_id');
+            $table->index('word_id');
         });
+
+        Schema::create('unknown_words_2k', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedSmallInteger('language_id');
+            $table->unsignedSmallInteger('word_id');
+            $table->tinyInteger('status');
+            $table->timestamps();
+            $table->index('user_id');
+            $table->index('word_id');
+        });
+
+        Schema::create('unknown_words_3k', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedSmallInteger('language_id');
+            $table->unsignedSmallInteger('word_id');
+            $table->tinyInteger('status');
+            $table->timestamps();
+            $table->index('user_id');
+            $table->index('word_id');
+        });
+
+        Schema::create('unknown_words_4k', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedSmallInteger('language_id');
+            $table->unsignedSmallInteger('word_id');
+            $table->tinyInteger('status');
+            $table->timestamps();
+            $table->index('user_id');
+            $table->index('word_id');
+        });
+
     }
-// user_id (INT) | language | range(0-10) |  words (długi json taki jak poniżej)
-// [{"w":"door","d":"2016-11-16T16:14"},{"w":"word","d":"2016-11-16T16:14"}])
 
     /**
      * Reverse the migrations.
@@ -30,6 +66,9 @@ class CreateUnknownWordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unknown_words');
+        Schema::dropIfExists('unknown_words_1k');
+        Schema::dropIfExists('unknown_words_2k');
+        Schema::dropIfExists('unknown_words_3k');
+        Schema::dropIfExists('unknown_words_4k');
     }
 }

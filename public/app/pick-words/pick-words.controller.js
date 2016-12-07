@@ -57,9 +57,9 @@
 
 
 		/*
-		*	show Level Buttons For not logged User
+		*	show Stage Buttons For not logged User
 		*/
-		function showLevelButtonsForAnonymous(dictionaryID) {
+		function showStageButtonsForAnonymous(dictionaryID) {
 			if (dictionaryID == '') {
 				vm.data.levels = [];
 				vm.data.languageToLearn = '';
@@ -74,7 +74,7 @@
 			for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
 				obj = {
 					i: i,
-					level_name: 'Stage ' + counter,
+					level_name: $translate.instant('PICK_WORDS.STAGE') + ' ' + counter,
 					level: counter,
 					available: (i<free_words) ? 'yes' : 'no',
 					counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
@@ -87,20 +87,41 @@
 
 
 		/*
-		*	show Level Buttons For Logged User
+		*	show Stage Buttons For Logged User
 		*/
 
-		function showLevelButtonsForLoggedUser(dictionaryID) {
+		function showStageButtonsForLoggedUser(dictionaryID) {
 
-			console.log("showLevelButtonsForLoggedUser vm.data.availableDictionaries" , vm.data.availableDictionaries);
-			console.log("showLevelButtonsForLoggedUser vm.data.languageToLearn", vm.data.languageToLearn); 
-			
+			console.log('showStageButtonsForLoggedUser dictionaryID=',dictionaryID);
 			//check very quickly if dictionaryID belong to available languages
-			var belong = false;
-			angular.forEach(availableDictionaries, function(value, key) {
-				if (key == dictionaryID) belong = true;
-			});
-			if (belong == false) return;
+			// var belong = false;
+			// angular.forEach(availableDictionaries, function(value, key) {
+			// 	if (key == dictionaryID) belong = true;
+			// });
+			// if (belong == false) return;
+			if (dictionaryID == '') {
+				vm.data.levels = [];
+				vm.data.languageToLearn = '';
+				return;
+			}
+
+			vm.data.languageToLearn = dictionaryID;
+			var count_words = availableDictionaries[dictionaryID].count_words;
+			var free_words = availableDictionaries[dictionaryID].free_words_for_not_premium_users;
+			vm.data.levels = [];
+			var counter = 1;
+			for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
+				obj = {
+					i: i,
+					level_name: $translate.instant('PICK_WORDS.STAGE') + ' ' + counter,
+					level: counter,
+					available: (i<free_words) ? 'yes' : 'no',
+					counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
+				};
+				vm.data.levels.push(obj);
+				counter++;
+			}
+ 
 
 			// if (dictionaryID == '') {
 			// 	vm.data.levels = [];
@@ -149,11 +170,13 @@
 			var userStatus = user.getUserStatus();
 			
 			if (userStatus == 'anonymous') {
-				showLevelButtonsForAnonymous(dictionaryID);
+				showStageButtonsForAnonymous(dictionaryID);
 				return;
 			}
+			else {
+				showStageButtonsForLoggedUser(dictionaryID);
+			}
 
-			//showLevelButtonsForLoggedUser(dictionaryID);
 
 
 		}
