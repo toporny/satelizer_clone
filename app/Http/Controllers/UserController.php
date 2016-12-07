@@ -65,9 +65,12 @@ class UserController extends Controller {
 
         $remove_array = [];
         $add_array = [];
+        $add_array_int = [];
+
         foreach ($list_of_ids_array as $item) {
             if ($item < 0) array_push ($remove_array, -$item);
             if ($item > 0) {
+                array_push ($add_array_int, $item);
                 array_push ($add_array, [
                     'user_id' => $user_id,
                     'language_id' => $language_id,
@@ -76,83 +79,22 @@ class UserController extends Controller {
                     ]);
             }
         }
+
+
         DB::table('unknown_words_1k')
             ->where('user_id', '=', $user_id)
             ->where('language_id', '=', $language_id)
-            ->whereIn('word_id', $remove_array)
+            ->whereIn('word_id', array_merge( $remove_array, $add_array_int))
             ->delete();
 
+        if (count($add_array)>0) {
+            DB::table('unknown_words_1k')->insert($add_array);
+        }
 
-        //DB::table('unknown_words_1k')->insert($add_array);
+        return response()->json(['status'=> 1]);
 
-
-// User::where('votes', '>', 100)->delete();
-        // if (count($remove_array)>0) {
-        //     DB::table('unknown_words_1k')
-        //         ->where('unknown_words_1k.user_id', '=', $user_id)
-        //         ->where('available_dictionaries.id', '=', 'unknown_words_1k.language_id')
-        //         ->where('available_dictionaries.language_id', '=', $language_id)
-        //         ->whereIn('unknown_words_1k.id', $remove_array)
-        //         ->delete();
-        // }
-        // print "<pre>";
-        // print_r($user_id);
-        // print_r($language_id);
-        // print_r($remove_array);
-        // exit;
-
-/*
-        $unknown_words_1k_data = array(
-                ['id' => 1, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 12, 'status' => 1, 'created_at' => '2016-12-07 12:24:18'],
-                ['id' => 2, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 14, 'status' => 2, 'created_at' => '2016-12-07 12:24:18'],
-                ['id' => 3, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 16, 'status' => 3, 'created_at' => '2016-12-07 12:24:18'],
-                ['id' => 4, 'user_id' => 8, 'language_id'=> 1 ,'word_id' => 18, 'status' => 0, 'created_at' => '2016-12-07 12:24:18'],
-        );
-            
-        DB::table('unknown_words_1k')->insert($unknown_words_1k_data);
-
-*/
-
-
-        // print "<pre>";
-        // print_r( $tmp);
-        // exit;
-
-        // remove from unknown_words_1k every ID with negative sign
-
-
-        // add to unknown_words_1k every ID with negative sign
-
-
-        // $user->locale = json_decode($tmp)->id;
-        // $user->languageToLearn = $request->input('languageToLearn')['id'];
-        // $user->displayName = $request->input('displayName');
-        // $user->email = $request->input('email');
-
-        // $user->save();
-
-        // $token = $this->createToken($user);
-
-        // $return = response()->json(['token' => $token]);
-        // return $return;
     }
 
-
-
-
-
-    // /**
-    //  * Get Words pagination list from dictionary table 
-    //  */
-    // public function getListOfWords($language_and_page)
-    // {
-    //     $records_on_page = Config::get('app.records_on_page');
-        
-    //     $transactions = DB::table('dictionary_en')->select( 'id', 'word' )->orderby('id');
-    //     $transactions = $transactions->paginate($records_on_page);
-
-    //     return response()->json(['status'=> 1, 'words' =>  $transactions ]);
-    // }
 
     /**
      * Get Words pagination list from "dictionary_**" table 

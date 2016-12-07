@@ -126,8 +126,6 @@
                 common.rememberUnknownWords(vm.data.removeOrAddWords, language_id)
                 .then(function(response){
                     changePagePart2();
-                    //console.log(vm.data.totalItems);
-                    $loading.finish('loading-div');
                 })
                 .catch(function(fallback) {
                     $loading.finish('loading-div');
