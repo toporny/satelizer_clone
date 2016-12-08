@@ -6,8 +6,8 @@ angular.module('MyApp')
 
   function common($http, $ngBootbox) {
     service = {
-//      getAvailableDictionaries: getAvailableDictionaries,
-      //getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
+      // getAvailableDictionaries: getAvailableDictionaries,
+      // getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
       // getDictionariesAlphabetically:getDictionariesAlphabetically,
       getListOfWords: getListOfWords,
       showPremiumModal: showPremiumModal,
@@ -16,11 +16,13 @@ angular.module('MyApp')
     return service;
 
 
-
+                // to_remove: Array(),
+                // to_add: Array()
 
     function rememberUnknownWords(list_of_IDs, selected_language) {
       var postData = {
-                        list_of_ids: list_of_IDs,
+                        to_add: list_of_IDs.to_add,
+                        to_remove: list_of_IDs.to_remove,
                         language_id: selected_language
                      };
       return $http.post('/api/remember_unknown_words/', postData); 

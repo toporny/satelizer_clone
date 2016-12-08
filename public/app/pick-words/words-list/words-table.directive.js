@@ -18,65 +18,66 @@
             scope: {
                 words: '=',
                 remember: '&',
+                selectNoneAllParent: '&',
             },
-            templateUrl: 'app/pick-words/words-list/' + templateUrl,
-            link: link
+            templateUrl: 'app/pick-words/words-list/' + templateUrl
         }
     }
 
-
-
-    function link(scope, elem, attrs) {
-        var $ctrl = scope.$ctrl;
-        elem.bind('click', function(e) {
-            var i_element = angular.element(e.target.parentElement).find('i');
-            if (i_element.length == 1) {
-                var tr_data = i_element[0].parentElement.parentElement;
-                if (angular.element(tr_data).hasClass('danger2')) {
-                    angular.element(tr_data).removeClass('danger2')
-                    angular.element(tr_data).addClass('success');
-                    data = {
-                        'action': 'remove_word_from_list',
-                        'id': angular.element(tr_data).data('id')
-                    }
-                    $ctrl.remember({data:data});
-                }
-                else if (angular.element(tr_data).hasClass('success')) {
-                    angular.element(tr_data).removeClass('success');
-                    angular.element(tr_data).addClass('danger2');
-                    data = {
-                        'action': 'add_word_to_list',
-                        'id': angular.element(tr_data).data('id')
-                    }
-                    $ctrl.remember({data:data});
-                }
-            }
-        });
-    }
-
-
+// http://stackoverflow.com/questions/13965627/angular-ng-click-event-delegation
  
     wordsTableController.$inject = [];
 
     function wordsTableController() {
         var $ctrl = this;
-        $ctrl.selectAll = selectAll;
-        $ctrl.selectNone = selectNone;
+        $ctrl.selectNoneAll = selectNoneAll;
+        $ctrl.rowClick = rowClick;
 
-        function selectAll() {
-            angular.forEach($ctrl.words, function(value, key) {
-              value.unknown = 1;
-            });
+        function rowClick(idx) {
+            data = {
+                'id': $ctrl.words[idx].id
+            }
+            if ($ctrl.words[idx].status > 0) {
+                $ctrl.words[idx].status = null;
+                data.action = 'remove_word_from_list';
+            }
+            else {
+                $ctrl.words[idx].status = 3;
+                data.action = 'add_word_to_list';
+            }
+            $ctrl.remember({data:data});
         }
 
-        function selectNone() {
-            angular.forEach($ctrl.words, function(value, key) {
-              value.unknown = 0;
-            });
+
+        /*
+        * select none/all
+        * @param {string} action;   action ex: selectAll/selectNone
+        * function returns array with positive and negative IDs
+        * positive means add ID to DB
+        * negative means remove
+        */
+        function selectNoneAll(action) {
+            switch(action) {
+                case 'selectAll':
+                    angular.forEach($ctrl.words, function(value, key) {
+                        value.status = 3 ;
+                    });
+                break;
+                case 'selectNone':
+                    angular.forEach($ctrl.words, function(value, key) {
+                        value.status = 0 ;
+                    });
+                break;
+                default: return;
+            }
+
+            var data = {
+                action: action,
+                words: $ctrl.words
+            };
+            $ctrl.selectNoneAllParent({data:data});
         }
     }
-
-
 
 
 })();

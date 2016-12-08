@@ -1,15 +1,16 @@
-<table class="table table-hover words_list">
+<table class="table table-hover words_list" >
   <thead>
     <tr>
       <th translate="PICK_WORDS.WORD"></th>
       <th class="text-center">
-        <button ng-click="$ctrl.selectAll()" type="button" class="btn btn-primary btn-sm" translate="PICK_WORDS.ALL"></button>
-        <button ng-click="$ctrl.selectNone()" type="button" class="btn btn-primary btn-sm" translate="PICK_WORDS.NONE"></button>
+        <button ng-click="$ctrl.selectNoneAll('selectAll')" type="button" class="btn btn-primary btn-sm" translate="PICK_WORDS.ALL"></button>
+        <button ng-click="$ctrl.selectNoneAll('selectNone')" type="button" class="btn btn-primary btn-sm" translate="PICK_WORDS.NONE"></button>
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-class="(item.status>0) ? 'danger2' : 'success'"
+    <tr ng-class="(item.status > 0) ? 'danger2' : 'success' "
+        ng-click="$ctrl.rowClick($index)"
         ng-repeat="item in $ctrl.words" data-id="{{item.id}}">
       <td>{{item.word}}</td>
       <td class="text-center"><i class="fa" aria-hidden="true"></i></td>

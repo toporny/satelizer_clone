@@ -61,38 +61,32 @@ class UserController extends Controller {
             return response('problem with getting user_id', 500);
         }
 
-        $list_of_ids_array = $request->input('list_of_ids');
+        $to_add = $request->input('to_add');
+        $to_remove = $request->input('to_remove');
 
-        $remove_array = [];
-        $add_array = [];
-        $add_array_int = [];
+        if (isset($to_remove) && count($to_remove)>0) {
+            DB::table('unknown_words_1k')
+                ->where('user_id', $user_id)
+                ->where('language_id', $language_id)
+                ->whereIn('word_id', $to_remove)
+                ->delete();
+        }
 
-        foreach ($list_of_ids_array as $item) {
-            if ($item < 0) array_push ($remove_array, -$item);
+        $add_array = array();
+        foreach ($to_add as $key => $item) {
             if ($item > 0) {
-                array_push ($add_array_int, $item);
                 array_push ($add_array, [
                     'user_id' => $user_id,
                     'language_id' => $language_id,
                     'word_id' => $item,
-                    'status' => 3,
+                    'status' => 3
                     ]);
             }
         }
-
-
-        DB::table('unknown_words_1k')
-            ->where('user_id', '=', $user_id)
-            ->where('language_id', '=', $language_id)
-            ->whereIn('word_id', array_merge( $remove_array, $add_array_int))
-            ->delete();
-
-        if (count($add_array)>0) {
-            DB::table('unknown_words_1k')->insert($add_array);
-        }
+// TODO: make unknown_words_1k DYNAMIC!
+        DB::table('unknown_words_1k')->insert($add_array);
 
         return response()->json(['status'=> 1]);
-
     }
 
 

@@ -14,7 +14,7 @@ class CreateUnknownWordsTable extends Migration
     public function up()
     {
         Schema::create('unknown_words_1k', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('language_id');
             $table->unsignedSmallInteger('word_id');
@@ -25,7 +25,7 @@ class CreateUnknownWordsTable extends Migration
         });
 
         Schema::create('unknown_words_2k', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('language_id');
             $table->unsignedSmallInteger('word_id');
@@ -36,7 +36,7 @@ class CreateUnknownWordsTable extends Migration
         });
 
         Schema::create('unknown_words_3k', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('language_id');
             $table->unsignedSmallInteger('word_id');
@@ -47,7 +47,7 @@ class CreateUnknownWordsTable extends Migration
         });
 
         Schema::create('unknown_words_4k', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('language_id');
             $table->unsignedSmallInteger('word_id');
