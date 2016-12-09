@@ -12,6 +12,7 @@
             PROGRESS_BAR: 'Progress bar',
             MARK_UNKNWON_WORDS_AS_RED: 'Mark unknown words as <font color="red">red</font>',
             NEXT: 'Next »',
+            WORDS: 'Words'
           }
         });
      
@@ -24,6 +25,8 @@
             PROGRESS_BAR: 'Postęp',
             MARK_UNKNWON_WORDS_AS_RED: 'Zaznacz nieznane Ci wyrazy kolorem <font color="red">czerwonym</font>',
             NEXT: 'Następny »',
+            WORDS: 'Wyrazy'
+
           } 
         });
      

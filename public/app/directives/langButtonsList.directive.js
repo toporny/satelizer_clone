@@ -41,9 +41,6 @@ angular.module('MyApp')
     var $ctrl = this;
   	$ctrl.languageBtnLocalSelectedd = languageBtnLocalSelectedd;
 
-// console.log('$ctrl.availableDictionaries',$ctrl.availableDictionaries);
-// console.log('$ctrl.languageToLearn',$ctrl.languageToLearn);
-
 
 		function languageBtnLocalSelectedd(dictionary_id, alreadyClicked){
 			console.log('languageBtnLocalSelectedd dictionary_id',dictionary_id );

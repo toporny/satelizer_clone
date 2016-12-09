@@ -2,30 +2,34 @@
   <div class="panel panel-default">
     <div class="panel-heading" translate="LEARN.HEAD_TITLE"></div>
     <div class="panel-body">
+
       <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <h2  translate="LEARN.TITLE"></h2>
-          <p class="margin-bottom10" translate="LEARN.DESCRIPTION"></p>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <p translate="LEARN.SELECT_LANGUAGE"></p>
 
-            <div class="row margin-top10">
-              <div class="col-xs-6 col-sm-4 col-md-3">
-               <!-- the same is in "test" menu -->
-                <button type="button" style="width:200px; text-align:left; margin:4px; " class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="en"></span></button>
-                
-                <div id="derp" class="slideable">
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="de"></span></button>
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="es"></span></button>
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="pl"></span></button>
-                  <button type="button" style="width:200px; text-align:left; margin:4px; display:block;" class="btn btn-info btn-lg"><span class="lang-lg lang-lbl" lang="fr"></span></button>
-                </div>
-                
-                <button class="btn btn-link" style="margin-left:4px" slide-toggle="#derp">more..</button>
-
-              </div>
-            </div>
-
+          <lang-buttons-list
+            available-dictionaries = "learn.data.availableDictionaries" 
+            language-to-learn = "learn.data.languageToLearn"
+            language-btn-selected = "learn.languageSelected(dictionaryID)"
+            >
+          </lang-buttons-list>
         </div>
+
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-if="!learn.data.languageToLearn">
+          <img src="img\prof.svg" style="width:50%; float:right;">
+          <p><b translate="LEARN.DESCRIPTON_LINE_1"></b></p>
+          <p translate="LEARN.DESCRIPTON_LINE_2"></p>
+        </div>
+
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-if="learn.data.languageToLearn">
+          <div class="alert alert-warning" role="alert">jakis tam komunikat na pasku alert warning</div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna purus, rhoncus a placerat in, porttitor iaculis dui. Cras in elementum quam. Vestibulum at lobortis neque. Aliquam quis euismod ligula, vitae suscipit enim. Integer sed lectus vehicula, dictum purus at, rutrum ante. Nullam velit arcu, gravida at condimentum quis, iaculis et velit. In faucibus faucibus lorem, id lobortis nulla dignissim pharetra. Curabitur nunc mi, iaculis ac finibus at, varius sit amet diam. Pellentesque auctor dictum turpis, et semper eros laoreet sit amet. In et scelerisque sapien, faucibus sodales leo. Sed eget aliquam lectus. Donec ultricies tempor risus, a dapibus mauris aliquet quis.<p>
+        </div>
+
+
       </div>
+
+
     </div>
     <div class="panel-footer text-center">
       <ul class="list-inline">

@@ -9,13 +9,13 @@
         .translations('en', {
           PICK_WORDS: {
             HEAD_TITLE: 'Please select language and level',
-            SELECT_LANGUAGE: 'Select language',
+            SELECT_LANGUAGE: 'Select language that you want to learn',
             WORD: 'Word',
             ALL: 'ALL',
             NONE: 'NONE',
             PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED: 'Progress bar shows in how many levels you have already maintained.',
             DO_YOU_KNOW_WHAT_YOU_DONT_KNOW: 'Do you know what you don\'t know?',
-            IN_NEXT_STEP_YOU_WILL_SEE_THE_LIST: 'In next step you will see the list of at least 5000 words divided by levels. Each level has 250 words. Your task is to select unknown words in each leavels and let the proffessor know which exactly words you don\'t know. ',
+            IN_NEXT_STEP_YOU_WILL_SEE_THE_LIST: 'In next step you will see the list of at least 5000 words divided by levels. Each level has 250 words. Your task is to select unknown words in each level and let the proffessor know which exactly words you don\'t know. ',
             IT_SEEMS_A_LOT_TO_DO_BUT_IT_HAS_TO_BE_DONE_ONLY_ONCE: 'It seems a lot to do but it has to be done only once. From that moment proffessor will remember all list and in the next stages he starts teaching only what you don\'t know',
             PLEASE_SELECT_STAGE: 'Please select stage. (<b>Stage 1</b> means {{maxWordsPerPage}} most used words, etc..)',
             STAGE: 'Stage',
@@ -25,7 +25,7 @@
       $translateProvider.translations('pl', {
         PICK_WORDS: {
           HEAD_TITLE: 'Wybierz język i poziom',
-          SELECT_LANGUAGE: 'Wybierz język',
+          SELECT_LANGUAGE: 'Wybierz język którego chcesz się uczyć',
           WORD: 'Wyraz',
           ALL: 'WSZYSTKO',
           NONE: 'ŻADEN',

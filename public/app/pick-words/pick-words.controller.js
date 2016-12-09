@@ -3,7 +3,7 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-    PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
+  PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
 
   function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
 		vm = this;
@@ -155,7 +155,6 @@
 
 			if (angular.isUndefined(dictionaryID)) return;
 
-
 			//check very quickly if dictionaryID belong to available languages
 			var belong = false;
 			angular.forEach(availableDictionaries, function(value, key) {
@@ -176,9 +175,6 @@
 			else {
 				showStageButtonsForLoggedUser(dictionaryID);
 			}
-
-
-
 		}
 
 
