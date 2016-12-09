@@ -9,13 +9,18 @@
     	vm = this;
 			vm.data = {
 				//availableDictionaries : {},
-				languageToLearn  : null,
+				languageToLearn  : 'en_EN',
 				maxWordsPerPage: maxWordsPerPage
-
+//ngStorage-languageToLearn
 				// languages: languages,
 				// //config: config, 
 				// languageSelected: languages[0], // we need this to pick first element as selected
 			};
+			//user.setLocalStorage([ 'languageToLearn' ], {locale: 'en_EN'}); 
+        user.setLocalStorage(['languageToLearn'],
+          {
+            languageToLearn: 'en_EN'
+          });
 
 			showLeftButtons();
 
