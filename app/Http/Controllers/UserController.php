@@ -50,6 +50,11 @@ class UserController extends Controller {
     public function rememberUnknownWords(Request $request)
     {
         $user = User::find($request['user']['sub']);
+
+        if (!isset($user)) {
+            return response('user is not logged in!', 500);
+        }
+
         $user_id = $user->id;
 
         $language_id = $request->input('language_id');
@@ -96,35 +101,49 @@ class UserController extends Controller {
      * structure of this string s: 
      * [12,14,15,17,19,20,21,22,23,24,25,26,27,28,29, etc 
      */
+
+    private $table = null;
+    private $language_id = null;
+    private $unknown_words_table = null;
+
     public function getListOfWordsWithUnknowns(Request $request, $language)
     {
 		// TODO: move this to external function 
         switch($language) {
-            case 'en_EN': $table = 'dictionary_en'; break;
-            case 'es_ES': $table = 'dictionary_es'; break;
-            case 'pl_PL': $table = 'dictionary_pl'; break;
-            default: $table = 'dictionary_en';
+            case 'en_EN': $this->dictTable = 'dictionary_en'; $this->language_id = 1; break;
+            case 'es_ES': $this->dictTable = 'dictionary_es'; $this->language_id = 2; break;
+            case 'ru_RU': $this->dictTable = 'dictionary_ru'; $this->language_id = 3; break;
+            case 'fr_FR': $this->dictTable = 'dictionary_fr'; $this->language_id = 4; break;
+            case 'de_DE': $this->dictTable = 'dictionary_de'; $this->language_id = 5; break;
+            case 'pl_PL': $this->dictTable = 'dictionary_pl'; $this->language_id = 6; break;
+            default:
+                return response('language not defined', 500);
+            break;
         }
 
         $records_on_page = Config::get('app.records_on_page');
-
 
         $user = User::find($request['user']['sub']);
 
         if (isset($user)) {
 
-            ($user->id >= 1000) ? $tableIndex = substr("$user->id", -4, 1) : $tableIndex = 1;
-            $transactions = DB::table('dictionary_en')
-                ->leftJoin('unknown_words_1k', $table.'.id', '=', 'unknown_words_'.$tableIndex.'k.word_id')
-                ->select( $table.'.id', $table.'.word', 'unknown_words_'.$tableIndex.'k.status')
-                ->orderBy($table.'.id', 'asc');
+            ($user->id >= 1000) ? $dictTableIndex = substr("$user->id", -4, 1) : $dictTableIndex = 1;
+            $this->unknown_words_table  = 'unknown_words_'.$dictTableIndex .'k';
+            // MADNESS !
+            $transactions = DB::table($this->dictTable)
+                ->leftJoin($this->unknown_words_table , function ($join) {
+                    $join->on($this->dictTable.'.id', '=', $this->unknown_words_table.'.word_id')
+                         ->on($this->unknown_words_table.'.language_id' , "=", $this->language_id);
+                })
+                ->select( $this->dictTable.'.id', $this->dictTable.'.word', $this->unknown_words_table.'.status')
+                ->orderBy($this->dictTable.'.id', 'asc');
 
             $transactions = $transactions->paginate($records_on_page);
             return response()->json(['status'=> 1, 'words' =>  $transactions ]);
 
         }
         else {
-            $transactions = DB::table($table)->select( 'id', 'word' )->orderby('id');
+            $transactions = DB::table($this->dictTable)->select( 'id', 'word' )->orderby('id');
             $transactions = $transactions->paginate($records_on_page);
             $transactions->each(function($value) {
                 $value->{"status"} = null;
