@@ -29,7 +29,7 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-6" dw-loading="loading-div">
+        <div class="col-xs-12 col-sm-6 col-md-6" dw-loading="loading-div">
           <div
             class="words-table"
             select-none-all-parent="wordsList.selectNoneAllParent(data)"
@@ -37,7 +37,7 @@
             words="wordsList.data.words1">
           </div>
         </div>
-        <div class="col-sm-6 col-md-6" dw-loading="loading-div">
+        <div class="col-xs-12 col-sm-6 col-md-6" dw-loading="loading-div">
           <div
             class="words-table"
             select-none-all-parent="wordsList.selectNoneAllParent(data)"
@@ -50,9 +50,6 @@
       <div class="row">
         <div class="col-sm-12 col-md-12">
           <ul boundary-link-numbers="true" force-ellipses="true" max-size="5" next-text=">>" previous-text="<<" rotate="true" uib-pagination ng-change="wordsList.changePage()" total-items="wordsList.data.totalItems" ng-model="wordsList.data.currentPage" items-per-page="250"></ul>
-<!--           <p class="text-right margin-top10">
-            <a class="btn btn-primary" ng-click="wordsList.next(wordsList.data.languageSelected)" href="#" translate="WORDS_LIST.NEXT"></a>
-          </p> -->
         </div>
       </div>
     </div>

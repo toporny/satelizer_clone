@@ -18,6 +18,7 @@
             PREMIUM: 'Premium',
             PROFILE: 'Profile',
             LOGOUT: 'Logout',
+            SELECT_YOUR_NATIVE_LANGUAGE: 'Select your native language',
             FLAG: 'en',
           },
         });
@@ -35,6 +36,7 @@
             PREMIUM: 'Premium',
             PROFILE: 'Profil',
             LOGOUT: 'Wyloguj się',
+            SELECT_YOUR_NATIVE_LANGUAGE: 'Wybierz swój język ojczysty',
             FLAG: 'pl',
           },
       });

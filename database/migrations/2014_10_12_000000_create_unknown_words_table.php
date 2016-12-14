@@ -13,6 +13,17 @@ class CreateUnknownWordsTable extends Migration
      */
     public function up()
     {
+        Schema::create('unknown_words_0k', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedSmallInteger('language_id');
+            $table->unsignedSmallInteger('word_id');
+            $table->tinyInteger('status');
+            $table->timestamps();
+            $table->index('user_id');
+            $table->index('word_id');
+        });
+
         Schema::create('unknown_words_1k', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');

@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      {{ 'LEARN_INTRO.HEAD_TITLE' | translate }}
+      <span class="lang-sm" lang="{{learnIntro.data.flag}}" tooltip-placement="left" uib-tooltip="Language that you want to learn" style="float:right; border:1px solid gray; margin-top:1px"></span>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+          <p translate="LEARN_INTRO.SELECT_LANGUAGE"></p>
+
+          <lang-buttons-list
+            available-dictionaries = "learnIntro.data.availableDictionaries" 
+            language-to-learn = "learnIntro.data.languageToLearn"
+            language-btn-selected = "learnIntro.languageSelected1(dictionaryID)"
+            >
+          </lang-buttons-list>
+        </div>
+
+
+        <div class="col-xs-6 col-sm-7 col-md-4 col-lg-5">
+          <p><b translate="LEARN_INTRO.DESCRIPTON_GREETINGS"></b></p>
+          <p translate="LEARN_INTRO.DESCRIPTON_LINE_1"></p>
+          
+          <p class="text-right"> 
+            <button type="button" ng-click="learnIntro.start()" class="btn btn-primary btn-lg">Start</button>
+
+          </p>
+
+        </div>
+
+        <div class="hidden-xs hidden-sm col-md-4 col-lg-4">
+          <img src="img\prof.svg" width="100%">
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+    <div class="panel-footer text-center">
+      <ul class="list-inline">
+        <li><i class="ion-star"></i> {{stars | number}} stars</li>
+        <li><i class="ion-fork-repo"></i> {{forks | number}} forks</li>
+        <li><i class="ion-pull-request"></i> {{issues | number}} issues</li>
+      </ul>
+    </div>
+  </div>
+</div>
+

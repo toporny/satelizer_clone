@@ -13,5 +13,11 @@
             controller: 'LearnCtrl as learn',
             authenticate: false
         })
+        .state('learn_intro', {
+            url: '/learn_intro',
+            templateUrl: 'app/learn/learn_intro.html',
+            controller: 'LearnIntroCtrl as learnIntro',
+            authenticate: false
+        })
     }
 })();

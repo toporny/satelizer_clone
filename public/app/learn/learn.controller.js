@@ -5,6 +5,9 @@
 
     LearnCtrl.$inject = ['$translate', 'maxWordsPerPage', 'translatePluginToISO', 'user', 'availableDictionaries'];
 
+//				http://vt-api.com.es/vocabulary-trainer.php
+
+
     function LearnCtrl ($translate, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
     	vm = this;
 			vm.data = {
@@ -22,24 +25,25 @@
             languageToLearn: 'en_EN'
           });
 
-			showLeftButtons();
+			//showLeftButtons();
 
+			// if languageSelected then go to / #/learn
 
 			/*
 			* show Left Buttons
 			*/
-			function showLeftButtons(){
-				vm.data.languageToLearn =  user.getLocalStorage( 'languageToLearn' );
-				currentLocaleISO = translatePluginToISO[$translate.use()];
-				var tmp = [];			
-				angular.forEach(availableDictionaries, function(value, key) {
-					// don't show the same language as current locale is
-					if (key != currentLocaleISO) {
-							tmp.push({id : key});
-					}
-				});
-				vm.data.availableDictionaries = tmp;
-			}
+			// function showLeftButtons(){
+			// 	vm.data.languageToLearn =  user.getLocalStorage( 'languageToLearn' );
+			// 	currentLocaleISO = translatePluginToISO[$translate.use()];
+			// 	var tmp = [];			
+			// 	angular.forEach(availableDictionaries, function(value, key) {
+			// 		// don't show the same language as current locale is
+			// 		if (key != currentLocaleISO) {
+			// 				tmp.push({id : key});
+			// 		}
+			// 	});
+			// 	vm.data.availableDictionaries = tmp;
+			// }
 
 
     }

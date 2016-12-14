@@ -11,7 +11,7 @@
                 url: '/tests',
                 templateUrl: 'app/tests/tests.html',
                 authenticate: false,
-                controller: 'TestsCtrl as test',
+                controller: 'TestsCtrl as tests',
             })
         }
 })();

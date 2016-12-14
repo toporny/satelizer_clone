@@ -55,7 +55,7 @@
         function changeLanguage(){
 
             var options = {
-                message: 'Select Language',
+                message: $translate.instant('NAVIGATION.SELECT_YOUR_NATIVE_LANGUAGE'),
                 size: "small",
                 className: 'test-class',
                 buttons: {

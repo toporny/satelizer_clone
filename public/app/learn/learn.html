@@ -1,52 +1,29 @@
 <div class="container">
   <div class="panel panel-default">
-    <div class="panel-heading" translate="LEARN.HEAD_TITLE"></div>
+    <div class="panel-heading">
+      {{ 'LEARN_INTRO.HEAD_TITLE' | translate }}
+      <span class="lang-sm" lang="{{learnIntro.data.flag}}" tooltip-placement="left" uib-tooltip="Language that you want to learn" style="float:right; border:1px solid gray; margin-top:1px"></span>
+    </div>
     <div class="panel-body">
 
       <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-          <p translate="LEARN.SELECT_LANGUAGE"></p>
-
-          <lang-buttons-list
-            available-dictionaries = "learn.data.availableDictionaries" 
-            language-to-learn = "learn.data.languageToLearn"
-            language-btn-selected = "learn.languageSelected(dictionaryID)"
-            >
-          </lang-buttons-list>
-        </div>
-
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-if="!learn.data.languageToLearn">
-          <img src="img\prof.svg" style="width:50%; float:right;">
-          <p><b translate="LEARN.DESCRIPTON_LINE_1"></b></p>
-          <p translate="LEARN.DESCRIPTON_LINE_2"></p>
-        </div>
-
-
         <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4" ng-if="learn.data.languageToLearn">
-          <div class="row">
-<ul class="list-group">
-  <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item">Morbi leo risus</a>
-  <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-  <a href="#" class="list-group-item">Vestibulum at eros</a>
-  <a href="#" class="list-group-item active">
-    LIFE
-  </a>
-  <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item">Morbi leo risus</a>
-  <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-  <a href="#" class="list-group-item">Vestibulum at eros</a>
-</ul>
-
-
-          </div>
-
+             <ul class="list-group">
+              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item">Morbi leo risus</a>
+              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+              <a href="#" class="list-group-item">Vestibulum at eros</a>
+              <a href="#" class="list-group-item active">
+                LIFE
+              </a>
+              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+              <a href="#" class="list-group-item">Morbi leo risus</a>
+              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+              <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </ul>
         </div>
 
-
-
-
-        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4" ng-if="learn.data.languageToLearn">
+        <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8" ng-if="learn.data.languageToLearn">
           <style>
             .best-translations {  font-family: 'Montserrat', sans-serif; font-weight: bold; font-size:150%; }
             .small2 {  color:#999999;

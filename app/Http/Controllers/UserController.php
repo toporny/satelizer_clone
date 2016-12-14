@@ -69,8 +69,12 @@ class UserController extends Controller {
         $to_add = $request->input('to_add');
         $to_remove = $request->input('to_remove');
 
+        // TODO: move it to external function getNameOfUnknownWordsTable 
+        ($user->id >= 1000) ? $dictTableIndex = (substr("$user->id", -4, 1)) : $dictTableIndex = 0;
+        $unknown_words_table = 'unknown_words_'.$dictTableIndex .'k';
+
         if (isset($to_remove) && count($to_remove)>0) {
-            DB::table('unknown_words_1k')
+            DB::table($unknown_words_table)
                 ->where('user_id', $user_id)
                 ->where('language_id', $language_id)
                 ->whereIn('word_id', $to_remove)
@@ -88,8 +92,7 @@ class UserController extends Controller {
                     ]);
             }
         }
-// TODO: make unknown_words_1k DYNAMIC!
-        DB::table('unknown_words_1k')->insert($add_array);
+        DB::table($unknown_words_table)->insert($add_array);
 
         return response()->json(['status'=> 1]);
     }
@@ -127,7 +130,8 @@ class UserController extends Controller {
 
         if (isset($user)) {
 
-            ($user->id >= 1000) ? $dictTableIndex = substr("$user->id", -4, 1) : $dictTableIndex = 1;
+            // TODO: move it to external function getNameOfUnknownWordsTable 
+            ($user->id >= 1000) ? $dictTableIndex = (substr("$user->id", -4, 1)) : $dictTableIndex = 0;
             $this->unknown_words_table  = 'unknown_words_'.$dictTableIndex .'k';
             // MADNESS !
             $transactions = DB::table($this->dictTable)

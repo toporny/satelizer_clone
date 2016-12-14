@@ -1,17 +1,41 @@
-angular.module('MyApp')
-  .controller('TestsCtrl', function($scope, $http) {
-    // $http.jsonp('https://api.github.com/repos/sahat/satellizer?callback=JSON_CALLBACK')
-    //   .success(function(data) {
-    //     if (data) {
-    //       if (data.data.stargazers_count) {
-    //         $scope.stars = data.data.stargazers_count;
-    //       }
-    //       if (data.data.forks) {
-    //         $scope.forks = data.data.forks;
-    //       }
-    //       if (data.data.open_issues) {
-    //         $scope.issues = data.data.open_issues;
-    //       }
-    //     }
-    //   });
-  });
+(function () {
+  angular
+    .module('MyApp')
+    .controller('TestsCtrl',TestsCtrl);
+
+    TestsCtrl.$inject = ['$translate', 'maxWordsPerPage', 'translatePluginToISO', 'user', 'availableDictionaries'];
+
+    function TestsCtrl ($translate, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
+        vm = this;
+            vm.data = {
+                //availableDictionaries : {},
+                languageToLearn  : 'en_EN',
+                maxWordsPerPage: maxWordsPerPage
+            };
+            //user.setLocalStorage([ 'languageToLearn' ], {locale: 'en_EN'}); 
+        user.setLocalStorage(['languageToLearn'],
+          {
+            languageToLearn: 'en_EN'
+          });
+
+            showLeftButtons();
+
+ 
+            function showLeftButtons(){
+                vm.data.languageToLearn =  user.getLocalStorage( 'languageToLearn' );
+                currentLocaleISO = translatePluginToISO[$translate.use()];
+                var tmp = [];           
+                angular.forEach(availableDictionaries, function(value, key) {
+                    // don't show the same language as current locale is
+                    if (key != currentLocaleISO) {
+                            tmp.push({id : key});
+                    }
+                });
+                vm.data.availableDictionaries = tmp;
+            }
+
+
+    }
+
+})();
+
