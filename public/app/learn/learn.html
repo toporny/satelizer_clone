@@ -7,20 +7,48 @@
     <div class="panel-body">
 
       <div class="row">
-        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4" ng-if="learn.data.languageToLearn">
-             <ul class="list-group">
-              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-              <a href="#" class="list-group-item">Morbi leo risus</a>
-              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-              <a href="#" class="list-group-item">Vestibulum at eros</a>
-              <a href="#" class="list-group-item active">
-                LIFE
-              </a>
-              <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-              <a href="#" class="list-group-item">Morbi leo risus</a>
-              <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-              <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </ul>
+
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-danger"
+              role="progressbar"
+              aria-valuenow="10"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width:{{learn.data.myValue2}}%">
+              {{learn.data.myValue2}}%
+            </div>
+          </div>
+    
+<!-- |filter:$index>0
+ -->
+<div class="list-group">
+  <a
+    ng-repeat="item in learn.data.items"
+    href="#"
+    ng-class="{'font-weight-bold': item.word==learn.data.slowo}"
+    class="list-group-item fade1"
+    >
+    {{item.word}}
+  </a>
+
+</div>
+
+<!-- 
+          <div class="list-group">
+            <a class="list-group-item animate-hide" ng-hide="!learn.data.myValue" href="#">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a ng-click="learn.test2()" href="#" class="list-group-item active animate-dissapear">
+              LIFE
+            </a>
+            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a class="animate-hide list-group-item" ng-hide="learn.data.myValue" href="#" >Vestibulum at eros</a>
+          </div> -->
         </div>
 
         <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8" ng-if="learn.data.languageToLearn">
@@ -48,7 +76,6 @@
           </div>
 
 
-    
           <ul class="list-group">
             <li class="list-group-item list-group-item-success">
               <p class="small small2 list-group-item-text">rzeczownik</p>
@@ -65,8 +92,31 @@
           </ul>
 
         </div>
+<button ng-click="learn.add_at_top()" type="button" class="btn btn-warning btn-lg">
+add_at_top
+</button> 
+<button ng-click="learn.add_at_bottom()" type="button" class="btn btn-warning btn-lg">
+add_at_bottom
+</button> 
+
+<button ng-click="learn.remove_at_top()" type="button" class="btn btn-warning btn-lg">
+remove_at_top
+</button> 
+<button ng-click="learn.remove_at_bottom()" type="button" class="btn btn-warning btn-lg">
+remove_at_bottom
+</button> 
+<br>
+
+<button ng-click="learn.scroll_up()" type="button" class="btn btn-warning btn-lg">
+scroll up
+</button><br>
+<button ng-click="learn.scroll_down()" type="button" class="btn btn-warning btn-lg">
+scroll down
+</button><br>
+
 
       </div>
+ 
 
 
     </div>
