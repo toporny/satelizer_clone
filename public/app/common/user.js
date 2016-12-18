@@ -63,7 +63,7 @@ angular.module('MyApp')
         if (default_locale == value.id.substr(0,2)) {
           $translate.use(default_locale);
           translateChanged = true;
-          setLocalStorage([ 'locale' ], {locale: languageToChange});
+          setLocalStorage({locale: languageToChange});
         }
       });
 
@@ -72,7 +72,7 @@ angular.module('MyApp')
         console.warn('Add translation strings everywhere and change to config.js/translationsSoFar and ');
         console.warn('English translation is for default now.');
         $translate.use('en');
-        setLocalStorage([ 'locale' ], {locale: 'en_EN'});        
+        setLocalStorage({locale: 'en_EN'});        
       }
       return translateChanged;
     }
@@ -121,7 +121,15 @@ angular.module('MyApp')
           getProfileFromAPI()
             .then(function(dataFromAPI){
               //console.log('getProfileFromAPI data',dataFromAPI);
-              setLocalStorage(['displayName', 'languageToLearn', 'locale', 'email'], dataFromAPI.data);
+
+              setLocalStorage(
+              [
+                { displayName: dataFromAPI.data.displayName },
+                { languageToLearn: dataFromAPI.data.languageToLearn },
+                { locale: dataFromAPI.data.locale },
+                { email: dataFromAPI.data.email }
+              ]
+              );
               // $localStorage.displayName = dataFromAPI.data.displayName;
               // $localStorage.languageToLearn = dataFromAPI.data.languageToLearn;
               // $localStorage.locale = dataFromAPI.data.locale;
@@ -152,24 +160,46 @@ angular.module('MyApp')
       return deferred.promise;
 		}
 
-    
-    function setLocalStorage(aArray, obj) {
-      if (!Array.isArray(aArray)) throw "setLocalStorage first parametr has to be array";
-      if (typeof obj !== "object")  throw "setLocalStorage second parametr has to be object";
 
-      // if user (from FB or G+) has strange locale settings 
-      // try to change en_GB to en_EN, es_CA to es_ES
-      if (angular.isDefined(obj.locale)) {
-        var first_two = obj.locale.substr(0,2);
-        if (angular.isDefined(translatePluginToISO[first_two]) ) {
-          obj.locale = translatePluginToISO[first_two]
-        } else obj.locale = 'en_EN';
-      } 
+    // this function is not yet used
+    // it has to check what browser locale user has
+    // if not suppoerted then set en_EN
+    // function checkIfLocaleIsSupported(lang) {
+    //   if (key == 'locale') {
+    //     var first_two = data.locale.substr(0,2);
+    //       if (angular.isDefined(translatePluginToISO[first_two]) ) {
+    //         obj.locale = translatePluginToISO[first_two]
+    //       } else obj.locale = 'en_EN';
+    //   }      
+    // }
 
-      angular.forEach(aArray, function(el) {
-        $localStorage[el] = obj[el];
-      });
+
+    // check if param it is only object or array of objects
+    function setLocalStorage(data) {
+      switch (Object.prototype.toString.call(data)) {
+        
+        case "[object Object]":
+          var keys = Object.keys(data)
+          $localStorage[keys[0]] = data[keys[0]];
+        break;
+
+        case "[object Array]":
+          
+          angular.forEach(data, function(obj) {
+            console.log('@@@@@@@@@obj', obj);
+            var keys = Object.keys(obj)
+            // console.log('key', key);
+            console.log('!!!!!!!!!obj[keys][0]', obj[keys[0]]);
+            $localStorage[keys[0]] = obj[keys[0]];
+          });          
+        break;
+
+        default:
+          console.error('setLocalStorage param has to be object or array');
+        break;
+      }
     }
+
 
     function getLocalStorage(str) {
       return $localStorage[str]

@@ -16,29 +16,28 @@ angular.module('MyApp')
     function login() {
       // TODO: zresetowac
 
-      user.setLocalStorage([ 'displayName', 'languageToLearn', 'userStatus' , 'email'],
-        {
-          displayName: '',
-          languageToLearn: '',
-          userStatus: '',
-          email: ''
-        }
+      user.setLocalStorage( 
+        [
+          { displayName: '' },
+          { languageToLearn: ''},
+          { userStatus: ''},
+          { email: ''}
+        ]
       );      
 
       $auth.login(vm.data.user)
         .then(function(results) {
-          //console.log('login with success', results);
-          // user.setLocalStorage(['locale', 'languageToLearn'], results.data);
-          //console.log('locale = ', results.data.locale);
           
           
           user.changeLocaleForThisAPP(results.data.locale);
-          user.setLocalStorage([ 'displayName', 'languageToLearn', 'userStatus'],
-            {
-              displayName: results.data.displayName,
-              languageToLearn: results.data.languageToLearn,
-              userStatus: results.data.userStatus
-            }
+          console.log('results.data!!!',results.data);
+          console.log('@@@@results.data.displayName!!!', results.data.displayName);
+          user.setLocalStorage( 
+            [
+              { displayName: results.data.displayName },
+              { languageToLearn: results.data.languageToLearn },
+              { userStatus: results.data.userStatus } 
+            ]
           );
           // $translate.use('pl');
 
@@ -56,13 +55,13 @@ angular.module('MyApp')
       $auth.authenticate(provider)
         .then(function(result_provider) {
           user.changeLocaleForThisAPP(result_provider.data.locale); 
-          user.setLocalStorage([ 'displayName', 'languageToLearn', 'userStatus'],
-            {
-              displayName: result_provider.data.displayName,
-              languageToLearn: result_provider.data.languageToLearn,
-              userStatus: result_provider.data.userStatus              
-            }
-           );
+          user.setLocalStorage( 
+            [
+              { displayName: result_provider.data.displayName },
+              { languageToLearn: result_provider.data.languageToLearn },
+              { userStatus: result_provider.data.userStatus }
+            ]
+          );
 
           toastr.success($translate.instant('LOGIN.YOU_HAVE_SUCCESSFULLY_SIGNED_IN_WITH_PROVIDER', {provider: provider}));
           $location.path('/');

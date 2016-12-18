@@ -10,6 +10,7 @@
 
     function LearnCtrl ($scope, $translate, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
     	vm = this;
+    	vm.wordPicked = wordPicked;
     	vm.add_at_bottom = add_at_bottom;
     	vm.add_at_top = add_at_top;
     	vm.remove_at_bottom = remove_at_bottom;
@@ -31,30 +32,22 @@
 					{id:3, word:'word3'},
 					{id:4, word:'word4'},
 					{id:5, word:'word5'},
-					{id:5, word:'word6'},
-					{id:5, word:'word7'},
+					{id:6, word:'word6'},
+					{id:7, word:'word7'},
 				]
-//ngStorage-languageToLearn
-				// languages: languages,
-				// //config: config, 
-				// languageSelected: languages[0], // we need this to pick first element as selected
 			};
-			//user.setLocalStorage([ 'languageToLearn' ], {locale: 'en_EN'}); 
-        user.setLocalStorage(['languageToLearn'],
-          {
-            languageToLearn: 'en_EN'
-          });
+
+      user.setLocalStorage({languageToLearn: 'en_EN'});
 
 
-          $scope.$watchCollection(
-              "learn.data.items",
-              function( newValue, oldValue ) {
-                  console.log('oldValue',oldValue);
-                  console.log('newValue',newValue);
+        // $scope.$watchCollection(
+        //     "learn.data.items",
+        //     function( newValue, oldValue ) {
+        //         console.log('oldValue',oldValue);
+        //         console.log('newValue',newValue);
 
-              }
-          );
-
+        //     }
+        // );
 
 
 			//showLeftButtons();
@@ -102,12 +95,18 @@
 			}
 
 			function scroll_down(){
-				vm.data.slowo = 'word4'; 
+				vm.data.slowo = 'word3'; 
 				remove_at_top();
 				add_at_bottom();
 			}
 
+			function wordPicked(id) {
+				console.log('wordPicked', id);
+			}
+
  
+
+//  http://pl.123rf.com/search.php?word=professor&imgtype=0&t_word=professor&t_lang=pl&oriSearch=proffessor&srch_lang=pl&sti=n7skakul9skrk3zkjr|&mediapopup=21699403
 
 
     }

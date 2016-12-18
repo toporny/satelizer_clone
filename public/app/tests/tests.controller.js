@@ -12,8 +12,7 @@
                 languageToLearn  : 'en_EN',
                 maxWordsPerPage: maxWordsPerPage
             };
-            //user.setLocalStorage([ 'languageToLearn' ], {locale: 'en_EN'}); 
-        user.setLocalStorage(['languageToLearn'],
+        user.setLocalStorage( 
           {
             languageToLearn: 'en_EN'
           });

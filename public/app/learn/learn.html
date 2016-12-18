@@ -20,35 +20,16 @@
               {{learn.data.myValue2}}%
             </div>
           </div>
-    
-<!-- |filter:$index>0
- -->
-<div class="list-group">
-  <a
-    ng-repeat="item in learn.data.items"
-    href="#"
-    ng-class="{'font-weight-bold': item.word==learn.data.slowo}"
-    class="list-group-item fade1"
-    >
-    {{item.word}}
-  </a>
 
-</div>
+          <ul class="list-group">
+            <li ng-repeat="item in learn.data.items"
+                ng-click="learn.wordPicked(item.id)"
+                ng-class="{'selected': item.word==learn.data.slowo}"
+                class="list-group-item fade1">
+              {{item.word}}
+            </li>
+          </li>
 
-<!-- 
-          <div class="list-group">
-            <a class="list-group-item animate-hide" ng-hide="!learn.data.myValue" href="#">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
-            <a ng-click="learn.test2()" href="#" class="list-group-item active animate-dissapear">
-              LIFE
-            </a>
-            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a class="animate-hide list-group-item" ng-hide="learn.data.myValue" href="#" >Vestibulum at eros</a>
-          </div> -->
         </div>
 
         <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8" ng-if="learn.data.languageToLearn">
@@ -92,7 +73,7 @@
           </ul>
 
         </div>
-<button ng-click="learn.add_at_top()" type="button" class="btn btn-warning btn-lg">
+<!-- <button ng-click="learn.add_at_top()" type="button" class="btn btn-warning btn-lg">
 add_at_top
 </button> 
 <button ng-click="learn.add_at_bottom()" type="button" class="btn btn-warning btn-lg">
@@ -106,10 +87,10 @@ remove_at_top
 remove_at_bottom
 </button> 
 <br>
-
+ -->
 <button ng-click="learn.scroll_up()" type="button" class="btn btn-warning btn-lg">
 scroll up
-</button><br>
+</button>
 <button ng-click="learn.scroll_down()" type="button" class="btn btn-warning btn-lg">
 scroll down
 </button><br>

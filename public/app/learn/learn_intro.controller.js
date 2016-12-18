@@ -23,10 +23,7 @@
 
  
 
-			user.setLocalStorage(['languageToLearn'], // TODO:zmienic to!
-				{
-				languageToLearn: 'en_EN'
-				});
+			user.setLocalStorage( { languageToLearn: 'en_EN' });
 
 
 			showLeftButtons();

@@ -15,13 +15,21 @@
 
         //toastr.info('You have been logged out');
         console.log('TODO: remove all storage data');
-        user.setLocalStorage(['displayName','email','languageToLearn' ,'userStatus'],
-          {
+        // user.setLocal1Storage(['displayName','email','languageToLearn' ,'userStatus'],
+        //   {
+        //     displayName: undefined,
+        //     email: undefined,
+        //     languageToLearn: undefined,
+        //     userStatus: 'anonymous'
+        //   });
+        user.setLocalStorage(
+          [{
             displayName: undefined,
             email: undefined,
             languageToLearn: undefined,
             userStatus: 'anonymous'
-          });
+          }]
+          );
         $location.path('/');
       });
   };

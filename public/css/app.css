@@ -131,5 +131,11 @@ h6 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.list-group li:hover {
+  background-color: #DDDDDD;
+}
+.list-group li.selected {
+  background-color: #FFAAAA;
+}
 
 /*# sourceMappingURL=app.css.map */
