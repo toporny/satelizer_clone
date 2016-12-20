@@ -52,6 +52,8 @@ Route::get('api/get_words_with_unknowns/{language_and_page}', ['middleware' => '
 Route::post('api/remember_unknown_words/', ['middleware' => 'both', 'uses' => 'UserController@rememberUnknownWords']);
 
 
+Route::get('api/get_words_with_translations_for_user/{language_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getWordsWithTranslationsForUser']);
+//Route::get('api/get_words_with_translations_for_user1/{language_and_page}', 'UserController@getWordsWithTranslationsForUser');
 
 // Initialize Angular.js App Route.
 Route::get('/', 'HomeController@index');

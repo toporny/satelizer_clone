@@ -3,12 +3,12 @@
     .module('MyApp')
     .controller('LearnCtrl',LearnCtrl);
 
-    LearnCtrl.$inject = ['$scope', '$translate', 'common', 'maxWordsPerPage', 'translatePluginToISO', 'user', 'availableDictionaries'];
+    LearnCtrl.$inject = ['$scope', '$translate', 'maxWordsPerPage', 'translatePluginToISO', 'user', 'availableDictionaries'];
 
 //				http://vt-api.com.es/vocabulary-trainer.php
 
 
-    function LearnCtrl ($scope, $translate, common, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
+    function LearnCtrl ($scope, $translate, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
     	vm = this;
     	vm.wordPicked = wordPicked;
     	vm.add_at_bottom = add_at_bottom;
@@ -42,8 +42,6 @@
 
       user.setLocalStorage({languageToLearn: 'en_EN'});
 
-      var paramString = 'en_EN?page=1';
-      common.getWordsWithTranslationsForUser(paramString);
 
         // $scope.$watchCollection(
         //     "learn.data.items",

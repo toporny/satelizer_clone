@@ -184,12 +184,8 @@ angular.module('MyApp')
         break;
 
         case "[object Array]":
-          
           angular.forEach(data, function(obj) {
-            console.log('@@@@@@@@@obj', obj);
             var keys = Object.keys(obj)
-            // console.log('key', key);
-            console.log('!!!!!!!!!obj[keys][0]', obj[keys[0]]);
             $localStorage[keys[0]] = obj[keys[0]];
           });          
         break;

@@ -10,6 +10,7 @@ angular.module('MyApp')
       // getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
       // getDictionariesAlphabetically:getDictionariesAlphabetically,
       getListOfWords: getListOfWords,
+      getWordsWithTranslationsForUser: getWordsWithTranslationsForUser,
       showPremiumModal: showPremiumModal,
       rememberUnknownWords: rememberUnknownWords
     }
@@ -34,6 +35,9 @@ angular.module('MyApp')
       return $http.get('/api/get_words_with_unknowns/'+language_and_page);
     }
 
+    function getWordsWithTranslationsForUser(language_and_page) {
+      return $http.get('/api/get_words_with_translations_for_user/'+language_and_page);
+    }
 
 
     function showPremiumModal() {

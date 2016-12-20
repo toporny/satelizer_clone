@@ -19,5 +19,11 @@
             controller: 'LearnIntroCtrl as learnIntro',
             authenticate: false
         })
+        .state('learn_show_all', {
+            url: '/learn_show_all',
+            templateUrl: 'app/learn/learn_show_all.html',
+            controller: 'LearnShowAllCtrl as learnShowAll',
+            authenticate: false
+        })
     }
 })();
