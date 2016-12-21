@@ -47,13 +47,14 @@ Route::get('api/get_list_of_words/{language_and_page}', ['middleware' => 'auth',
 
 Route::get('api/generate_config_files/', 'UserController@generateConfigFiles');
 
-Route::get('api/get_words_with_unknowns/{language_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getListOfWordsWithUnknowns']);
 
 Route::post('api/remember_unknown_words/', ['middleware' => 'both', 'uses' => 'UserController@rememberUnknownWords']);
 
 
-Route::get('api/get_words_with_translations_for_user/{language_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getWordsWithTranslationsForUser']);
-//Route::get('api/get_words_with_translations_for_user1/{language_and_page}', 'UserController@getWordsWithTranslationsForUser');
+Route::get('api/get_words_with_unknowns/{language}/{state_name_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getListOfWordsWithUnknowns']);
+Route::get('api/learn_get_unknowns_with_translations_for_user/{language}/{state_name_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getWordsWithTranslationsForUser']);
+Route::get('api/learn_get_unknowns_for_user/{language}/{state_name_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getUnknownsForUser']);
+
 
 // Initialize Angular.js App Route.
 Route::get('/', 'HomeController@index');

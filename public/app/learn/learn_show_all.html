@@ -1,93 +1,55 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">
-      {{ 'LEARN_INTRO.HEAD_TITLE' | translate }}
+      {{ 'LEARN_SHOW_ALL.HEAD_TITLE' | translate }}
       <span class="lang-sm" lang="{{learnIntro.data.flag}}" tooltip-placement="left" uib-tooltip="Language that you want to learn" style="float:right; border:1px solid gray; margin-top:1px"></span>
     </div>
     <div class="panel-body">
 
       <div class="row">
-
-        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-          <div class="progress">
-            <div
-              class="progress-bar progress-bar-danger"
-              role="progressbar"
-              aria-valuenow="10"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width:{{learn.data.myValue2}}%">
-              {{learn.data.myValue2}}%
-            </div>
-          </div>
-
-          <p>
-            <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha2" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span></button>
-            <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha3" type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
-            <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha4" type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
-            <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha5" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span></button>
-            <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha1" type="button" class="btn btn-warning btn-lg">Show All</button>
-          </p>
- 
-          <ul class="list-group">
-            <li ng-repeat="item in learn.data.items"
-                ng-click="learn.wordPicked(item.id)"
-                ng-class="{'selected': item.word==learn.data.slowo}"
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <ul class="list-group" dw-loading="loading-div">
+            <li ng-repeat="item in learnShowAll.data.items"
+                ng-click="learnShowAll.wordPicked(item.id)"
+                ng-class="{'selected': item.word==learnShowAll.data.slowo}"
                 class="list-group-item fade1">
               {{item.word}}
             </li>
           </ul>
-
         </div>
 
-        <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8" ng-if="learn.data.languageToLearn">
-          <style>
-            .best-translations {  font-family: 'Montserrat', sans-serif; font-weight: bold; font-size:150%; }
-            .small2 {  color:#999999;
-          </style>
-
-          <div class="row">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-right: 0px">
-              <button type="button" class="btn btn-warning btn-lg">
-              <span class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="hidden-xs">WORD</span>
-              </button>
-            </div>
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="text-align: center; padding-right: 0px;padding-left: 0px">
-                <h1 style="margin-top:0px">“LIFE”</h1>
-            </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 0px">
-              <button style="float:right" type="button" class="btn btn-warning btn-lg">
-                <span class="hidden-xs">LAKE</span>
-                <span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              </button>    
-            </div>
-          </div>
-
-
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-success">
-              <p class="small small2 list-group-item-text">rzeczownik</p>
-              <p class="list-group-item-heading"><b class="best-translations">życie,</b> żywot, okres użytkowania, dusza, byt</p>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <ul class="list-group" dw-loading="loading-div">
+            <li ng-repeat="item in learnShowAll.data.items"
+                ng-click="learnShowAll.wordPicked(item.id)"
+                ng-class="{'selected': item.word==learnShowAll.data.slowo}"
+                class="list-group-item fade1">
+              {{item.word}}
             </li>
-            <li class="list-group-item list-group-item-warning">
-              <p class="small small2 list-group-item-text">przymiotnik</p>
-              <p class="list-group-item-heading"><b class="best-translations">na życie,</b> całego życia, ratunkowy, dożywotni</p>
-            </li>
-            <li class="list-group-item list-group-item-info">
-              <p class="small small2 list-group-item-text">czasownik</p>
-              <p class="list-group-item-heading">darować komuś życie</p>
-             </li>
           </ul>
-
         </div>
 
-        <button ng-click="learn.scroll_up()" type="button" class="btn btn-warning btn-lg">
-          scroll up
-        </button>
-        <button ng-click="learn.scroll_down()" type="button" class="btn btn-warning btn-lg">
-          scroll down
-        </button><br>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <ul class="list-group" dw-loading="loading-div">
+            <li ng-repeat="item in learnShowAll.data.items"
+                ng-click="learnShowAll.wordPicked(item.id)"
+                ng-class="{'selected': item.word==learnShowAll.data.slowo}"
+                class="list-group-item fade1">
+              {{item.word}}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <ul class="list-group" dw-loading="loading-div">
+            <li ng-repeat="item in learnShowAll.data.items"
+                ng-click="learnShowAll.wordPicked(item.id)"
+                ng-class="{'selected': item.word==learnShowAll.data.slowo}"
+                class="list-group-item fade1">
+              {{item.word}}
+            </li>
+          </ul>
+        </div>
 
       </div>
 

@@ -26,12 +26,11 @@
             <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha3" type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
             <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha4" type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
             <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha5" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span></button>
-            <button tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha1" type="button" class="btn btn-warning btn-lg">Show All</button>
+            <button ng-click="learn.goToShowAll();" tooltip-placement="top" tooltip-popup-delay="500" uib-tooltip="aha1" type="button" class="btn btn-warning btn-lg">Show All</button>
           </p>
 
 
-
-          <ul class="list-group">
+          <ul class="list-group"  dw-loading="loading-div">
             <li ng-repeat="item in learn.data.items"
                 ng-click="learn.wordPicked(item.id)"
                 ng-class="{'selected': item.word==learn.data.slowo}"
@@ -39,6 +38,7 @@
               {{item.word}}
             </li>
           </ul>
+
 
         </div>
 
@@ -89,6 +89,9 @@
         </button>
         <button ng-click="learn.scroll_down()" type="button" class="btn btn-warning btn-lg">
           scroll down
+        </button><br>
+        <button ng-click="learn.test()" type="button" class="btn btn-warning btn-lg">
+          test
         </button><br>
 
       </div>

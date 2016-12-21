@@ -3,13 +3,15 @@
     .module('MyApp')
     .controller('LearnCtrl',LearnCtrl);
 
-    LearnCtrl.$inject = ['$scope', '$translate', 'common', 'maxWordsPerPage', 'translatePluginToISO', 'user', 'availableDictionaries'];
+    LearnCtrl.$inject = ['$scope', '$translate', '$loading', '$state', 'toastr', 'common', 'maxWordsPerPage', 'translatePluginToISO', 'user', 'availableDictionaries'];
 
 //				http://vt-api.com.es/vocabulary-trainer.php
 
 
-    function LearnCtrl ($scope, $translate, common, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
+    function LearnCtrl ($scope, $translate, $loading, $state, toastr, common, maxWordsPerPage, translatePluginToISO, user, availableDictionaries ) {
     	vm = this;
+    	vm.goToShowAll = goToShowAll;
+
     	vm.wordPicked = wordPicked;
     	vm.add_at_bottom = add_at_bottom;
     	vm.add_at_top = add_at_top;
@@ -17,6 +19,9 @@
     	vm.remove_at_top = remove_at_top;
     	vm.scroll_up = scroll_up;
     	vm.scroll_down = scroll_down;
+    	vm.test = test;
+
+ 	
 
 			vm.data = {
 				//availableDictionaries : {},
@@ -29,10 +34,10 @@
 				items: [
 					{id:1, word:'word1'},
 					{id:2, word:'word2'},
-					{id:3, word:'word3'},
-					{id:4, word:'word4'},
-					{id:5, word:'word5'},
-					{id:6, word:'word6'},
+					// {id:3, word:'word3'},
+					// {id:4, word:'word4'},
+					// {id:5, word:'word5'},
+					// {id:6, word:'word6'},
 					{id:7, word:'word7'},
 					{id:8, word:'word8'},
 					{id:9, word:'word9'},
@@ -41,18 +46,9 @@
 			};
 
       user.setLocalStorage({languageToLearn: 'en_EN'});
+      
+      showLeftColumnWithWords('en_EN', 1);
 
-      var paramString = 'en_EN?page=1';
-      common.getWordsWithTranslationsForUser(paramString);
-
-        // $scope.$watchCollection(
-        //     "learn.data.items",
-        //     function( newValue, oldValue ) {
-        //         console.log('oldValue',oldValue);
-        //         console.log('newValue',newValue);
-
-        //     }
-        // );
 
 
 			//showLeftButtons();
@@ -60,20 +56,31 @@
 			// if languageSelected then go to / #/learn
 
 			/*
-			* show Left Buttons
+			* show Left Column With Words
 			*/
-			// function showLeftButtons(){
-			// 	vm.data.languageToLearn =  user.getLocalStorage( 'languageToLearn' );
-			// 	currentLocaleISO = translatePluginToISO[$translate.use()];
-			// 	var tmp = [];			
-			// 	angular.forEach(availableDictionaries, function(value, key) {
-			// 		// don't show the same language as current locale is
-			// 		if (key != currentLocaleISO) {
-			// 				tmp.push({id : key});
-			// 		}
-			// 	});
-			// 	vm.data.availableDictionaries = tmp;
-			// }
+			function showLeftColumnWithWords(languageToLearn, page){
+        var paramString = {
+            language: languageToLearn,
+            page: page
+        };
+
+				$loading.start('loading-div');
+
+				common.getUnknownsWithTranslationsForUser(paramString)
+				.then(function(response) {
+					console.log('response',response);
+					  //vm.data.totalItems = response.data.words.total;
+					  vm.data.items = response.data.words.data;
+					  $loading.finish('loading-div');
+					  //vm.data.uibPpaginationDisabled = false;
+					})
+					.catch(function(fallback) {
+					  $loading.finish('loading-div');
+					  //vm.data.uibPpaginationDisabled = false;
+					  toastr.error('Problem with getting data');
+					  console.log(fallback);
+					});
+			}
 
 
 			function add_at_top(){
@@ -107,6 +114,28 @@
 
 			function wordPicked(id) {
 				console.log('wordPicked', id);
+			}
+
+
+			function goToShowAll() {
+				$state.go('learn_show_all');
+			}
+
+			function test() {
+				console.log('test');
+				showLeftColumnWithWords();
+				// vm.data.items = [
+				// 	{id:6, word:'word6'},
+				// 	{id:7, word:'word7'},
+				// 	{id:8, word:'word8'},
+				// 	{id:9, word:'word9'},
+				// 	{id:10, word:'word10'},
+				// 	{id:1, word:'word1'},
+				// 	{id:2, word:'word2'},
+				// 	{id:3, word:'word3'},
+				// 	{id:4, word:'word4'},
+				// 	{id:5, word:'word5'},
+				// ];				
 			}
 
  

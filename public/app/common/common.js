@@ -9,8 +9,11 @@ angular.module('MyApp')
       // getAvailableDictionaries: getAvailableDictionaries,
       // getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
       // getDictionariesAlphabetically:getDictionariesAlphabetically,
-      getListOfWords: getListOfWords,
-      getWordsWithTranslationsForUser: getWordsWithTranslationsForUser,
+      pick_getAllWordsWithUnknowns: pick_getAllWordsWithUnknowns,
+//      learn_getAll: learn_getAll,
+
+      getUnknownsWithTranslationsForUser: getUnknownsWithTranslationsForUser,
+      getUnknownsForUser: getUnknownsForUser,
       showPremiumModal: showPremiumModal,
       rememberUnknownWords: rememberUnknownWords
     }
@@ -29,15 +32,27 @@ angular.module('MyApp')
       return $http.post('/api/remember_unknown_words/', postData); 
     }
 
+    // function learn_getAll(oParams) {
+    //   params = oParams.language+'/learn_get_show_all?page='+oParams.page; // make string
+    //   return $http.get('/api/get_words_with_unknowns/'+params);
+    // }
 
-
-    function getListOfWords(language_and_page) {
-      return $http.get('/api/get_words_with_unknowns/'+language_and_page);
+    function pick_getAllWordsWithUnknowns(oParams) {
+      params = oParams.language+'/pick_get_list_of_words?page='+oParams.page; // make string
+      return $http.get('/api/get_words_with_unknowns/'+params);
     }
 
-    function getWordsWithTranslationsForUser(language_and_page) {
-      return $http.get('/api/get_words_with_translations_for_user/'+language_and_page);
+    function getUnknownsWithTranslationsForUser(oParams) {
+      params = oParams.language+'/learn_get_unknowns_with_translations_for_user?page='+oParams.page; // make string
+      return $http.get('/api/learn_get_unknowns_with_translations_for_user/'+params);
     }
+
+    function getUnknownsForUser(oParams) {
+      params = oParams.language+'/learn_get_unknowns_for_user?page='+oParams.page; // make string
+      return $http.get('/api/learn_get_unknowns_for_user/'+params);
+    }
+
+
 
 
     function showPremiumModal() {

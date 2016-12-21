@@ -246,9 +246,9 @@ angular.module('MyApp')
     //   return $http.get('/api/get_dictionaries_alphabeticaly/'+language);
     // }
 
-    function getListOfWords(language_and_page) {
-      return $http.get('/api/get_words_with_unknowns1/'+language_and_page); // TODO: remove 1
-    }
+    // function getListOfWords(language_and_page) {
+    //   return $http.get('/api/get_words_with_unknowns1/'+language_and_page); // TODO: remove 1
+    // }
 
     function showPremiumModal() {
     

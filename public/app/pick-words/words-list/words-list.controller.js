@@ -99,15 +99,17 @@
                 //vm.data.removeOrAddWords = [];
                 vm.currentViewIdList = [];
                 vm.originalViewIdList = [];
-
-                var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
+                var paramString = {
+                    language: $stateParams.selected_language,
+                    page: vm.data.currentPage
+                };
                 location.href = apiUrl+'#/pick/words-list/'+$stateParams.selected_language+'/?level='+vm.data.currentPage;
                 $loading.start('loading-div');
                 vm.data.uibPpaginationDisabled = true;
-                var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;            
+                //var paramString = $stateParams.selected_language+'?page='+vm.data.currentPage;
                 var data1 = [];
                 var data2 = [];
-                common.getListOfWords(paramString)
+                common.pick_getAllWordsWithUnknowns(paramString)
                 .then(function(response) {
                     vm.data.totalItems = response.data.words.total;
 
@@ -117,7 +119,7 @@
                     });
 
                     vm.currentViewIdList = angular.copy(vm.originalViewIdList); // clone
-                    console.log('vm.originalViewIdList!!!!!',vm.originalViewIdList);
+                    // console.log('vm.originalViewIdList!!!!!',vm.originalViewIdList);
 
                     $loading.finish('loading-div');
                     vm.data.uibPpaginationDisabled = false;
