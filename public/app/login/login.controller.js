@@ -27,11 +27,7 @@ angular.module('MyApp')
 
       $auth.login(vm.data.user)
         .then(function(results) {
-          
-          
           user.changeLocaleForThisAPP(results.data.locale);
-          console.log('results.data!!!',results.data);
-          console.log('@@@@results.data.displayName!!!', results.data.displayName);
           user.setLocalStorage( 
             [
               { displayName: results.data.displayName },

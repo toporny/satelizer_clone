@@ -2,9 +2,9 @@
 angular.module('MyApp')
   .factory('user', user);
 
-  user.$inject = ['$log','$http', '$auth', '$q', '$localStorage', '$window', '$translate', 'translationsSoFar', 'translatePluginToISO', '$state'];
+  user.$inject = ['$log','$http', '$auth', '$q', '$localStorage', '$window', '$translate', 'translationsSoFar', 'translatePluginToISO', '$state', '$ngBootbox'];
 
-  function user($log, $http, $auth, $q, $localStorage, $window, $translate, translationsSoFar,translatePluginToISO,$state ) {
+  function user($log, $http, $auth, $q, $localStorage, $window, $translate, translationsSoFar, translatePluginToISO, $state, $ngBootbox ) {
 
     //examine browser settings. If (en,es,ru,fr,de, pl) then setup settings
     var lang = $window.navigator.language || $window.navigator.userLanguage; 
@@ -44,7 +44,8 @@ angular.module('MyApp')
       changeLocaleForThisAPP: changeLocaleForThisAPP,
       getUserStatus:          getUserStatus,
       setLanguageToLearn:     setLanguageToLearn,
-      getLanguageToLearn:     getLanguageToLearn
+      getLanguageToLearn:     getLanguageToLearn,
+      showPremiumModal:       showPremiumModal
 
     }
     return service;
@@ -176,6 +177,9 @@ angular.module('MyApp')
 
     // check if param it is only object or array of objects
     function setLocalStorage(data) {
+      
+
+
       switch (Object.prototype.toString.call(data)) {
         
         case "[object Object]":
@@ -250,6 +254,9 @@ angular.module('MyApp')
     //   return $http.get('/api/get_words_with_unknowns1/'+language_and_page); // TODO: remove 1
     // }
 
+
+
+    // TODO: do translation
     function showPremiumModal() {
     
       var options = {

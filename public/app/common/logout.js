@@ -23,12 +23,12 @@
         //     userStatus: 'anonymous'
         //   });
         user.setLocalStorage(
-          [{
-            displayName: undefined,
-            email: undefined,
-            languageToLearn: undefined,
-            userStatus: 'anonymous'
-          }]
+          [
+            {displayName: undefined},
+            {email: undefined},
+            {languageToLearn: undefined},
+            {userStatus: 'anonymous'}
+          ]
           );
         $location.path('/');
       });

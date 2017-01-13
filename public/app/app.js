@@ -9,8 +9,8 @@ angular
   'ngBootbox',
   'satellizer',
   'ui.bootstrap',
-  'ngStorage'
-  ,'darthwade.dwLoading'
+  'ngStorage',
+  'darthwade.dwLoading'
   ])
 
 .config(function($translateProvider, $stateProvider, $urlRouterProvider, $authProvider, $ngBootboxConfigProvider, apiUrl) {
@@ -57,16 +57,35 @@ angular
 
 
 angular.module('MyApp')
-  .run(function ($rootScope, $state, $auth ) {
+  .run(function ($rootScope, $state, $auth, user ) {
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
       // console.log('toState = ',toState);
       // console.log('toParams = ',toParams);
       // console.log('fromState = ',fromState);
       // console.log('fromParams = ',fromParams);
+
+      console.log('$auth.isAuthenticated() = ', $auth.isAuthenticated());
+
+      // if user is not authenticated then remove every user details from storage
+      if ($auth.isAuthenticated() == false) {
+        console.log('if user is not authenticated then remove every user details from storage');
+
+        user.setLocalStorage(
+          [
+            {displayName: undefined},
+            {email: undefined},
+            {languageToLearn: undefined},
+            {userStatus: 'anonymous'}
+          ]
+          );
+      }
+      
+
+
       if (toState.authenticate && !$auth.isAuthenticated()){
         // User isn’t authenticated
         $state.transitionTo("login");
-        console.log('User isnt authenticated -> login');
+        console.log('User is not authenticated -> login');
         event.preventDefault(); 
       } else {
          // nav.setSelected(toState.url);

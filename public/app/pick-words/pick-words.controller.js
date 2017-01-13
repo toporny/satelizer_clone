@@ -3,9 +3,9 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-  PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage'];
+  PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', 'maxWordsPerPage', '$ngBootbox', 'translationsSoFar'];
 
-  function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage) {
+  function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, maxWordsPerPage, $ngBootbox, translationsSoFar) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
@@ -40,7 +40,6 @@
 						tmp.push({id : key});
 				}
 			});
-			//console.log('tmp',tmp);
 			vm.data.availableDictionaries = tmp;			
 		}
 
@@ -77,7 +76,7 @@
 					level_name: $translate.instant('PICK_WORDS.STAGE') + ' ' + counter,
 					level: counter,
 					available: (i<free_words) ? 'yes' : 'no',
-					counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
+					counter_from_to : '('+i + '-' + (i-1+maxWordsPerPage)+ ')'
 				};
 				vm.data.levels.push(obj);
 				counter++;
@@ -116,7 +115,7 @@
 					level_name: $translate.instant('PICK_WORDS.STAGE') + ' ' + counter,
 					level: counter,
 					available: (i<free_words) ? 'yes' : 'no',
-					counter_from_to : '('+i + '-' + (i+maxWordsPerPage)+ ')'
+					counter_from_to : '('+i + '-' + (i-1+maxWordsPerPage)+ ')'
 				};
 				vm.data.levels.push(obj);
 				counter++;
@@ -155,6 +154,19 @@
 
 			if (angular.isUndefined(dictionaryID)) return;
 
+			// move this to separate service
+			var languageAvailable = false;
+			angular.forEach(translationsSoFar, function(value, key) {
+				if (dictionaryID.substr(0,2) == value.id.substr(0,2)) {
+					languageAvailable = true;
+				}
+			});
+			if (languageAvailable === false) {
+				toastr.warning(dictionaryID+' not yet ready', 'Warning');
+				return;
+			}
+
+
 			//check very quickly if dictionaryID belong to available languages
 			var belong = false;
 			angular.forEach(availableDictionaries, function(value, key) {
@@ -179,15 +191,7 @@
 
 
 		function next(selectedLevel) {
-			//common.getAvailableDictionaries();
-			//$state.go('words-list', {selected_language: 'en_EN', level: selectedLevel});
-			var param = {
-				level: selectedLevel
-			};
-
-			$location.url("/pick/words-list/"+user.getLanguageToLearn()+"/").search(param);
-
-			//$state.go('words-list/:words_counter/:selected_language/:level?', {level: selectedLevel, words_counter: 4534,  selected_language: 'en_EN'});
+			$location.url("/pick/words-list/"+user.getLanguageToLearn()+"/").search({level: selectedLevel});
 		}
 
 		function showPremiumModal() {

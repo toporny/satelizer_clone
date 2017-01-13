@@ -3,7 +3,7 @@
     .module('MyApp')
     .constant('translationsSoFar',[  // it has to be array for PROFIL/LOCALE
         {id: 'en_EN', name: 'english'},
-        // {id: 'es_ES', name: 'spanish'},
+        {id: 'es_ES', name: 'spanish'},
         // {id: 'ru_RU', name: 'russian'},
         // {id: 'fr_FR', name: 'french'},
         // {id: 'de_DE', name: 'deutsch'},

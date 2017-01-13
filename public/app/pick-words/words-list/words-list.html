@@ -5,6 +5,19 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-12 col-md-12">
+
+        <!-- to do: move it to separate directive -->
+        <div 
+          ng-if="wordsList.data.userStatus != 'premium'"
+          class="alert alert-danger"
+          role="alert">
+          <span
+            translate="WORDS_LIST.STAGE_X_AND_ABOVE_ONLY_FOR_PREMIUM"
+            translate-value-stage="{{wordsList.data.howManyStageIsFreeForNormalUser}}">
+          </span>
+          <u><a href="#/premium" translate="COMMON.BUY_PREMIUM"></a></u>
+        </div>
+
           <h2 translate="WORDS_LIST.TITLE"></h2>
           <p translate="WORDS_LIST.MARK_UNKNWON_WORDS_AS_RED"></p>
           <div class="progress">
