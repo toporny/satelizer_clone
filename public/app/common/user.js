@@ -45,8 +45,9 @@ angular.module('MyApp')
       getUserStatus:          getUserStatus,
       setLanguageToLearn:     setLanguageToLearn,
       getLanguageToLearn:     getLanguageToLearn,
-      showPremiumModal:       showPremiumModal
-
+      showPremiumModal:       showPremiumModal,
+      API_setStage:           API_setStage,
+      API_deleteStage:        API_deleteStage
     }
     return service;
 
@@ -71,7 +72,7 @@ angular.module('MyApp')
       if (translateChanged == false) {
         console.warn('Sorry but translation for '+languageToChange+ ' is not yet ready.');
         console.warn('Add translation strings everywhere and change to config.js/translationsSoFar and ');
-        console.warn('English translation is for default now.');
+        console.warn('English translation is set for default now.');
         $translate.use('en');
         setLocalStorage({locale: 'en_EN'});        
       }
@@ -98,6 +99,19 @@ angular.module('MyApp')
     function updateProfileByAPI  (profileData) {
       return $http.put('/api/me', profileData);
     }
+
+    function API_setStage  (levelData) {
+      return $http.post('api/set_stage/', levelData);
+    }
+
+    function API_getStages  (language_id) {
+      return $http.get('api/get_stages/', language_id);
+    }
+
+    function API_deleteStage (language_id, levelData) {
+      return $http.post('api/delete_stage/', levelData);
+    }
+
 
 
     /*

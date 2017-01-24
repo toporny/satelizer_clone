@@ -51,7 +51,7 @@ class UserController extends Controller {
 
 
     /**
-     * Get signed in user's profile.
+     * remember Unknown Words
      */
     public function rememberUnknownWords(Request $request)
     {
@@ -109,9 +109,125 @@ class UserController extends Controller {
 
 
 
+
+    /**
+     * set Stage
+     */
+    public function setStage(Request $request)
+    {
+        $user = User::find($request['user']['sub']);
+
+        if (!isset($user)) {
+            return response('user is not logged in!', 500);
+        }
+
+        $user_id = $user->id;
+        if (!is_int($user_id)) {
+            return response('problem with getting user_id', 500);
+        }
+
+        $language_id = $request->input('language_id');
+        if (!$language_id) {
+            return response('language_id is not set', 500);
+        }
+
+        $stage_finished = $request->input('stage_finished');
+        if (!$stage_finished) {
+            return response('stage_finished is not set', 500);
+        }
+
+
+        $array  = [
+            'user_id' => $user_id,
+            'language_id' => $language_id,
+            'stage_finished' => $stage_finished
+        ];
+
+        DB::table('users_level_progress')->insert($array);
+
+        return response()->json(['status'=> 1]);
+
+    }
+
+   /**
+     * get Stages
+     */
+    public function getStages(Request $request, $language_id)
+    {
+        $user = User::find($request['user']['sub']);
+
+        if (!isset($user)) {
+            return response('user is not logged in!', 500);
+        }
+
+        $user_id = $user->id;
+        if (!is_int($user_id)) {
+            return response('problem with getting user_id', 500);
+        }
+        
+        print "not yet ready";
+
+        // DB::table('users_level_progress')
+        //     ->where('user_id', $user_id)
+        //     ->where('language_id', $language_id)
+        //     ->delete();
+    }
+
+
+   /**
+     * delete Stage
+     */
+    public function deleteStage(Request $request)
+    {
+        $user = User::find($request['user']['sub']);
+print "not yet ready";
+return;
+        if (!isset($user)) {
+            return response('user is not logged in!', 500);
+        }
+
+        $user_id = $user->id;
+        if (!is_int($user_id)) {
+            return response('problem with getting user_id', 500);
+        }
+
+        $dictionary_id = $request->input('dictionary_id');
+        if (!$dictionary_id) {
+            return response('dictionary_id is not set', 500);
+        }
+
+        $stage = $request->input('stage');
+        if (!$stage) {
+            return response('stage is not set', 500);
+        }
+
+
+        // $array  = [
+        //     'user_id' => $user_id,
+        //     'dictionary_id' => $dictionary_id,
+        //     'stage_finished' => $stage,
+        // ]                    
+        // DB::table('users_level_progress')->insert($array);
+
+        print "not yet implemented";
+        return response('stage is not set', 500);
+//        return response()->json(['status'=> -1]);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function getUnknownsForUser(Request $request, $language, $state_name)
     {
-        //http://localhost:3000/api/get_words_with_translations_for_user/en_EN?page=2
+        //http://localhost:8000/api/get_words_with_translations_for_user/en_EN?page=2
         $records_on_page = $this->getMaxPaginateForState($state_name);
 
         $this->dictTable = $this->laravel_config->getDictTable($language);
@@ -151,7 +267,7 @@ class UserController extends Controller {
 
     public function getWordsWithTranslationsForUser(Request $request, $language, $state_name)
     {
-        //http://localhost:3000/api/get_words_with_translations_for_user/en_EN?page=2
+        //http://localhost:8000/api/get_words_with_translations_for_user/en_EN?page=2
         $records_on_page = $this->getMaxPaginateForState($state_name);
 
         $this->dictTable = $this->laravel_config->getDictTable($language);
@@ -288,8 +404,8 @@ class UserController extends Controller {
 
 
     /**
-     * Henerate config files
-     * http://localhost:3000/api/generate_config_files
+     * Generate config files
+     * http://localhost:8000/api/generate_config_files
      */
     public function generateConfigFiles(Request $request)
     {

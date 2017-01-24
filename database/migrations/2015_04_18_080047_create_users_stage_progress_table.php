@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersLevelProgressTable extends Migration {
+class CreateUsersStageProgressTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -16,8 +16,8 @@ class CreateUsersLevelProgressTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->integer('dictionary_id')->unsigned();
-			$table->string('levels_progress')->nullable();
+			$table->integer('language_id')->unsigned();
+			$table->integer('stage_finished')->nullable();
 		});
 	}
 

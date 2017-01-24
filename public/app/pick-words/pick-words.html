@@ -3,7 +3,7 @@
     <div class="panel-heading" translate="PICK_WORDS.HEAD_TITLE"></div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+        <div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
           <p translate="PICK_WORDS.SELECT_LANGUAGE"></p>
 
           <lang-buttons-list
@@ -14,7 +14,17 @@
           </lang-buttons-list>
         </div>
 
-        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9" ng-if="pick.data.languageToLearn">
+        <div class="col-xs-12 col-sm-9 col-md-8 col-lg-9" ng-if="pick.data.languageToLearn">
+
+<button ng-click="pick.tmp_test(1)">add 1</button>
+<button ng-click="pick.tmp_test(2)">add 2</button>
+<button ng-click="pick.tmp_test(3)">add 3</button>
+<br>
+<button ng-click="pick.tmp_test(-1)">remove 1</button>
+<button ng-click="pick.tmp_test(-2)">remove 2</button>
+<button ng-click="pick.tmp_test(-3)">remove 3</button>
+
+
           <div class="alert alert-warning" role="alert" translate="PICK_WORDS.PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED"></div>
           <div class="progress">
             <div
@@ -36,9 +46,9 @@
             <b>{{item.level_name}}</b> {{item.counter_from_to}}
           </button>
         </div>
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-if="!pick.data.languageToLearn">
-        <img src="img\prof.svg" style="width:50%; float:right;">
 
+        <div class="col-xs-12 col-sm-9 col-md-8 col-lg-8" ng-if="!pick.data.languageToLearn">
+          <img src="img\prof.svg" style="width:50%; float:right;">
           <p><b translate="PICK_WORDS.DO_YOU_KNOW_WHAT_YOU_DONT_KNOW"></b></p>
           <p translate="PICK_WORDS.IN_NEXT_STEP_YOU_WILL_SEE_THE_LIST"></p>
           <p translate="PICK_WORDS.IT_SEEMS_A_LOT_TO_DO_BUT_IT_HAS_TO_BE_DONE_ONLY_ONCE"></p>

@@ -12,6 +12,6 @@
       'pl_PL':{'id': '6','count_words': '7000', 'free_words_for_not_premium_users': '4400', 'language_name': 'polish', 'available_languages':  [{"id":"en_EN", "name":"english"}, {"id":"es_ES", "name":"spanish"}, {"id":"ru_RU", "name":"russian"}, {"id":"fr_FR", "name":"french"},  {"id":"de_DE", "name":"deutsch"}] },
     })
     .constant('maxWordsPerPage', 250)
-    .constant('apiUrl', 'http://localhost:3000/');
+    .constant('apiUrl', 'http://localhost:8000/');
 
 })();

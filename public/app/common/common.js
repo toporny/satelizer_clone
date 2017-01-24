@@ -2,9 +2,9 @@
 angular.module('MyApp')
   .factory('common', common);
 
-  common.$inject = ['$http', '$ngBootbox'];
+  common.$inject = ['$http', '$ngBootbox', '$translate', 'availableDictionaries', 'maxWordsPerPage'];
 
-  function common($http, $ngBootbox) {
+  function common($http, $ngBootbox, $translate, availableDictionaries, maxWordsPerPage) {
     service = {
       // getAvailableDictionaries: getAvailableDictionaries,
       // getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
@@ -15,6 +15,7 @@ angular.module('MyApp')
       getUnknownsWithTranslationsForUser: getUnknownsWithTranslationsForUser,
       getUnknownsForUser: getUnknownsForUser,
       showPremiumModal: showPremiumModal,
+      getLevels:getLevels,
       rememberUnknownWords: rememberUnknownWords
     }
     return service;
@@ -52,6 +53,25 @@ angular.module('MyApp')
       return $http.get('/api/learn_get_unknowns_for_user/'+params);
     }
 
+
+    function getLevels(dictionaryID) {
+      var count_words = availableDictionaries[dictionaryID].count_words;
+      var free_words = availableDictionaries[dictionaryID].free_words_for_not_premium_users;
+      var data_levels = [];
+      var counter = 1;
+      for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
+        obj = {
+          i: i,
+          level_name: $translate.instant('PICK_WORDS.STAGE') + ' ' + counter,
+          level: counter,
+          available: (i<free_words) ? 'yes' : 'no',
+          counter_from_to : '('+i + '-' + (i-1+maxWordsPerPage)+ ')'
+        };
+        data_levels.push(obj);
+        counter++;
+      }
+      return data_levels;
+    }
 
 
 
