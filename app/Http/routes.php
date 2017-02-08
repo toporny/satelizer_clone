@@ -50,9 +50,9 @@ Route::get('api/generate_config_files/', 'UserController@generateConfigFiles');
 
 Route::post('api/remember_unknown_words/', ['middleware' => 'both', 'uses' => 'UserController@rememberUnknownWords']);
 
-Route::post('api/set_stage/', ['middleware' => 'both', 'uses' => 'UserController@setStage']);
-Route::post('api/get_stages/{language_id}', ['middleware' => 'both', 'uses' => 'UserController@getStages']);
-Route::post('api/delete_stage/', ['middleware' => 'both', 'uses' => 'UserController@deleteStage']);
+Route::post('api/add_level_progress/', ['middleware' => 'both', 'uses' => 'UserController@addLevelProgress']);
+Route::get('api/get_level_progress/{language_id}', ['middleware' => 'both', 'uses' => 'UserController@getLevelProgress']);
+Route::post('api/remove_level_progress/', ['middleware' => 'both', 'uses' => 'UserController@removeLevelProgress']);
 
 
 Route::get('api/get_words_with_unknowns/{language}/{state_name_and_page}', ['middleware' => 'both', 'uses' => 'UserController@getListOfWordsWithUnknowns']);

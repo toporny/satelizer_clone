@@ -113,7 +113,7 @@ class UserController extends Controller {
     /**
      * set Stage
      */
-    public function setStage(Request $request)
+    public function addLevelProgress(Request $request)
     {
         $user = User::find($request['user']['sub']);
 
@@ -152,7 +152,7 @@ class UserController extends Controller {
    /**
      * get Stages
      */
-    public function getStages(Request $request, $language_id)
+    public function getLevelProgress(Request $request, $language_id)
     {
         $user = User::find($request['user']['sub']);
 
@@ -177,11 +177,10 @@ class UserController extends Controller {
    /**
      * delete Stage
      */
-    public function deleteStage(Request $request)
+    public function removeLevelProgress(Request $request)
     {
         $user = User::find($request['user']['sub']);
-print "not yet ready";
-return;
+
         if (!isset($user)) {
             return response('user is not logged in!', 500);
         }
@@ -191,27 +190,24 @@ return;
             return response('problem with getting user_id', 500);
         }
 
-        $dictionary_id = $request->input('dictionary_id');
-        if (!$dictionary_id) {
-            return response('dictionary_id is not set', 500);
+        $language_id = $request->input('language_id');
+        if (!$language_id) {
+            return response('language_id is not set', 500);
         }
 
-        $stage = $request->input('stage');
-        if (!$stage) {
-            return response('stage is not set', 500);
+        $stage_finished = $request->input('stage_finished');
+        if (!$stage_finished) {
+            return response('stage_finished is not set', 500);
         }
 
 
-        // $array  = [
-        //     'user_id' => $user_id,
-        //     'dictionary_id' => $dictionary_id,
-        //     'stage_finished' => $stage,
-        // ]                    
-        // DB::table('users_level_progress')->insert($array);
+        DB::table('users_level_progress')
+            ->where('user_id', $user_id)
+            ->where('language_id', $language_id)
+            ->where('stage_finished', $stage_finished)
+            ->delete();
 
-        print "not yet implemented";
-        return response('stage is not set', 500);
-//        return response()->json(['status'=> -1]);
+       return response()->json(['status'=> 1]);
 
     }
 

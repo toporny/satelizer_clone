@@ -35,19 +35,21 @@ angular.module('MyApp')
     }
 
     service = {
-      getProfileFromAPI:      getProfileFromAPI,
-      updateProfileByAPI:     updateProfileByAPI,      
-      getPersonalData:        getPersonalData,
-      setPersonalData:        setPersonalData,
-      getLocalStorage:        getLocalStorage,
-      setLocalStorage:        setLocalStorage,
-      changeLocaleForThisAPP: changeLocaleForThisAPP,
-      getUserStatus:          getUserStatus,
-      setLanguageToLearn:     setLanguageToLearn,
-      getLanguageToLearn:     getLanguageToLearn,
-      showPremiumModal:       showPremiumModal,
-      API_setStage:           API_setStage,
-      API_deleteStage:        API_deleteStage
+      getProfileFromAPI:            getProfileFromAPI,
+      updateProfileByAPI:           updateProfileByAPI,      
+      getPersonalData:              getPersonalData,
+      setPersonalData:              setPersonalData,
+      getLocalStorage:              getLocalStorage,
+      setLocalStorage:              setLocalStorage,
+      changeLocaleForThisAPP:       changeLocaleForThisAPP,
+      getUserStatus:                getUserStatus,
+      setLanguageToLearn:           setLanguageToLearn,
+      getLanguageToLearn:           getLanguageToLearn,
+      showPremiumModal:             showPremiumModal,
+
+      API_addUserLevelProgress:     API_addUserLevelProgress,
+      API_removeUserLevelProgress:  API_removeUserLevelProgress,
+      API_getUserLevelProgress:     API_getUserLevelProgress
     }
     return service;
 
@@ -100,16 +102,16 @@ angular.module('MyApp')
       return $http.put('/api/me', profileData);
     }
 
-    function API_setStage  (levelData) {
-      return $http.post('api/set_stage/', levelData);
+    function API_addUserLevelProgress  (levelData) {
+      return $http.post('api/add_level_progress/', levelData);
     }
 
-    function API_getStages  (language_id) {
-      return $http.get('api/get_stages/', language_id);
+    function API_getUserLevelProgress  (language_id) {
+      return $http.get('api/get_level_progress/', language_id);
     }
 
-    function API_deleteStage (language_id, levelData) {
-      return $http.post('api/delete_stage/', levelData);
+    function API_removeUserLevelProgress (levelData) {
+      return $http.post('api/remove_level_progress/', levelData);
     }
 
 

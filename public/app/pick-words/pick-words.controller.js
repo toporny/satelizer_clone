@@ -143,7 +143,7 @@
 		}
 
 /*
-    function API_setStage  (levelData) {
+    function API_addStage (levelData) {
       return $http.post('api/remember_stage/', levelData);
     }
 
@@ -159,13 +159,13 @@
 
 		function tmp_test(level) {
 
-			if (level >0) {
+			if (level > 0) {
 				levelData = {language_id: '1', stage_finished: '2'};
-				user.API_setStage(levelData);
+				user.API_addUserLevelProgress(levelData);
 			}
 
 			if (level < 0) {
-				alert(level);
+				user.API_removeUserLevelProgress(levelData);
 			}
 		}
 
