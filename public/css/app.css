@@ -104,7 +104,6 @@ h1, h2, h3, h4, h5, h6 {
   content: "\f087";
 }
 .fade1.ng-leave {
-  -webkit-transition: 0.25s linear all;
   transition: 0.25s linear all;
   opacity: 1;
   height: 40px;
@@ -116,7 +115,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 0;
 }
 .fade1.ng-enter {
-  -webkit-transition: 0.25s linear all;
   transition: 0.25s linear all;
   opacity: 0;
   height: 0px;
@@ -134,6 +132,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 .list-group li.selected {
   background-color: #DDDDDD;
+}
+.btn-unavailable {
+  color: #A3A3A3;
+  background-color: #EDEDED;
+  border-color: #D6D6D6;
+}
+.btn-unavailable:hover,
+.btn-unavailable:focus,
+.btn-unavailable:active,
+.btn-unavailable.active,
+.open .dropdown-toggle.btn-unavailable {
+  color: #A3A3A3;
+  background-color: #E3E3E3;
+  border-color: #D6D6D6;
+}
+.btn-unavailable:active,
+.btn-unavailable.active,
+.open .dropdown-toggle.btn-unavailable {
+  background-image: none;
+}
+.btn-unavailable.disabled,
+.btn-unavailable[disabled],
+fieldset[disabled] .btn-unavailable,
+.btn-unavailable.disabled:hover,
+.btn-unavailable[disabled]:hover,
+fieldset[disabled] .btn-unavailable:hover,
+.btn-unavailable.disabled:focus,
+.btn-unavailable[disabled]:focus,
+fieldset[disabled] .btn-unavailable:focus,
+.btn-unavailable.disabled:active,
+.btn-unavailable[disabled]:active,
+fieldset[disabled] .btn-unavailable:active,
+.btn-unavailable.disabled.active,
+.btn-unavailable[disabled].active,
+fieldset[disabled] .btn-unavailable.active {
+  background-color: #EDEDED;
+  border-color: #D6D6D6;
+}
+.btn-unavailable .badge {
+  color: #EDEDED;
+  background-color: #A3A3A3;
 }
 
 /*# sourceMappingURL=app.css.map */

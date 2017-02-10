@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-9 col-md-8 col-lg-9" ng-if="pick.data.languageToLearn">
-
+ 
 <button ng-click="pick.tmp_test(1)">add 1</button>
 <button ng-click="pick.tmp_test(2)">add 2</button>
 <button ng-click="pick.tmp_test(3)">add 3</button>
@@ -23,7 +23,8 @@
 <button ng-click="pick.tmp_test(-1)">remove 1</button>
 <button ng-click="pick.tmp_test(-2)">remove 2</button>
 <button ng-click="pick.tmp_test(-3)">remove 3</button>
-
+<br>
+<button ng-click="pick.tmp_getLevels()">getLevels</button>
 
           <div class="alert alert-warning" role="alert" translate="PICK_WORDS.PROGRESS_BAR_SHOWS_HOW_MANY_LEVELS_YOU_ALREADY_MAINTAINED"></div>
           <div class="progress">
@@ -39,10 +40,11 @@
           </div>
           <p translate="PICK_WORDS.PLEASE_SELECT_STAGE" translate-values='{ maxWordsPerPage: pick.data.maxWordsPerPage}'></p>
           <button
-            ng-click="pick.next(item.level)"
+            ng-click="pick.next(item.level, item.available)"
+            ng-class="{'btn-unavailable' : item.available == 'no', 'btn-primary' : item.fixed == '1',  } "
             ng-repeat="item in pick.data.levels"
             type="button"
-            class="btn btn-lg btn-default ng-binding level_button">
+            class="btn btn-lg ng-binding level_button">
             <b>{{item.level_name}}</b> {{item.counter_from_to}}
           </button>
         </div>

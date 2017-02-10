@@ -3,14 +3,15 @@
     .module('MyApp')
     .controller('PickCtrl',PickCtrl);
 
-  PickCtrl.$inject = ['$location','$state', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', '$ngBootbox', 'translationsSoFar'];
+  PickCtrl.$inject = ['$location', '$translate', 'translatePluginToISO', '$rootScope', 'common', 'toastr', 'user', 'availableDictionaries', '$ngBootbox', 'translationsSoFar'];
 
-  function PickCtrl ($location, $state, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, $ngBootbox, translationsSoFar) {
+  function PickCtrl ($location, $translate, translatePluginToISO, $rootScope, common, toastr, user, availableDictionaries, $ngBootbox, translationsSoFar) {
 		vm = this;
 		vm.next = next;
 		vm.showPremiumModal = showPremiumModal;
 		vm.languageSelected = languageSelected;
 		vm.tmp_test = tmp_test;
+		vm.tmp_getLevels = tmp_getLevels;
 
 
 		vm.data = {
@@ -77,13 +78,6 @@
 
 		function showStageButtonsForLoggedUser(dictionaryID) {
 
-			console.log('showStageButtonsForLoggedUser dictionaryID=',dictionaryID);
-			//check very quickly if dictionaryID belong to available languages
-			// var belong = false;
-			// angular.forEach(availableDictionaries, function(value, key) {
-			// 	if (key == dictionaryID) belong = true;
-			// });
-			// if (belong == false) return;
 			if (dictionaryID == '') {
 				vm.data.levels = [];
 				vm.data.languageToLearn = '';
@@ -93,6 +87,22 @@
 			vm.data.languageToLearn = dictionaryID;
 			vm.data.levels = common.getLevels(dictionaryID);
 
+			// check in database in "user_level_progress" table
+			// and add to "pick.data.levels" additional properities
+			// todo: do it promise
+
+			tmp = 1;
+			angular.forEach(vm.data.levels, function(obj) {
+				if (obj.available == 'yes') {
+					angular.extend(obj, {fixed : (tmp++) & 1});
+				}
+				console.log( obj);
+			});
+
+			
+			console.log('vm.data.levels',vm.data.levels);
+
+
 			vm.data.languageToLearn = dictionaryID; // make the right of page visible
 		}
 
@@ -101,15 +111,13 @@
 		*/
 		function languageSelected(dictionaryID) {
 
-
 			//if (angular.isUndefined(dictionaryID)) return;
 			if (dictionaryID == null) return;
-
 
 			// move this to separate service
 			var languageAvailable = false;
 
-			angular.forEach(translationsSoFar, function(value, key) {
+			angular.forEach(translationsSoFar, function(value, key) { // todo: move it to common functions1
 				if (dictionaryID.substr(0,2) == value.id.substr(0,2)) {
 					languageAvailable = true;
 				}
@@ -142,29 +150,35 @@
 			}
 		}
 
-/*
-    function API_addStage (levelData) {
-      return $http.post('api/remember_stage/', levelData);
-    }
 
-    function API_deleteStage  (levelData) {
-      return $http.post('api/forget_stage/', levelData);
-    }
-*/
-
-		function next(selectedLevel) {
+		function next(selectedLevel, is_available) {
+			if (is_available == 'no') {
+				common.showPremiumModal();
+			}
+			else
 			$location.url("/pick/words-list/"+user.getLanguageToLearn()+"/").search({level: selectedLevel});
 		}
 
 
-		function tmp_test(level) {
+		function tmp_getLevels() {
+			var tmp = user.API_removeUserLevelProgress(levelData);
+			console.log(tmp);
+		}
 
-			if (level > 0) {
-				levelData = {language_id: '1', stage_finished: '2'};
+
+
+		// temorary function
+		function tmp_test(level) {
+			if (level > 0) { // add 
+				tmp = user.getLanguageToLearn();
+				language_id = availableDictionaries[tmp].id;
+				levelData = { language_id: language_id, stage_finished: level};
 				user.API_addUserLevelProgress(levelData);
 			}
-
-			if (level < 0) {
+			if (level < 0) { //remove
+				tmp = user.getLanguageToLearn();
+				language_id = availableDictionaries[tmp].id;
+				levelData = { language_id: language_id, stage_finished: level};
 				user.API_removeUserLevelProgress(levelData);
 			}
 		}

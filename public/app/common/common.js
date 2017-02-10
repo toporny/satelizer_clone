@@ -2,9 +2,9 @@
 angular.module('MyApp')
   .factory('common', common);
 
-  common.$inject = ['$http', '$ngBootbox', '$translate', 'availableDictionaries', 'maxWordsPerPage'];
+  common.$inject = ['$http', '$state', '$ngBootbox', '$translate', 'availableDictionaries', 'maxWordsPerPage'];
 
-  function common($http, $ngBootbox, $translate, availableDictionaries, maxWordsPerPage) {
+  function common($http, $state, $ngBootbox, $translate, availableDictionaries, maxWordsPerPage) {
     service = {
       // getAvailableDictionaries: getAvailableDictionaries,
       // getAvailableDictionariesAndLevels: getAvailableDictionariesAndLevels,
@@ -59,9 +59,9 @@ angular.module('MyApp')
       var free_words = availableDictionaries[dictionaryID].free_words_for_not_premium_users;
       var data_levels = [];
       var counter = 1;
-      for (i = 1; i <= count_words; i=i+maxWordsPerPage ) {
+      for (i = 1; i <= count_words; i = i+maxWordsPerPage ) {
         obj = {
-          i: i,
+          //i: i,
           level_name: $translate.instant('PICK_WORDS.STAGE') + ' ' + counter,
           level: counter,
           available: (i<free_words) ? 'yes' : 'no',
